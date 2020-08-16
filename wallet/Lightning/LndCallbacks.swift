@@ -67,9 +67,9 @@ extension Lightning {
     }
     
     class WalletBalanceCallback: NSObject, LndmobileCallbackProtocol {
-        private var completion: (LndWalletBalance, Error?) -> Void
+        private var completion: (Lnrpc_WalletBalanceResponse, Error?) -> Void
 
-        init(_ completion: @escaping (LndWalletBalance, Error?) -> Void) {
+        init(_ completion: @escaping (Lnrpc_WalletBalanceResponse, Error?) -> Void) {
             let startedOnMainThread = Thread.current.isMainThread
             self.completion = { (balance, error) in
                 if startedOnMainThread {
@@ -82,23 +82,51 @@ extension Lightning {
 
         func onResponse(_ p0: Data?) {
             guard let data = p0 else {
-                completion(LndWalletBalance(total: 0, confirmed: 0, unconfirmed: 0), LightningError.missingResponse)
+                completion(Lnrpc_WalletBalanceResponse(), nil)
                 return
             }
         
             do {
-                let response = try Lnrpc_WalletBalanceResponse(serializedData: data)
-                let totalBalance = Int(response.totalBalance)
-                let confirmedBalance = Int(response.confirmedBalance)
-                let unconfirmedBalance = Int(response.unconfirmedBalance)
-                completion(LndWalletBalance(total: totalBalance, confirmed: confirmedBalance, unconfirmed: unconfirmedBalance), nil)
+                completion(try Lnrpc_WalletBalanceResponse(serializedData: data), nil)
             } catch {
-                completion(LndWalletBalance(total: 0, confirmed: 0, unconfirmed: 0), error)
+                completion(Lnrpc_WalletBalanceResponse(), error)
             }
         }
 
         func onError(_ p0: Error?) {
-            completion(LndWalletBalance(total: 0, confirmed: 0, unconfirmed: 0), p0)
+            completion(Lnrpc_WalletBalanceResponse(), p0)
+        }
+    }
+    
+    class GetInfoCallback: NSObject, LndmobileCallbackProtocol {
+        private var completion: (Lnrpc_GetInfoResponse, Error?) -> Void
+
+        init(_ completion: @escaping (Lnrpc_GetInfoResponse, Error?) -> Void) {
+            let startedOnMainThread = Thread.current.isMainThread
+            self.completion = { (info, error) in
+                if startedOnMainThread {
+                    DispatchQueue.main.async { completion(info, error) }
+                } else {
+                    completion(info, error)
+                }
+            }
+        }
+
+        func onResponse(_ p0: Data?) {
+            guard let data = p0 else {
+                completion(Lnrpc_GetInfoResponse(), LightningError.missingResponse)
+                return
+            }
+        
+            do {
+                completion(try Lnrpc_GetInfoResponse(serializedData: data), nil)
+            } catch {
+                completion(Lnrpc_GetInfoResponse(), error)
+            }
+        }
+
+        func onError(_ p0: Error?) {
+            completion(Lnrpc_GetInfoResponse(), p0)
         }
     }
 }
