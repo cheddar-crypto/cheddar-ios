@@ -15,10 +15,30 @@
 		00665E8524E5C72C00030A13 /* Lightning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665E7D24E5C72C00030A13 /* Lightning.swift */; };
 		00665E8624E5C72C00030A13 /* lnd.conf in Resources */ = {isa = PBXBuildFile; fileRef = 00665E7E24E5C72C00030A13 /* lnd.conf */; };
 		00665E8724E5C72C00030A13 /* lnd.conf in Resources */ = {isa = PBXBuildFile; fileRef = 00665E7E24E5C72C00030A13 /* lnd.conf */; };
-		00665E8824E5C72C00030A13 /* rpc.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665E8024E5C72C00030A13 /* rpc.pb.swift */; };
-		00665E8924E5C72C00030A13 /* rpc.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665E8024E5C72C00030A13 /* rpc.pb.swift */; };
-		00665E8A24E5C72C00030A13 /* walletunlocker.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665E8124E5C72C00030A13 /* walletunlocker.pb.swift */; };
-		00665E8B24E5C72C00030A13 /* walletunlocker.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665E8124E5C72C00030A13 /* walletunlocker.pb.swift */; };
+		00665EA824E9185B00030A13 /* lncli.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665E9324E9185B00030A13 /* lncli.pb.swift */; };
+		00665EA924E9185B00030A13 /* lncli.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665E9324E9185B00030A13 /* lncli.pb.swift */; };
+		00665EAA24E9185B00030A13 /* chainnotifier.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665E9524E9185B00030A13 /* chainnotifier.pb.swift */; };
+		00665EAB24E9185B00030A13 /* chainnotifier.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665E9524E9185B00030A13 /* chainnotifier.pb.swift */; };
+		00665EAC24E9185B00030A13 /* walletkit.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665E9724E9185B00030A13 /* walletkit.pb.swift */; };
+		00665EAD24E9185B00030A13 /* walletkit.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665E9724E9185B00030A13 /* walletkit.pb.swift */; };
+		00665EAE24E9185B00030A13 /* router.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665E9924E9185B00030A13 /* router.pb.swift */; };
+		00665EAF24E9185B00030A13 /* router.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665E9924E9185B00030A13 /* router.pb.swift */; };
+		00665EB024E9185B00030A13 /* rpc.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665E9A24E9185B00030A13 /* rpc.pb.swift */; };
+		00665EB124E9185B00030A13 /* rpc.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665E9A24E9185B00030A13 /* rpc.pb.swift */; };
+		00665EB224E9185B00030A13 /* autopilot.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665E9C24E9185B00030A13 /* autopilot.pb.swift */; };
+		00665EB324E9185B00030A13 /* autopilot.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665E9C24E9185B00030A13 /* autopilot.pb.swift */; };
+		00665EB424E9185B00030A13 /* signer.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665E9E24E9185B00030A13 /* signer.pb.swift */; };
+		00665EB524E9185B00030A13 /* signer.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665E9E24E9185B00030A13 /* signer.pb.swift */; };
+		00665EB624E9185B00030A13 /* walletunlocker.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665E9F24E9185B00030A13 /* walletunlocker.pb.swift */; };
+		00665EB724E9185B00030A13 /* walletunlocker.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665E9F24E9185B00030A13 /* walletunlocker.pb.swift */; };
+		00665EB824E9185B00030A13 /* watchtower.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665EA124E9185B00030A13 /* watchtower.pb.swift */; };
+		00665EB924E9185B00030A13 /* watchtower.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665EA124E9185B00030A13 /* watchtower.pb.swift */; };
+		00665EBA24E9185B00030A13 /* wtclient.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665EA324E9185B00030A13 /* wtclient.pb.swift */; };
+		00665EBB24E9185B00030A13 /* wtclient.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665EA324E9185B00030A13 /* wtclient.pb.swift */; };
+		00665EBC24E9185B00030A13 /* verrpc.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665EA524E9185B00030A13 /* verrpc.pb.swift */; };
+		00665EBD24E9185B00030A13 /* verrpc.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665EA524E9185B00030A13 /* verrpc.pb.swift */; };
+		00665EBE24E9185B00030A13 /* invoices.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665EA724E9185B00030A13 /* invoices.pb.swift */; };
+		00665EBF24E9185B00030A13 /* invoices.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665EA724E9185B00030A13 /* invoices.pb.swift */; };
 		3C42530BF0760EAA4F38CEDD /* Pods_wallet_walletUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8169844622EC1A934F64E4C8 /* Pods_wallet_walletUITests.framework */; };
 		4029655179169C028F45B373 /* Pods_walletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6665EF031EDC3E364CE652 /* Pods_walletTests.framework */; };
 		7ABFCBD124E4EBFD0012EF39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD024E4EBFD0012EF39 /* AppDelegate.swift */; };
@@ -54,10 +74,20 @@
 		00665E7C24E5C72C00030A13 /* LndCallbacks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LndCallbacks.swift; sourceTree = "<group>"; };
 		00665E7D24E5C72C00030A13 /* Lightning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lightning.swift; sourceTree = "<group>"; };
 		00665E7E24E5C72C00030A13 /* lnd.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lnd.conf; sourceTree = "<group>"; };
-		00665E8024E5C72C00030A13 /* rpc.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rpc.pb.swift; sourceTree = "<group>"; };
-		00665E8124E5C72C00030A13 /* walletunlocker.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = walletunlocker.pb.swift; sourceTree = "<group>"; };
 		00665E8C24E5C79500030A13 /* wallet-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "wallet-Bridging-Header.h"; sourceTree = "<group>"; };
 		00665E8D24E5C79500030A13 /* walletTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "walletTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		00665E9324E9185B00030A13 /* lncli.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = lncli.pb.swift; sourceTree = "<group>"; };
+		00665E9524E9185B00030A13 /* chainnotifier.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = chainnotifier.pb.swift; sourceTree = "<group>"; };
+		00665E9724E9185B00030A13 /* walletkit.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = walletkit.pb.swift; sourceTree = "<group>"; };
+		00665E9924E9185B00030A13 /* router.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = router.pb.swift; sourceTree = "<group>"; };
+		00665E9A24E9185B00030A13 /* rpc.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rpc.pb.swift; sourceTree = "<group>"; };
+		00665E9C24E9185B00030A13 /* autopilot.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = autopilot.pb.swift; sourceTree = "<group>"; };
+		00665E9E24E9185B00030A13 /* signer.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = signer.pb.swift; sourceTree = "<group>"; };
+		00665E9F24E9185B00030A13 /* walletunlocker.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = walletunlocker.pb.swift; sourceTree = "<group>"; };
+		00665EA124E9185B00030A13 /* watchtower.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = watchtower.pb.swift; sourceTree = "<group>"; };
+		00665EA324E9185B00030A13 /* wtclient.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wtclient.pb.swift; sourceTree = "<group>"; };
+		00665EA524E9185B00030A13 /* verrpc.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = verrpc.pb.swift; sourceTree = "<group>"; };
+		00665EA724E9185B00030A13 /* invoices.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = invoices.pb.swift; sourceTree = "<group>"; };
 		22C1F2815F66B3F1B4C860DC /* Pods-wallet-walletUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet-walletUITests.release.xcconfig"; path = "Target Support Files/Pods-wallet-walletUITests/Pods-wallet-walletUITests.release.xcconfig"; sourceTree = "<group>"; };
 		49151D7AE89BC38CAB768074 /* Pods-walletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletTests.debug.xcconfig"; path = "Target Support Files/Pods-walletTests/Pods-walletTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4C2A1A61CA82F3F36E6DB4B2 /* Pods-walletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletTests.release.xcconfig"; path = "Target Support Files/Pods-walletTests/Pods-walletTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -127,10 +157,100 @@
 		00665E7F24E5C72C00030A13 /* rpc */ = {
 			isa = PBXGroup;
 			children = (
-				00665E8024E5C72C00030A13 /* rpc.pb.swift */,
-				00665E8124E5C72C00030A13 /* walletunlocker.pb.swift */,
+				00665E9B24E9185B00030A13 /* autopilotrpc */,
+				00665E9424E9185B00030A13 /* chainrpc */,
+				00665EA624E9185B00030A13 /* invoicesrpc */,
+				00665E9224E9185B00030A13 /* lnclipb */,
+				00665E9824E9185B00030A13 /* routerrpc */,
+				00665E9A24E9185B00030A13 /* rpc.pb.swift */,
+				00665E9D24E9185B00030A13 /* signrpc */,
+				00665EA424E9185B00030A13 /* verrpc */,
+				00665E9624E9185B00030A13 /* walletrpc */,
+				00665E9F24E9185B00030A13 /* walletunlocker.pb.swift */,
+				00665EA024E9185B00030A13 /* watchtowerrpc */,
+				00665EA224E9185B00030A13 /* wtclientrpc */,
 			);
 			path = rpc;
+			sourceTree = "<group>";
+		};
+		00665E9224E9185B00030A13 /* lnclipb */ = {
+			isa = PBXGroup;
+			children = (
+				00665E9324E9185B00030A13 /* lncli.pb.swift */,
+			);
+			path = lnclipb;
+			sourceTree = "<group>";
+		};
+		00665E9424E9185B00030A13 /* chainrpc */ = {
+			isa = PBXGroup;
+			children = (
+				00665E9524E9185B00030A13 /* chainnotifier.pb.swift */,
+			);
+			path = chainrpc;
+			sourceTree = "<group>";
+		};
+		00665E9624E9185B00030A13 /* walletrpc */ = {
+			isa = PBXGroup;
+			children = (
+				00665E9724E9185B00030A13 /* walletkit.pb.swift */,
+			);
+			path = walletrpc;
+			sourceTree = "<group>";
+		};
+		00665E9824E9185B00030A13 /* routerrpc */ = {
+			isa = PBXGroup;
+			children = (
+				00665E9924E9185B00030A13 /* router.pb.swift */,
+			);
+			path = routerrpc;
+			sourceTree = "<group>";
+		};
+		00665E9B24E9185B00030A13 /* autopilotrpc */ = {
+			isa = PBXGroup;
+			children = (
+				00665E9C24E9185B00030A13 /* autopilot.pb.swift */,
+			);
+			path = autopilotrpc;
+			sourceTree = "<group>";
+		};
+		00665E9D24E9185B00030A13 /* signrpc */ = {
+			isa = PBXGroup;
+			children = (
+				00665E9E24E9185B00030A13 /* signer.pb.swift */,
+			);
+			path = signrpc;
+			sourceTree = "<group>";
+		};
+		00665EA024E9185B00030A13 /* watchtowerrpc */ = {
+			isa = PBXGroup;
+			children = (
+				00665EA124E9185B00030A13 /* watchtower.pb.swift */,
+			);
+			path = watchtowerrpc;
+			sourceTree = "<group>";
+		};
+		00665EA224E9185B00030A13 /* wtclientrpc */ = {
+			isa = PBXGroup;
+			children = (
+				00665EA324E9185B00030A13 /* wtclient.pb.swift */,
+			);
+			path = wtclientrpc;
+			sourceTree = "<group>";
+		};
+		00665EA424E9185B00030A13 /* verrpc */ = {
+			isa = PBXGroup;
+			children = (
+				00665EA524E9185B00030A13 /* verrpc.pb.swift */,
+			);
+			path = verrpc;
+			sourceTree = "<group>";
+		};
+		00665EA624E9185B00030A13 /* invoicesrpc */ = {
+			isa = PBXGroup;
+			children = (
+				00665EA724E9185B00030A13 /* invoices.pb.swift */,
+			);
+			path = invoicesrpc;
 			sourceTree = "<group>";
 		};
 		329457048B50980C6F7F3FDA /* Pods */ = {
@@ -465,13 +585,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00665EBA24E9185B00030A13 /* wtclient.pb.swift in Sources */,
 				7ABFCBD124E4EBFD0012EF39 /* AppDelegate.swift in Sources */,
 				7ABFCBD324E4EBFD0012EF39 /* SceneDelegate.swift in Sources */,
-				00665E8824E5C72C00030A13 /* rpc.pb.swift in Sources */,
 				7ABFCBD524E4EBFD0012EF39 /* ContentView.swift in Sources */,
+				00665EA824E9185B00030A13 /* lncli.pb.swift in Sources */,
+				00665EB024E9185B00030A13 /* rpc.pb.swift in Sources */,
+				00665EAA24E9185B00030A13 /* chainnotifier.pb.swift in Sources */,
+				00665EB424E9185B00030A13 /* signer.pb.swift in Sources */,
+				00665EBE24E9185B00030A13 /* invoices.pb.swift in Sources */,
 				00665E8424E5C72C00030A13 /* Lightning.swift in Sources */,
+				00665EAC24E9185B00030A13 /* walletkit.pb.swift in Sources */,
 				00665E8224E5C72C00030A13 /* LndCallbacks.swift in Sources */,
-				00665E8A24E5C72C00030A13 /* walletunlocker.pb.swift in Sources */,
+				00665EAE24E9185B00030A13 /* router.pb.swift in Sources */,
+				00665EBC24E9185B00030A13 /* verrpc.pb.swift in Sources */,
+				00665EB624E9185B00030A13 /* walletunlocker.pb.swift in Sources */,
+				00665EB824E9185B00030A13 /* watchtower.pb.swift in Sources */,
+				00665EB224E9185B00030A13 /* autopilot.pb.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,11 +609,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00665E8924E5C72C00030A13 /* rpc.pb.swift in Sources */,
-				00665E8B24E5C72C00030A13 /* walletunlocker.pb.swift in Sources */,
+				00665EB524E9185B00030A13 /* signer.pb.swift in Sources */,
+				00665EB324E9185B00030A13 /* autopilot.pb.swift in Sources */,
+				00665EAF24E9185B00030A13 /* router.pb.swift in Sources */,
+				00665EBB24E9185B00030A13 /* wtclient.pb.swift in Sources */,
+				00665EBD24E9185B00030A13 /* verrpc.pb.swift in Sources */,
 				7ABFCBE824E4EC010012EF39 /* LightningTests.swift in Sources */,
 				00665E8524E5C72C00030A13 /* Lightning.swift in Sources */,
+				00665EAD24E9185B00030A13 /* walletkit.pb.swift in Sources */,
+				00665EB924E9185B00030A13 /* watchtower.pb.swift in Sources */,
+				00665EB124E9185B00030A13 /* rpc.pb.swift in Sources */,
+				00665EBF24E9185B00030A13 /* invoices.pb.swift in Sources */,
 				00665E8324E5C72C00030A13 /* LndCallbacks.swift in Sources */,
+				00665EAB24E9185B00030A13 /* chainnotifier.pb.swift in Sources */,
+				00665EB724E9185B00030A13 /* walletunlocker.pb.swift in Sources */,
+				00665EA924E9185B00030A13 /* lncli.pb.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
