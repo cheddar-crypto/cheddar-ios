@@ -146,8 +146,8 @@
 		00665E7B24E5C72C00030A13 /* Lightning */ = {
 			isa = PBXGroup;
 			children = (
-				00665E7C24E5C72C00030A13 /* LndCallbacks.swift */,
 				00665E7D24E5C72C00030A13 /* Lightning.swift */,
+				00665E7C24E5C72C00030A13 /* LndCallbacks.swift */,
 				00665E7E24E5C72C00030A13 /* lnd.conf */,
 				00665E7F24E5C72C00030A13 /* rpc */,
 			);

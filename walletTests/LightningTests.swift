@@ -13,8 +13,6 @@ class walletTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        
-        Lightning.shared.purge()
     }
 
     override func tearDown() {
@@ -22,16 +20,23 @@ class walletTests: XCTestCase {
     }
 
     func testLND() {
-        Lightning.shared.start { (error) in
-            XCTAssertNil(error)
+        Lightning.shared.purge()
+        
+        let startExpectation = expectation(description: "LND started")
+        let rpcExpectation = expectation(description: "LND RPC became ready")
+        
+        Lightning.shared.start({ (error) in
+            XCTAssertNil(error, "Start LND error")
+            startExpectation.fulfill()
+        }) { (error) in
+            XCTAssertNil(error, "Start RPC error")
+            rpcExpectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                XCTFail(error.localizedDescription)
+            }
         }
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }

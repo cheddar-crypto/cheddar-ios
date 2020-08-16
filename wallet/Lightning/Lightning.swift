@@ -7,12 +7,6 @@
 
 import Foundation
 
-struct LndWalletBalance {
-    let total: Int
-    let confirmed: Int
-    let unconfirmed: Int
-}
-
 class Lightning {
     static let shared = Lightning()
     
@@ -43,18 +37,23 @@ class Lightning {
     //Ensure it stays a singleton
     private init() {}
     
-    func start(_ completion: @escaping (Error?) -> Void) {
+    func start(_ completion: @escaping (Error?) -> Void, onRpcReady: @escaping (Error?) -> Void) {
         print("LND Start Request")
         
+        //Delete previous config if it exists
+        try? FileManager.default.removeItem(at: confFile)
+        //Copy new config into LND directory
         do {
             try FileManager.default.copyItem(at: Bundle.main.bundleURL.appendingPathComponent(confName), to: confFile)
         } catch {
-            print("Conf already exists")
+            return completion(error)
         }
         
         let args = "--lnddir=\(storage.path)"
 
-        LndmobileStart(args, LndGenericCallback(completion), nil)
+        print(args)
+
+        LndmobileStart(args, LndGenericCallback(completion), LndGenericCallback(onRpcReady))
     }
     
     func generateSeed(_ completion: @escaping ([String], Error?) -> Void) {
@@ -97,12 +96,19 @@ class Lightning {
         }        
     }
 
-    func walletBalance(_ completion: @escaping (LndWalletBalance, Error?) -> Void) {
+    func walletBalance(_ completion: @escaping (Lnrpc_WalletBalanceResponse, Error?) -> Void) {
         do {
-            let request = try Lnrpc_WalletBalanceRequest().serializedData()
-            LndmobileWalletBalance(request, WalletBalanceCallback(completion))
+            LndmobileWalletBalance(try Lnrpc_WalletBalanceRequest().serializedData(), WalletBalanceCallback(completion))
         } catch {
-            completion(LndWalletBalance(total: 0, confirmed: 0, unconfirmed: 0), error)
+            completion(Lnrpc_WalletBalanceResponse(), error)
+        }
+    }
+    
+    func info(_ completion: @escaping (Lnrpc_GetInfoResponse, Error?) -> Void) {
+        do {
+            LndmobileGetInfo(try Lnrpc_GetInfoRequest().serializedData(), GetInfoCallback(completion))
+        } catch {
+            completion(Lnrpc_GetInfoResponse(), error)
         }
     }
 }
@@ -111,6 +117,7 @@ class Lightning {
 extension Lightning {
     func purge() {
         //TODO ensure testnet only
+        print("WARNING: removing existing LND directory")
         try! FileManager.default.removeItem(at: storage)
     }
 }
