@@ -56,6 +56,18 @@ class Lightning {
         LndmobileStart(args, LndGenericCallback(completion), LndGenericCallback(onRpcReady))
     }
     
+    func stop(_ completion: @escaping (Error?) -> Void) {
+        print("LND Stop Request")
+
+        do {
+            let request = try Lnrpc_StopRequest().serializedData()
+            LndmobileStopDaemon(request, LndGenericCallback(completion))
+            completion(nil) //TODO figure out why callback is never hit by LndGenericCallback
+        } catch {
+            completion(error)
+        }
+    }
+    
     func generateSeed(_ completion: @escaping ([String], Error?) -> Void) {
         do {
             let request = try Lnrpc_GenSeedRequest().serializedData()

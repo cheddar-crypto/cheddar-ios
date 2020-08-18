@@ -16,6 +16,7 @@ extension Lightning {
         init(_ completion: @escaping (Error?) -> Void) {
             let startedOnMainThread = Thread.current.isMainThread
             self.completion = { error in
+                
                 if startedOnMainThread {
                     DispatchQueue.main.async { completion(error) }
                 } else {
