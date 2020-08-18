@@ -41,6 +41,8 @@
 		00665EBF24E9185B00030A13 /* invoices.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665EA724E9185B00030A13 /* invoices.pb.swift */; };
 		00665EC924EC494A00030A13 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665EC824EC494A00030A13 /* HomeViewController.swift */; };
 		00665ECE24EC4B9000030A13 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665ECD24EC4B9000030A13 /* UIViewController.swift */; };
+		00665ED224EC510400030A13 /* EventBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665ED124EC510400030A13 /* EventBus.swift */; };
+		00665ED424EC55B300030A13 /* LightningStateMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665ED324EC55B300030A13 /* LightningStateMonitor.swift */; };
 		3C42530BF0760EAA4F38CEDD /* Pods_wallet_walletUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8169844622EC1A934F64E4C8 /* Pods_wallet_walletUITests.framework */; };
 		4029655179169C028F45B373 /* Pods_walletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6665EF031EDC3E364CE652 /* Pods_walletTests.framework */; };
 		7ABFCBD124E4EBFD0012EF39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD024E4EBFD0012EF39 /* AppDelegate.swift */; };
@@ -91,6 +93,8 @@
 		00665EA724E9185B00030A13 /* invoices.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = invoices.pb.swift; sourceTree = "<group>"; };
 		00665EC824EC494A00030A13 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		00665ECD24EC4B9000030A13 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		00665ED124EC510400030A13 /* EventBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBus.swift; sourceTree = "<group>"; };
+		00665ED324EC55B300030A13 /* LightningStateMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightningStateMonitor.swift; sourceTree = "<group>"; };
 		22C1F2815F66B3F1B4C860DC /* Pods-wallet-walletUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet-walletUITests.release.xcconfig"; path = "Target Support Files/Pods-wallet-walletUITests/Pods-wallet-walletUITests.release.xcconfig"; sourceTree = "<group>"; };
 		49151D7AE89BC38CAB768074 /* Pods-walletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletTests.debug.xcconfig"; path = "Target Support Files/Pods-walletTests/Pods-walletTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4C2A1A61CA82F3F36E6DB4B2 /* Pods-walletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletTests.release.xcconfig"; path = "Target Support Files/Pods-walletTests/Pods-walletTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -283,6 +287,8 @@
 		00665ED024EC504F00030A13 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				00665ED124EC510400030A13 /* EventBus.swift */,
+				00665ED324EC55B300030A13 /* LightningStateMonitor.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -612,6 +618,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00665EBA24E9185B00030A13 /* wtclient.pb.swift in Sources */,
+				00665ED224EC510400030A13 /* EventBus.swift in Sources */,
 				7ABFCBD124E4EBFD0012EF39 /* AppDelegate.swift in Sources */,
 				7ABFCBD324E4EBFD0012EF39 /* SceneDelegate.swift in Sources */,
 				00665ECE24EC4B9000030A13 /* UIViewController.swift in Sources */,
@@ -625,6 +632,7 @@
 				00665E8424E5C72C00030A13 /* Lightning.swift in Sources */,
 				00665EAC24E9185B00030A13 /* walletkit.pb.swift in Sources */,
 				00665E8224E5C72C00030A13 /* LndCallbacks.swift in Sources */,
+				00665ED424EC55B300030A13 /* LightningStateMonitor.swift in Sources */,
 				00665EAE24E9185B00030A13 /* router.pb.swift in Sources */,
 				00665EBC24E9185B00030A13 /* verrpc.pb.swift in Sources */,
 				00665EB624E9185B00030A13 /* walletunlocker.pb.swift in Sources */,

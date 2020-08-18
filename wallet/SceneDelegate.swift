@@ -51,11 +51,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
         Lightning.shared.start({ (error) in
-            guard error != nil else {
+            guard error == nil else {
                 return print("LND start error")
             }
         }) { (error) in
-            guard error != nil else {
+            guard error == nil else {
                 return print("RPC startup error")
             }
         }
@@ -67,7 +67,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
         
         Lightning.shared.stop { (error) in
-            guard error != nil else {
+            guard error == nil else {
                 return print("LND stop error")
             }
             
