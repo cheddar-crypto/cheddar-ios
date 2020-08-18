@@ -47,7 +47,6 @@
 		4029655179169C028F45B373 /* Pods_walletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6665EF031EDC3E364CE652 /* Pods_walletTests.framework */; };
 		7ABFCBD124E4EBFD0012EF39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD024E4EBFD0012EF39 /* AppDelegate.swift */; };
 		7ABFCBD324E4EBFD0012EF39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD224E4EBFD0012EF39 /* SceneDelegate.swift */; };
-		7ABFCBD524E4EBFD0012EF39 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD424E4EBFD0012EF39 /* ContentView.swift */; };
 		7ABFCBD724E4EC010012EF39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD624E4EC010012EF39 /* Assets.xcassets */; };
 		7ABFCBDD24E4EC010012EF39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFCBDB24E4EC010012EF39 /* LaunchScreen.storyboard */; };
 		7ABFCBE824E4EC010012EF39 /* LightningTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBE724E4EC010012EF39 /* LightningTests.swift */; };
@@ -103,7 +102,6 @@
 		7ABFCBCD24E4EBFD0012EF39 /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ABFCBD024E4EBFD0012EF39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7ABFCBD224E4EBFD0012EF39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7ABFCBD424E4EBFD0012EF39 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7ABFCBD624E4EC010012EF39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7ABFCBDC24E4EC010012EF39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7ABFCBDE24E4EC010012EF39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -346,7 +344,6 @@
 				00665E8D24E5C79500030A13 /* walletTests-Bridging-Header.h */,
 				7ABFCBD024E4EBFD0012EF39 /* AppDelegate.swift */,
 				7ABFCBD224E4EBFD0012EF39 /* SceneDelegate.swift */,
-				7ABFCBD424E4EBFD0012EF39 /* ContentView.swift */,
 				7ABFCBD624E4EC010012EF39 /* Assets.xcassets */,
 				7ABFCBDB24E4EC010012EF39 /* LaunchScreen.storyboard */,
 				7ABFCBDE24E4EC010012EF39 /* Info.plist */,
@@ -622,7 +619,6 @@
 				7ABFCBD124E4EBFD0012EF39 /* AppDelegate.swift in Sources */,
 				7ABFCBD324E4EBFD0012EF39 /* SceneDelegate.swift in Sources */,
 				00665ECE24EC4B9000030A13 /* UIViewController.swift in Sources */,
-				7ABFCBD524E4EBFD0012EF39 /* ContentView.swift in Sources */,
 				00665EA824E9185B00030A13 /* lncli.pb.swift in Sources */,
 				00665EC924EC494A00030A13 /* HomeViewController.swift in Sources */,
 				00665EB024E9185B00030A13 /* rpc.pb.swift in Sources */,
