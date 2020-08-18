@@ -53,13 +53,51 @@ class Lightning {
 
         print(args)
 
-        LndmobileStart(args, LndGenericCallback(completion), LndGenericCallback(onRpcReady))
+        LndmobileStart(
+            args,
+            LndGenericCallback { (error) in
+                completion(error)
+                
+                if error == nil {
+                    EventBus.postToMainThread(.lndStarted)
+                }
+            },
+            LndGenericCallback { (error) in
+                onRpcReady(error)
+                
+                if error == nil {
+                    EventBus.postToMainThread(.lndRpcReady)
+                }
+            }
+        )
+    }
+    
+    func stop(_ completion: @escaping (Error?) -> Void) {
+        print("LND Stop Request")
+
+        do {
+            LndmobileStopDaemon(
+                try Lnrpc_StopRequest().serializedData(),
+                LndGenericCallback{ (error) in
+                    completion(error)
+                    
+                    if error == nil {
+                        EventBus.postToMainThread(.lndStopped)
+                    }
+                }
+            )
+            completion(nil) //TODO figure out why callback is never hit by LndGenericCallback
+        } catch {
+            completion(error)
+        }
     }
     
     func generateSeed(_ completion: @escaping ([String], Error?) -> Void) {
         do {
-            let request = try Lnrpc_GenSeedRequest().serializedData()
-            LndmobileGenSeed(request, GenerateSeedCallback(completion))
+            LndmobileGenSeed(
+                try Lnrpc_GenSeedRequest().serializedData(),
+                GenerateSeedCallback(completion)
+            )
         } catch {
             completion([], error)
         }
@@ -75,7 +113,16 @@ class Lightning {
         request.walletPassword = passwordData
         
         do {
-            LndmobileInitWallet(try request.serializedData(), LndGenericCallback(completion))
+            LndmobileInitWallet(
+                try request.serializedData(),
+                LndGenericCallback { (error) in
+                    completion(error)
+                    
+                    if error == nil {
+                        EventBus.postToMainThread(.lndWalletUnlocked)
+                    }
+                }
+            )
         } catch {
             return completion(error)
         }
@@ -90,7 +137,16 @@ class Lightning {
         request.walletPassword = passwordData
         
         do {
-            LndmobileUnlockWallet(try request.serializedData(), LndGenericCallback(completion))
+            LndmobileUnlockWallet(
+                try request.serializedData(),
+                LndGenericCallback { (error) in
+                    completion(error)
+                    
+                    if error == nil {
+                        EventBus.postToMainThread(.lndWalletUnlocked)
+                    }
+                }
+            )
         } catch {
             return completion(error)
         }        
