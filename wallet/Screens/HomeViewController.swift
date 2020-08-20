@@ -74,6 +74,36 @@ class HomeViewController: UIViewController {
         }
     }
     
+    @objc private func newAddress() {
+        resultMessage.text = ""
+        Lightning.shared.newAddress { [weak self] (address, error) in
+            guard let self = self else { return }
+            
+            guard error == nil else {
+                self.resultMessage.text = "New address failed - \(error?.localizedDescription ?? "")"
+                return
+            }
+            
+            self.resultMessage.text = address
+            UIPasteboard.general.string = address
+        }
+    }
+    
+    @objc private func showBalance() {
+        resultMessage.text = ""
+        
+        Lightning.shared.walletBalance { [weak self] (balanceResponse, error) in
+            guard let self = self else { return }
+            
+            guard error == nil else {
+                self.resultMessage.text = "Wallet balance failed - \(error?.localizedDescription ?? "")"
+                return
+            }
+            
+            self.resultMessage.text = "Total: \(balanceResponse.totalBalance)\nConfirmed: \(balanceResponse.confirmedBalance)\nUnconfirmed: \(balanceResponse.unconfirmedBalance)\n"
+        }
+    }
+    
     @objc private func wipeWallet() {
         Lightning.shared.stop { (error) in
             Lightning.shared.purge()
@@ -83,43 +113,29 @@ class HomeViewController: UIViewController {
             }
         }
     }
+    
+    private func addDebugButton(_ title: String, action: Selector, topAnchor: NSLayoutYAxisAnchor, topConstant: CGFloat) -> UIButton {
+        let button = UIButton()
+        button.setTitle(title, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(button)
+        button.topAnchor.constraint(equalTo: topAnchor, constant: topConstant).isActive = true
+        button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        button.addTarget(self, action: action, for: .touchUpInside)
+        button.layer.cornerRadius = 15
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.white.cgColor
+    
+        return button
+    }
 
     private func setup() {
-        let createButton = UIButton()
-        createButton.setTitle("Create wallet", for: .normal)
-        createButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(createButton)
-        createButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-        createButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        createButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        createButton.addTarget(self, action: #selector(createWallet), for: .touchUpInside)
-        createButton.layer.cornerRadius = 15
-        createButton.layer.borderWidth = 1
-        createButton.layer.borderColor = UIColor.white.cgColor
-        
-        let unlockButton = UIButton()
-        unlockButton.setTitle("Unlock wallet", for: .normal)
-        unlockButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(unlockButton)
-        unlockButton.topAnchor.constraint(equalTo: createButton.bottomAnchor, constant: 10).isActive = true
-        unlockButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        unlockButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        unlockButton.addTarget(self, action: #selector(unlockWallet), for: .touchUpInside)
-        unlockButton.layer.cornerRadius = 15
-        unlockButton.layer.borderWidth = 1
-        unlockButton.layer.borderColor = UIColor.white.cgColor
-        
-        let wipeButton = UIButton()
-        wipeButton.setTitle("Wipe (and close) wallet", for: .normal)
-        wipeButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(wipeButton)
-        wipeButton.topAnchor.constraint(equalTo: unlockButton.bottomAnchor, constant: 10).isActive = true
-        wipeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        wipeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        wipeButton.addTarget(self, action: #selector(wipeWallet), for: .touchUpInside)
-        wipeButton.layer.cornerRadius = 15
-        wipeButton.layer.borderWidth = 1
-        wipeButton.layer.borderColor = UIColor.white.cgColor
+        let createButton = addDebugButton("Create wallet", action: #selector(createWallet), topAnchor: view.topAnchor, topConstant: 100)
+        let unlockButton = addDebugButton("Unlock wallet", action: #selector(unlockWallet), topAnchor: createButton.bottomAnchor, topConstant: 10)
+        let newAddressButton = addDebugButton("New address (copies to clipboard)", action: #selector(newAddress), topAnchor: unlockButton.bottomAnchor, topConstant: 10)
+        let getBalanceButton = addDebugButton("Show balance", action: #selector(showBalance), topAnchor: newAddressButton.bottomAnchor, topConstant: 10)
+        let wipeButton = addDebugButton("Wipe (and close) wallet", action: #selector(wipeWallet), topAnchor: getBalanceButton.bottomAnchor, topConstant: 10)
         
         resultMessage = UILabel()
         resultMessage.text = "..."
@@ -135,7 +151,7 @@ class HomeViewController: UIViewController {
         debugStatus = UILabel()
         debugStatus.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(debugStatus)
-        debugStatus.topAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        debugStatus.topAnchor.constraint(equalTo: resultMessage.bottomAnchor, constant: 50).isActive = true
         debugStatus.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         debugStatus.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         debugStatus.textColor = .white //TODO move to theme

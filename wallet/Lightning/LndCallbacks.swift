@@ -130,4 +130,36 @@ extension Lightning {
             completion(Lnrpc_GetInfoResponse(), p0)
         }
     }
+    
+    class NewAddressCallback: NSObject, LndmobileCallbackProtocol {
+           private var completion: (String, Error?) -> Void
+
+           init(_ completion: @escaping (String, Error?) -> Void) {
+               let startedOnMainThread = Thread.current.isMainThread
+               self.completion = { (response, error) in
+                   if startedOnMainThread {
+                       DispatchQueue.main.async { completion(response, error) }
+                   } else {
+                       completion(response, error)
+                   }
+               }
+           }
+
+           func onResponse(_ p0: Data?) {
+               guard let data = p0 else {
+                   completion("", LightningError.missingResponse)
+                   return
+               }
+           
+               do {
+                completion(try Lnrpc_NewAddressResponse(serializedData: data).address, nil)
+               } catch {
+                   completion("", error)
+               }
+           }
+
+           func onError(_ p0: Error?) {
+               completion("", p0)
+           }
+       }
 }

@@ -167,6 +167,14 @@ class Lightning {
             completion(Lnrpc_GetInfoResponse(), error)
         }
     }
+    
+    func newAddress(_ completion: @escaping (String, Error?) -> Void) {        
+        do {
+            LndmobileNewAddress(try Lnrpc_NewAddressRequest().serializedData(), NewAddressCallback(completion))
+        } catch {
+            completion("", error)
+        }
+    }
 }
 
 //Utils
