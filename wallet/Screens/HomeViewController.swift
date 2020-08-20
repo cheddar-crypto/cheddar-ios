@@ -100,7 +100,35 @@ class HomeViewController: UIViewController {
                 return
             }
             
-            self.resultMessage.text = "Total: \(balanceResponse.totalBalance)\nConfirmed: \(balanceResponse.confirmedBalance)\nUnconfirmed: \(balanceResponse.unconfirmedBalance)\n"
+            self.resultMessage.text = "Total: \(balanceResponse.totalBalance)\nConfirmed: \(balanceResponse.confirmedBalance)\nUnconfirmed: \(balanceResponse.unconfirmedBalance)"
+        }
+    }
+    
+    @objc private func openChannel() {
+        resultMessage.text = ""
+        
+        let nodePubKey = try! NodePublicKey("0277622bf4c497475960bf91bd3c673a4cb4e9b589cebfde9700c197b3989cc1b8")
+        
+        Lightning.shared.openChannel(localFundingAmount: 20000, closeAddress: "", nodePubkey: nodePubKey) { [weak self] (response, error) in
+            guard let self = self else { return }
+            
+            guard error == nil else {
+                self.resultMessage.text = "Channel open failed - \(error?.localizedDescription ?? "")"
+                return
+            }
+            
+            guard let update = response.update else {
+              return
+            }
+            
+            switch update {
+            case .chanPending(let pendingUpdate):
+                self.resultMessage.text = "Channel open pending update\nTXID: \(pendingUpdate.txid.base64EncodedString())"
+            case .chanOpen(let openUpdate):
+                self.resultMessage.text = "Channel open success update"
+            case .psbtFund(let onpsbtFund):
+                self.resultMessage.text = "I don't know why you would get this error"
+            }
         }
     }
     
@@ -135,7 +163,8 @@ class HomeViewController: UIViewController {
         let unlockButton = addDebugButton("Unlock wallet", action: #selector(unlockWallet), topAnchor: createButton.bottomAnchor, topConstant: 10)
         let newAddressButton = addDebugButton("New address (copies to clipboard)", action: #selector(newAddress), topAnchor: unlockButton.bottomAnchor, topConstant: 10)
         let getBalanceButton = addDebugButton("Show balance", action: #selector(showBalance), topAnchor: newAddressButton.bottomAnchor, topConstant: 10)
-        let wipeButton = addDebugButton("Wipe (and close) wallet", action: #selector(wipeWallet), topAnchor: getBalanceButton.bottomAnchor, topConstant: 10)
+        let openChannelButton = addDebugButton("Open channel", action: #selector(openChannel), topAnchor: getBalanceButton.bottomAnchor, topConstant: 10)
+        let wipeButton = addDebugButton("Wipe (and close) wallet", action: #selector(wipeWallet), topAnchor: openChannelButton.bottomAnchor, topConstant: 10)
         
         resultMessage = UILabel()
         resultMessage.text = "..."

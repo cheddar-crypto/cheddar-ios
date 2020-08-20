@@ -168,11 +168,29 @@ class Lightning {
         }
     }
     
-    func newAddress(_ completion: @escaping (String, Error?) -> Void) {        
+    func newAddress(_ completion: @escaping (String, Error?) -> Void) {
         do {
             LndmobileNewAddress(try Lnrpc_NewAddressRequest().serializedData(), NewAddressCallback(completion))
         } catch {
             completion("", error)
+        }
+    }
+     
+    func openChannel(localFundingAmount: Int64, closeAddress: String, nodePubkey: NodePublicKey, _ completion: @escaping (Lnrpc_OpenStatusUpdate, Error?) -> Void) {
+        var request = Lnrpc_OpenChannelRequest()
+        request.localFundingAmount = localFundingAmount
+        request.closeAddress = closeAddress
+        request.nodePubkey = nodePubkey.data
+        
+        //TODO have the below config driven
+        request.minConfs = 2
+        request.targetConf = 2
+        request.spendUnconfirmed = false
+        
+        do {
+            LndmobileOpenChannel(try request.serializedData(), ChannelOpenStream(completion))
+        } catch {
+            completion(Lnrpc_OpenStatusUpdate(), nil)
         }
     }
 }
@@ -185,3 +203,4 @@ extension Lightning {
         try! FileManager.default.removeItem(at: storage)
     }
 }
+

@@ -132,34 +132,66 @@ extension Lightning {
     }
     
     class NewAddressCallback: NSObject, LndmobileCallbackProtocol {
-           private var completion: (String, Error?) -> Void
+        private var completion: (String, Error?) -> Void
 
-           init(_ completion: @escaping (String, Error?) -> Void) {
-               let startedOnMainThread = Thread.current.isMainThread
-               self.completion = { (response, error) in
-                   if startedOnMainThread {
-                       DispatchQueue.main.async { completion(response, error) }
-                   } else {
-                       completion(response, error)
-                   }
+        init(_ completion: @escaping (String, Error?) -> Void) {
+           let startedOnMainThread = Thread.current.isMainThread
+           self.completion = { (response, error) in
+               if startedOnMainThread {
+                   DispatchQueue.main.async { completion(response, error) }
+               } else {
+                   completion(response, error)
                }
            }
+        }
 
-           func onResponse(_ p0: Data?) {
-               guard let data = p0 else {
-                   completion("", LightningError.missingResponse)
-                   return
-               }
-           
-               do {
-                completion(try Lnrpc_NewAddressResponse(serializedData: data).address, nil)
-               } catch {
-                   completion("", error)
-               }
+        func onResponse(_ p0: Data?) {
+           guard let data = p0 else {
+               completion("", LightningError.missingResponse)
+               return
            }
 
-           func onError(_ p0: Error?) {
-               completion("", p0)
+           do {
+            completion(try Lnrpc_NewAddressResponse(serializedData: data).address, nil)
+           } catch {
+               completion("", error)
            }
-       }
+        }
+
+        func onError(_ p0: Error?) {
+           completion("", p0)
+        }
+    }
+    
+    class ChannelOpenStream: NSObject, LndmobileRecvStreamProtocol {
+        private var completion: (Lnrpc_OpenStatusUpdate, Error?) -> Void
+
+        init(_ completion: @escaping (Lnrpc_OpenStatusUpdate, Error?) -> Void) {
+            let startedOnMainThread = Thread.current.isMainThread
+            self.completion = { (info, error) in
+                if startedOnMainThread {
+                    DispatchQueue.main.async { completion(info, error) }
+                } else {
+                    completion(info, error)
+                }
+            }
+        }
+
+        func onResponse(_ p0: Data?) {
+            guard let data = p0 else {
+                completion(Lnrpc_OpenStatusUpdate(), LightningError.missingResponse)
+                return
+            }
+        
+            do {
+                completion(try Lnrpc_OpenStatusUpdate(serializedData: data), nil)
+            } catch {
+                completion(Lnrpc_OpenStatusUpdate(), error)
+            }
+        }
+
+        func onError(_ p0: Error?) {
+            completion(Lnrpc_OpenStatusUpdate(), p0)
+        }
+    }
 }
