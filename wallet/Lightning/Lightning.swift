@@ -182,9 +182,16 @@ class Lightning {
         }
     }
     
-    func connectToNode(_ completion: @escaping (Lnrpc_ConnectPeerResponse, Error?) -> Void) {
+    func connectToNode(nodePubkey: NodePublicKey, hostAddress: String, hostPort: UInt, _ completion: @escaping (Lnrpc_ConnectPeerResponse, Error?) -> Void) {
+        var request = Lnrpc_ConnectPeerRequest()
+        var addr = Lnrpc_LightningAddress()
+        addr.pubkey = nodePubkey.hexString
+        addr.host = "\(hostAddress):\(hostPort)"
+        request.addr = addr
+        request.perm = true
+        
         do {
-            LndmobileConnectPeer(try Lnrpc_ConnectPeerRequest().serializedData(), LndCallback<Lnrpc_ConnectPeerResponse>(completion))
+            LndmobileConnectPeer(try request.serializedData(), LndCallback<Lnrpc_ConnectPeerResponse>(completion))
         } catch {
             completion(Lnrpc_ConnectPeerResponse(), error)
         }
@@ -195,6 +202,7 @@ class Lightning {
         request.localFundingAmount = localFundingAmount
         request.closeAddress = closeAddress
         request.nodePubkey = nodePubkey.data
+        request.pushSat = 0
         
         //TODO have the below config driven
         request.minConfs = 2
