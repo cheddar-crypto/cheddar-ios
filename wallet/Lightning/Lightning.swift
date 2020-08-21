@@ -11,9 +11,8 @@ class Lightning {
     static let shared = Lightning()
     
     enum LightningError: Error {
-        case unknownStart
-        case missingResponse
-        case rpc
+        case unknown
+        case mapping
         case invalidPassword
     }
     
@@ -52,17 +51,17 @@ class Lightning {
         let args = "--lnddir=\(storage.path)"
 
         print(args)
-
+        
         LndmobileStart(
             args,
-            LndGenericCallback { (error) in
+            LndEmptyResponseCallback { (error) in
                 completion(error)
                 
                 if error == nil {
                     EventBus.postToMainThread(.lndStarted)
                 }
             },
-            LndGenericCallback { (error) in
+            LndEmptyResponseCallback { (error) in
                 onRpcReady(error)
                 
                 if error == nil {
@@ -78,13 +77,13 @@ class Lightning {
         do {
             LndmobileStopDaemon(
                 try Lnrpc_StopRequest().serializedData(),
-                LndGenericCallback{ (error) in
+                LndCallback<Lnrpc_StopResponse>({ (response, error) in
                     completion(error)
                     
                     if error == nil {
                         EventBus.postToMainThread(.lndStopped)
                     }
-                }
+                })
             )
             completion(nil) //TODO figure out why callback is never hit by LndGenericCallback
         } catch {
@@ -96,7 +95,9 @@ class Lightning {
         do {
             LndmobileGenSeed(
                 try Lnrpc_GenSeedRequest().serializedData(),
-                GenerateSeedCallback(completion)
+                LndCallback<Lnrpc_GenSeedResponse> { (response, error) in
+                    completion(response.cipherSeedMnemonic, error)
+                }
             )
         } catch {
             completion([], error)
@@ -115,9 +116,9 @@ class Lightning {
         do {
             LndmobileInitWallet(
                 try request.serializedData(),
-                LndGenericCallback { (error) in
+                LndEmptyResponseCallback { (error) in
                     completion(error)
-                    
+
                     if error == nil {
                         EventBus.postToMainThread(.lndWalletUnlocked)
                     }
@@ -139,7 +140,7 @@ class Lightning {
         do {
             LndmobileUnlockWallet(
                 try request.serializedData(),
-                LndGenericCallback { (error) in
+                LndEmptyResponseCallback { (error) in
                     completion(error)
                     
                     if error == nil {
@@ -154,7 +155,7 @@ class Lightning {
 
     func walletBalance(_ completion: @escaping (Lnrpc_WalletBalanceResponse, Error?) -> Void) {
         do {
-            LndmobileWalletBalance(try Lnrpc_WalletBalanceRequest().serializedData(), WalletBalanceCallback(completion))
+            LndmobileWalletBalance(try Lnrpc_WalletBalanceRequest().serializedData(), LndCallback<Lnrpc_WalletBalanceResponse>(completion))
         } catch {
             completion(Lnrpc_WalletBalanceResponse(), error)
         }
@@ -162,7 +163,7 @@ class Lightning {
     
     func info(_ completion: @escaping (Lnrpc_GetInfoResponse, Error?) -> Void) {
         do {
-            LndmobileGetInfo(try Lnrpc_GetInfoRequest().serializedData(), GetInfoCallback(completion))
+            LndmobileGetInfo(try Lnrpc_GetInfoRequest().serializedData(), LndCallback<Lnrpc_GetInfoResponse>(completion))
         } catch {
             completion(Lnrpc_GetInfoResponse(), error)
         }
@@ -170,9 +171,22 @@ class Lightning {
     
     func newAddress(_ completion: @escaping (String, Error?) -> Void) {
         do {
-            LndmobileNewAddress(try Lnrpc_NewAddressRequest().serializedData(), NewAddressCallback(completion))
+            LndmobileNewAddress(
+                try Lnrpc_NewAddressRequest().serializedData(),
+                LndCallback<Lnrpc_NewAddressResponse> { (response, error) in
+                    completion(response.address, error)
+                }
+            )
         } catch {
             completion("", error)
+        }
+    }
+    
+    func connectToNode(_ completion: @escaping (Lnrpc_ConnectPeerResponse, Error?) -> Void) {
+        do {
+            LndmobileConnectPeer(try Lnrpc_ConnectPeerRequest().serializedData(), LndCallback<Lnrpc_ConnectPeerResponse>(completion))
+        } catch {
+            completion(Lnrpc_ConnectPeerResponse(), error)
         }
     }
      
@@ -188,7 +202,7 @@ class Lightning {
         request.spendUnconfirmed = false
         
         do {
-            LndmobileOpenChannel(try request.serializedData(), ChannelOpenStream(completion))
+            LndmobileConnectPeer(try request.serializedData(), LndCallback<Lnrpc_OpenStatusUpdate>(completion))
         } catch {
             completion(Lnrpc_OpenStatusUpdate(), nil)
         }
