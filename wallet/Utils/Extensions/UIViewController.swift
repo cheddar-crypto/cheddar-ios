@@ -9,11 +9,12 @@
 import UIKit
 
 extension UIViewController {
-    func themeSetup() {
-        let backgroundColor: UIColor = .black //TODO move all colors to theme file
-        let textColor: UIColor = .white
+    
+    func setTheme() {
         
-        view.backgroundColor = backgroundColor
+        view.backgroundColor = Theme.backgroundColor
+        
+        let textColor: UIColor = Theme.inverseBackgroundColor
         
         //Nav setup
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -26,6 +27,7 @@ extension UIViewController {
             NSAttributedString.Key.foregroundColor: textColor
 //            NSAttributedString.Key.font:
         ]
+        
     }
     
     func hideKeyboardWhenSwipedDown() {
@@ -43,4 +45,5 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
 }

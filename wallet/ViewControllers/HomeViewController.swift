@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwiftUI
 
-class HomeViewController: UIViewController {
+class HomeViewController: CheddarViewController {
     private let password = "sshhhhhh"
 
     private var debugStatus: UILabel!
@@ -18,7 +19,6 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         title = "Say Cheese"
-        themeSetup()
         setup()
         updateStatus()
     }
@@ -91,15 +91,15 @@ class HomeViewController: UIViewController {
     
     @objc private func showBalance() {
         resultMessage.text = ""
-        
+
         Lightning.shared.walletBalance { [weak self] (balanceResponse, error) in
             guard let self = self else { return }
-            
+
             guard error == nil else {
                 self.resultMessage.text = "Wallet balance failed - \(error?.localizedDescription ?? "")"
                 return
             }
-            
+
             self.resultMessage.text = "Total: \(balanceResponse.totalBalance)\nConfirmed: \(balanceResponse.confirmedBalance)\nUnconfirmed: \(balanceResponse.unconfirmedBalance)"
         }
     }
@@ -142,8 +142,13 @@ class HomeViewController: UIViewController {
         }
     }
     
+    @objc private func launchRequestInvoice() {
+        presentRequestPayment()
+    }
+    
     private func addDebugButton(_ title: String, action: Selector, topAnchor: NSLayoutYAxisAnchor, topConstant: CGFloat) -> UIButton {
         let button = UIButton()
+        button.setTitleColor(Theme.inverseBackgroundColor, for: .normal)
         button.setTitle(title, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button)
@@ -153,7 +158,7 @@ class HomeViewController: UIViewController {
         button.addTarget(self, action: action, for: .touchUpInside)
         button.layer.cornerRadius = 15
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.borderColor = Theme.inverseBackgroundColor.cgColor
     
         return button
     }
@@ -165,15 +170,16 @@ class HomeViewController: UIViewController {
         let getBalanceButton = addDebugButton("Show balance", action: #selector(showBalance), topAnchor: newAddressButton.bottomAnchor, topConstant: 10)
         let openChannelButton = addDebugButton("Open channel", action: #selector(openChannel), topAnchor: getBalanceButton.bottomAnchor, topConstant: 10)
         let wipeButton = addDebugButton("Wipe (and close) wallet", action: #selector(wipeWallet), topAnchor: openChannelButton.bottomAnchor, topConstant: 10)
+        let flowExampleButton = addDebugButton("Launch request invoice flow", action: #selector(launchRequestInvoice), topAnchor: wipeButton.bottomAnchor, topConstant: 10)
         
         resultMessage = UILabel()
         resultMessage.text = "..."
         resultMessage.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(resultMessage)
-        resultMessage.topAnchor.constraint(equalTo: wipeButton.bottomAnchor, constant: 20).isActive = true
+        resultMessage.topAnchor.constraint(equalTo: flowExampleButton.bottomAnchor, constant: 20).isActive = true
         resultMessage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         resultMessage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        resultMessage.textColor = .white //TODO move to theme
+        resultMessage.textColor = Theme.inverseBackgroundColor
         resultMessage.textAlignment = .center
         resultMessage.numberOfLines = 0
         
@@ -183,7 +189,7 @@ class HomeViewController: UIViewController {
         debugStatus.topAnchor.constraint(equalTo: resultMessage.bottomAnchor, constant: 50).isActive = true
         debugStatus.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         debugStatus.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        debugStatus.textColor = .white //TODO move to theme
+        debugStatus.textColor = Theme.inverseBackgroundColor
         debugStatus.textAlignment = .center
         debugStatus.numberOfLines = 0
         debugStatus.text = "Debug status"

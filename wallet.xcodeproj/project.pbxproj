@@ -51,6 +51,16 @@
 		00665EDD24EF07E800030A13 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665EDB24EF07E800030A13 /* Settings.swift */; };
 		3C42530BF0760EAA4F38CEDD /* Pods_wallet_walletUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8169844622EC1A934F64E4C8 /* Pods_wallet_walletUITests.framework */; };
 		4029655179169C028F45B373 /* Pods_walletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6665EF031EDC3E364CE652 /* Pods_walletTests.framework */; };
+		7A2CC33D24EF5C6E00E2605A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC33C24EF5C6E00E2605A /* Colors.swift */; };
+		7A2CC34224EF634200E2605A /* CheddarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34124EF634200E2605A /* CheddarViewController.swift */; };
+		7A2CC34424EF63E200E2605A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34324EF63E200E2605A /* Theme.swift */; };
+		7A2CC34924EF6F7A00E2605A /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34824EF6F7A00E2605A /* Fonts.swift */; };
+		7A2CC34B24EF6F9F00E2605A /* CheddarNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34A24EF6F9F00E2605A /* CheddarNavigationController.swift */; };
+		7A2CC34D24EF6FC700E2605A /* RequestPaymentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34C24EF6FC700E2605A /* RequestPaymentNavigationController.swift */; };
+		7A2CC34F24EF722500E2605A /* RequestAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34E24EF722500E2605A /* RequestAmountViewController.swift */; };
+		7A2CC35124EF73AD00E2605A /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35024EF73AD00E2605A /* Navigation.swift */; };
+		7A2CC35324EF73D000E2605A /* RequestNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35224EF73D000E2605A /* RequestNoteViewController.swift */; };
+		7A2CC35524EF776400E2605A /* RequestInvoiceQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35424EF776400E2605A /* RequestInvoiceQRViewController.swift */; };
 		7ABFCBD124E4EBFD0012EF39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD024E4EBFD0012EF39 /* AppDelegate.swift */; };
 		7ABFCBD324E4EBFD0012EF39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD224E4EBFD0012EF39 /* SceneDelegate.swift */; };
 		7ABFCBD724E4EC010012EF39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD624E4EC010012EF39 /* Assets.xcassets */; };
@@ -107,6 +117,16 @@
 		4C2A1A61CA82F3F36E6DB4B2 /* Pods-walletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletTests.release.xcconfig"; path = "Target Support Files/Pods-walletTests/Pods-walletTests.release.xcconfig"; sourceTree = "<group>"; };
 		59841CD97AB95EE18B1586B5 /* Pods-wallet-walletUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet-walletUITests.debug.xcconfig"; path = "Target Support Files/Pods-wallet-walletUITests/Pods-wallet-walletUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		61751AE73E16766A4665327B /* Pods-wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet.release.xcconfig"; path = "Target Support Files/Pods-wallet/Pods-wallet.release.xcconfig"; sourceTree = "<group>"; };
+		7A2CC33C24EF5C6E00E2605A /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		7A2CC34124EF634200E2605A /* CheddarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheddarViewController.swift; sourceTree = "<group>"; };
+		7A2CC34324EF63E200E2605A /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		7A2CC34824EF6F7A00E2605A /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		7A2CC34A24EF6F9F00E2605A /* CheddarNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheddarNavigationController.swift; sourceTree = "<group>"; };
+		7A2CC34C24EF6FC700E2605A /* RequestPaymentNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPaymentNavigationController.swift; sourceTree = "<group>"; };
+		7A2CC34E24EF722500E2605A /* RequestAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAmountViewController.swift; sourceTree = "<group>"; };
+		7A2CC35024EF73AD00E2605A /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
+		7A2CC35224EF73D000E2605A /* RequestNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNoteViewController.swift; sourceTree = "<group>"; };
+		7A2CC35424EF776400E2605A /* RequestInvoiceQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInvoiceQRViewController.swift; sourceTree = "<group>"; };
 		7ABFCBCD24E4EBFD0012EF39 /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ABFCBD024E4EBFD0012EF39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7ABFCBD224E4EBFD0012EF39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -266,12 +286,16 @@
 			path = invoicesrpc;
 			sourceTree = "<group>";
 		};
-		00665ECA24EC4B3600030A13 /* Screens */ = {
+		00665ECA24EC4B3600030A13 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				00665EC824EC494A00030A13 /* HomeViewController.swift */,
+				7A2CC34124EF634200E2605A /* CheddarViewController.swift */,
+				7A2CC34E24EF722500E2605A /* RequestAmountViewController.swift */,
+				7A2CC35224EF73D000E2605A /* RequestNoteViewController.swift */,
+				7A2CC35424EF776400E2605A /* RequestInvoiceQRViewController.swift */,
 			);
-			path = Screens;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		00665ECB24EC4B6900030A13 /* Utils */ = {
@@ -279,6 +303,10 @@
 			children = (
 				00665ECC24EC4B7E00030A13 /* Extensions */,
 				00665EDB24EF07E800030A13 /* Settings.swift */,
+				7A2CC33C24EF5C6E00E2605A /* Colors.swift */,
+				7A2CC34324EF63E200E2605A /* Theme.swift */,
+				7A2CC34824EF6F7A00E2605A /* Fonts.swift */,
+				7A2CC35024EF73AD00E2605A /* Navigation.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -325,6 +353,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7A2CC34724EF6F6200E2605A /* NavigationControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7A2CC34A24EF6F9F00E2605A /* CheddarNavigationController.swift */,
+				7A2CC34C24EF6FC700E2605A /* RequestPaymentNavigationController.swift */,
+			);
+			path = NavigationControllers;
+			sourceTree = "<group>";
+		};
 		7ABFCBC424E4EBFD0012EF39 = {
 			isa = PBXGroup;
 			children = (
@@ -358,7 +395,8 @@
 				7ABFCBDB24E4EC010012EF39 /* LaunchScreen.storyboard */,
 				7ABFCBDE24E4EC010012EF39 /* Info.plist */,
 				00665E7B24E5C72C00030A13 /* Lightning */,
-				00665ECA24EC4B3600030A13 /* Screens */,
+				7A2CC34724EF6F6200E2605A /* NavigationControllers */,
+				00665ECA24EC4B3600030A13 /* ViewControllers */,
 				00665ECB24EC4B6900030A13 /* Utils */,
 			);
 			path = wallet;
@@ -624,27 +662,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A2CC34F24EF722500E2605A /* RequestAmountViewController.swift in Sources */,
 				00665ED724EF05B700030A13 /* NodePublicKey.swift in Sources */,
 				00665EBA24E9185B00030A13 /* wtclient.pb.swift in Sources */,
 				00665ED224EC510400030A13 /* EventBus.swift in Sources */,
 				7ABFCBD124E4EBFD0012EF39 /* AppDelegate.swift in Sources */,
 				7ABFCBD324E4EBFD0012EF39 /* SceneDelegate.swift in Sources */,
 				00665ECE24EC4B9000030A13 /* UIViewController.swift in Sources */,
+				7A2CC35524EF776400E2605A /* RequestInvoiceQRViewController.swift in Sources */,
 				00665EA824E9185B00030A13 /* lncli.pb.swift in Sources */,
 				00665EC924EC494A00030A13 /* HomeViewController.swift in Sources */,
+				7A2CC34B24EF6F9F00E2605A /* CheddarNavigationController.swift in Sources */,
 				00665EB024E9185B00030A13 /* rpc.pb.swift in Sources */,
 				00665EAA24E9185B00030A13 /* chainnotifier.pb.swift in Sources */,
 				00665EB424E9185B00030A13 /* signer.pb.swift in Sources */,
 				00665EBE24E9185B00030A13 /* invoices.pb.swift in Sources */,
 				00665E8424E5C72C00030A13 /* Lightning.swift in Sources */,
+				7A2CC33D24EF5C6E00E2605A /* Colors.swift in Sources */,
 				00665EAC24E9185B00030A13 /* walletkit.pb.swift in Sources */,
+				7A2CC35324EF73D000E2605A /* RequestNoteViewController.swift in Sources */,
 				00665E8224E5C72C00030A13 /* LndCallbacks.swift in Sources */,
+				7A2CC34424EF63E200E2605A /* Theme.swift in Sources */,
 				00665ED424EC55B300030A13 /* LightningStateMonitor.swift in Sources */,
 				00665EAE24E9185B00030A13 /* router.pb.swift in Sources */,
 				00665EBC24E9185B00030A13 /* verrpc.pb.swift in Sources */,
 				00665EB624E9185B00030A13 /* walletunlocker.pb.swift in Sources */,
 				00665EB824E9185B00030A13 /* watchtower.pb.swift in Sources */,
+				7A2CC34D24EF6FC700E2605A /* RequestPaymentNavigationController.swift in Sources */,
 				00665EDC24EF07E800030A13 /* Settings.swift in Sources */,
+				7A2CC34224EF634200E2605A /* CheddarViewController.swift in Sources */,
+				7A2CC35124EF73AD00E2605A /* Navigation.swift in Sources */,
+				7A2CC34924EF6F7A00E2605A /* Fonts.swift in Sources */,
 				00665EB224E9185B00030A13 /* autopilot.pb.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
