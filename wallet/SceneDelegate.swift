@@ -49,7 +49,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
+        // Use this method to undo the changes made on entering the background.        
+        guard !Settings.isUnitTest else {
+            return
+        }
+        
         Lightning.shared.start({ (error) in
             guard error == nil else {
                 return print("LND start error")
