@@ -107,27 +107,44 @@ class HomeViewController: CheddarViewController {
     @objc private func openChannel() {
         resultMessage.text = ""
         
-        let nodePubKey = try! NodePublicKey("0277622bf4c497475960bf91bd3c673a4cb4e9b589cebfde9700c197b3989cc1b8")
+        //TODO allow for passing in a convenient string like 02c72b987ee75223bf3437905c8b40d224ce94e3586da9eee0fc87839ac5842ccd@54.189.108.12:9735
         
-        Lightning.shared.openChannel(localFundingAmount: 20000, closeAddress: "", nodePubkey: nodePubKey) { [weak self] (response, error) in
+        let nodePubKey = try! NodePublicKey("02c72b987ee75223bf3437905c8b40d224ce94e3586da9eee0fc87839ac5842ccd")
+        let hostAddress = "54.189.108.12"
+        let hostPort: UInt = 9735
+        let closeAddress = "tb1qylxttvn7wm7vsc2j36cjvmpl7nykcrzqkz6avl"
+        
+        Lightning.shared.connectToNode(nodePubkey: nodePubKey, hostAddress: hostAddress, hostPort: hostPort) { [weak self] (response, error) in
             guard let self = self else { return }
-            
+
             guard error == nil else {
-                self.resultMessage.text = "Channel open failed - \(error?.localizedDescription ?? "")"
+                self.resultMessage.text = "Failed to connect to node - \(error?.localizedDescription ?? "")"
                 return
             }
             
-            guard let update = response.update else {
-              return
-            }
+            self.resultMessage.text = "Connected to peer"
             
-            switch update {
-            case .chanPending(let pendingUpdate):
-                self.resultMessage.text = "Channel open pending update\nTXID: \(pendingUpdate.txid.base64EncodedString())"
-            case .chanOpen(let openUpdate):
-                self.resultMessage.text = "Channel open success update"
-            case .psbtFund(let onpsbtFund):
-                self.resultMessage.text = "I don't know why you would get this error"
+            
+            Lightning.shared.openChannel(localFundingAmount: 20000, closeAddress: closeAddress, nodePubkey: nodePubKey) { [weak self] (response, error) in
+                guard let self = self else { return }
+                
+                guard error == nil else {
+                    self.resultMessage.text = "Channel open failed - \(error?.localizedDescription ?? "")"
+                    return
+                }
+                
+                guard let update = response.update else {
+                  return
+                }
+                
+                switch update {
+                case .chanPending(let pendingUpdate):
+                    self.resultMessage.text = "Channel open pending update\nTXID: \(pendingUpdate.txid.base64EncodedString())"
+                case .chanOpen(let openUpdate):
+                    self.resultMessage.text = "Channel open success update"
+                case .psbtFund(let onpsbtFund):
+                    self.resultMessage.text = "I don't know why you would get this error"
+                }
             }
         }
     }

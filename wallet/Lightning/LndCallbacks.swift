@@ -7,10 +7,45 @@
 //
 
 import Foundation
+import SwiftProtobuf
 
 extension Lightning {
-    // MARK: LND Start
-    class LndGenericCallback: NSObject, LndmobileCallbackProtocol {
+    
+    /// Generic callback for LND function which will map responses back into the protobuf message type.
+    class LndCallback<T: SwiftProtobuf.Message>: NSObject, LndmobileCallbackProtocol, LndmobileRecvStreamProtocol {
+        let completion: (T, Error?) -> Void
+
+        init(_ completion: @escaping (T, Error?) -> Void) {
+            let startedOnMainThread = Thread.current.isMainThread
+            self.completion = { (response, error) in
+                if startedOnMainThread {
+                    DispatchQueue.main.async { completion(response, error) }
+                } else {
+                    completion(response, error)
+                }
+            }
+        }
+        
+        func onResponse(_ p0: Data?) {
+            guard let data = p0 else {
+                completion(T(), nil) //For calls like balance checks, an empty response should just be `T` defaults
+                return
+            }
+            
+            do {
+                completion(try T(serializedData: data), nil)
+            } catch {
+                completion(T(), LightningError.mapping)
+            }
+        }
+
+        func onError(_ p0: Error?) {
+            completion(T(), p0 ?? LightningError.unknown)
+        }
+    }
+    
+    /// For LND callbacks that don't pass back any messages but can return errors
+    class LndEmptyResponseCallback: NSObject, LndmobileCallbackProtocol {
         let completion: (Error?) -> Void
 
         init(_ completion: @escaping (Error?) -> Void) {
@@ -30,168 +65,7 @@ extension Lightning {
         }
 
         func onError(_ p0: Error?) {
-            completion(p0 ?? LightningError.unknownStart)
-        }
-    }
-    
-    class GenerateSeedCallback: NSObject, LndmobileCallbackProtocol {
-        private var completion: ([String], Error?) -> Void
-
-        init(_ completion: @escaping ([String], Error?) -> Void) {
-            let startedOnMainThread = Thread.current.isMainThread
-            self.completion = { (seed, error) in
-                if startedOnMainThread {
-                    DispatchQueue.main.async { completion(seed, error) }
-                } else {
-                    completion(seed, error)
-                }
-            }
-        }
-
-        func onResponse(_ p0: Data?) {
-            guard let data = p0 else {
-                completion([], LightningError.missingResponse)
-                return
-            }
-        
-            do {
-                let response = try Lnrpc_GenSeedResponse(serializedData: data)
-                completion(response.cipherSeedMnemonic, nil)
-            } catch {
-                completion([], LightningError.rpc)
-            }
-        }
-
-        func onError(_ p0: Error?) {
-            completion([], p0)
-        }
-    }
-    
-    class WalletBalanceCallback: NSObject, LndmobileCallbackProtocol {
-        private var completion: (Lnrpc_WalletBalanceResponse, Error?) -> Void
-
-        init(_ completion: @escaping (Lnrpc_WalletBalanceResponse, Error?) -> Void) {
-            let startedOnMainThread = Thread.current.isMainThread
-            self.completion = { (balance, error) in
-                if startedOnMainThread {
-                    DispatchQueue.main.async { completion(balance, error) }
-                } else {
-                    completion(balance, error)
-                }
-            }
-        }
-
-        func onResponse(_ p0: Data?) {
-            guard let data = p0 else {
-                completion(Lnrpc_WalletBalanceResponse(), nil)
-                return
-            }
-        
-            do {
-                completion(try Lnrpc_WalletBalanceResponse(serializedData: data), nil)
-            } catch {
-                completion(Lnrpc_WalletBalanceResponse(), error)
-            }
-        }
-
-        func onError(_ p0: Error?) {
-            completion(Lnrpc_WalletBalanceResponse(), p0)
-        }
-    }
-    
-    class GetInfoCallback: NSObject, LndmobileCallbackProtocol {
-        private var completion: (Lnrpc_GetInfoResponse, Error?) -> Void
-
-        init(_ completion: @escaping (Lnrpc_GetInfoResponse, Error?) -> Void) {
-            let startedOnMainThread = Thread.current.isMainThread
-            self.completion = { (info, error) in
-                if startedOnMainThread {
-                    DispatchQueue.main.async { completion(info, error) }
-                } else {
-                    completion(info, error)
-                }
-            }
-        }
-
-        func onResponse(_ p0: Data?) {
-            guard let data = p0 else {
-                completion(Lnrpc_GetInfoResponse(), LightningError.missingResponse)
-                return
-            }
-        
-            do {
-                completion(try Lnrpc_GetInfoResponse(serializedData: data), nil)
-            } catch {
-                completion(Lnrpc_GetInfoResponse(), error)
-            }
-        }
-
-        func onError(_ p0: Error?) {
-            completion(Lnrpc_GetInfoResponse(), p0)
-        }
-    }
-    
-    class NewAddressCallback: NSObject, LndmobileCallbackProtocol {
-        private var completion: (String, Error?) -> Void
-
-        init(_ completion: @escaping (String, Error?) -> Void) {
-           let startedOnMainThread = Thread.current.isMainThread
-           self.completion = { (response, error) in
-               if startedOnMainThread {
-                   DispatchQueue.main.async { completion(response, error) }
-               } else {
-                   completion(response, error)
-               }
-           }
-        }
-
-        func onResponse(_ p0: Data?) {
-           guard let data = p0 else {
-               completion("", LightningError.missingResponse)
-               return
-           }
-
-           do {
-            completion(try Lnrpc_NewAddressResponse(serializedData: data).address, nil)
-           } catch {
-               completion("", error)
-           }
-        }
-
-        func onError(_ p0: Error?) {
-           completion("", p0)
-        }
-    }
-    
-    class ChannelOpenStream: NSObject, LndmobileRecvStreamProtocol {
-        private var completion: (Lnrpc_OpenStatusUpdate, Error?) -> Void
-
-        init(_ completion: @escaping (Lnrpc_OpenStatusUpdate, Error?) -> Void) {
-            let startedOnMainThread = Thread.current.isMainThread
-            self.completion = { (info, error) in
-                if startedOnMainThread {
-                    DispatchQueue.main.async { completion(info, error) }
-                } else {
-                    completion(info, error)
-                }
-            }
-        }
-
-        func onResponse(_ p0: Data?) {
-            guard let data = p0 else {
-                completion(Lnrpc_OpenStatusUpdate(), LightningError.missingResponse)
-                return
-            }
-        
-            do {
-                completion(try Lnrpc_OpenStatusUpdate(serializedData: data), nil)
-            } catch {
-                completion(Lnrpc_OpenStatusUpdate(), error)
-            }
-        }
-
-        func onError(_ p0: Error?) {
-            completion(Lnrpc_OpenStatusUpdate(), p0)
+            completion(p0 ?? LightningError.unknown)
         }
     }
 }

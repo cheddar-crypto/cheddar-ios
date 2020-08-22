@@ -16,6 +16,7 @@ class NodePublicKey {
     }
     
     private let bytes: [UInt8]
+    let hexString: String
     
     var data: Data {
         return Data(bytes)
@@ -53,5 +54,6 @@ class NodePublicKey {
         }
         
         self.bytes = bytes
+        self.hexString = hexString
     }
 }
