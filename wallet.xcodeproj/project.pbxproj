@@ -56,11 +56,15 @@
 		7A2CC34424EF63E200E2605A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34324EF63E200E2605A /* Theme.swift */; };
 		7A2CC34924EF6F7A00E2605A /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34824EF6F7A00E2605A /* Fonts.swift */; };
 		7A2CC34B24EF6F9F00E2605A /* CheddarNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34A24EF6F9F00E2605A /* CheddarNavigationController.swift */; };
-		7A2CC34D24EF6FC700E2605A /* RequestPaymentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34C24EF6FC700E2605A /* RequestPaymentNavigationController.swift */; };
+		7A2CC34D24EF6FC700E2605A /* RequestNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34C24EF6FC700E2605A /* RequestNavigationController.swift */; };
 		7A2CC34F24EF722500E2605A /* RequestAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34E24EF722500E2605A /* RequestAmountViewController.swift */; };
 		7A2CC35124EF73AD00E2605A /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35024EF73AD00E2605A /* Navigation.swift */; };
 		7A2CC35324EF73D000E2605A /* RequestNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35224EF73D000E2605A /* RequestNoteViewController.swift */; };
 		7A2CC35524EF776400E2605A /* RequestInvoiceQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35424EF776400E2605A /* RequestInvoiceQRViewController.swift */; };
+		7A2CC35724F1C63E00E2605A /* OnChainAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35624F1C63E00E2605A /* OnChainAddressViewController.swift */; };
+		7A2CC35924F1C76B00E2605A /* PaymentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35824F1C76B00E2605A /* PaymentNavigationController.swift */; };
+		7A2CC35B24F1C7B500E2605A /* ScanInvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35A24F1C7B500E2605A /* ScanInvoiceViewController.swift */; };
+		7A2CC35D24F1C81100E2605A /* SendPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35C24F1C81100E2605A /* SendPaymentViewController.swift */; };
 		7ABFCBD124E4EBFD0012EF39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD024E4EBFD0012EF39 /* AppDelegate.swift */; };
 		7ABFCBD324E4EBFD0012EF39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD224E4EBFD0012EF39 /* SceneDelegate.swift */; };
 		7ABFCBD724E4EC010012EF39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD624E4EC010012EF39 /* Assets.xcassets */; };
@@ -122,11 +126,15 @@
 		7A2CC34324EF63E200E2605A /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		7A2CC34824EF6F7A00E2605A /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		7A2CC34A24EF6F9F00E2605A /* CheddarNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheddarNavigationController.swift; sourceTree = "<group>"; };
-		7A2CC34C24EF6FC700E2605A /* RequestPaymentNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPaymentNavigationController.swift; sourceTree = "<group>"; };
+		7A2CC34C24EF6FC700E2605A /* RequestNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNavigationController.swift; sourceTree = "<group>"; };
 		7A2CC34E24EF722500E2605A /* RequestAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAmountViewController.swift; sourceTree = "<group>"; };
 		7A2CC35024EF73AD00E2605A /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		7A2CC35224EF73D000E2605A /* RequestNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNoteViewController.swift; sourceTree = "<group>"; };
 		7A2CC35424EF776400E2605A /* RequestInvoiceQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInvoiceQRViewController.swift; sourceTree = "<group>"; };
+		7A2CC35624F1C63E00E2605A /* OnChainAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnChainAddressViewController.swift; sourceTree = "<group>"; };
+		7A2CC35824F1C76B00E2605A /* PaymentNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentNavigationController.swift; sourceTree = "<group>"; };
+		7A2CC35A24F1C7B500E2605A /* ScanInvoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanInvoiceViewController.swift; sourceTree = "<group>"; };
+		7A2CC35C24F1C81100E2605A /* SendPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPaymentViewController.swift; sourceTree = "<group>"; };
 		7ABFCBCD24E4EBFD0012EF39 /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ABFCBD024E4EBFD0012EF39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7ABFCBD224E4EBFD0012EF39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -294,6 +302,9 @@
 				7A2CC34E24EF722500E2605A /* RequestAmountViewController.swift */,
 				7A2CC35224EF73D000E2605A /* RequestNoteViewController.swift */,
 				7A2CC35424EF776400E2605A /* RequestInvoiceQRViewController.swift */,
+				7A2CC35624F1C63E00E2605A /* OnChainAddressViewController.swift */,
+				7A2CC35A24F1C7B500E2605A /* ScanInvoiceViewController.swift */,
+				7A2CC35C24F1C81100E2605A /* SendPaymentViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -357,7 +368,8 @@
 			isa = PBXGroup;
 			children = (
 				7A2CC34A24EF6F9F00E2605A /* CheddarNavigationController.swift */,
-				7A2CC34C24EF6FC700E2605A /* RequestPaymentNavigationController.swift */,
+				7A2CC34C24EF6FC700E2605A /* RequestNavigationController.swift */,
+				7A2CC35824F1C76B00E2605A /* PaymentNavigationController.swift */,
 			);
 			path = NavigationControllers;
 			sourceTree = "<group>";
@@ -672,8 +684,10 @@
 				7A2CC35524EF776400E2605A /* RequestInvoiceQRViewController.swift in Sources */,
 				00665EA824E9185B00030A13 /* lncli.pb.swift in Sources */,
 				00665EC924EC494A00030A13 /* HomeViewController.swift in Sources */,
+				7A2CC35B24F1C7B500E2605A /* ScanInvoiceViewController.swift in Sources */,
 				7A2CC34B24EF6F9F00E2605A /* CheddarNavigationController.swift in Sources */,
 				00665EB024E9185B00030A13 /* rpc.pb.swift in Sources */,
+				7A2CC35724F1C63E00E2605A /* OnChainAddressViewController.swift in Sources */,
 				00665EAA24E9185B00030A13 /* chainnotifier.pb.swift in Sources */,
 				00665EB424E9185B00030A13 /* signer.pb.swift in Sources */,
 				00665EBE24E9185B00030A13 /* invoices.pb.swift in Sources */,
@@ -681,14 +695,16 @@
 				7A2CC33D24EF5C6E00E2605A /* Colors.swift in Sources */,
 				00665EAC24E9185B00030A13 /* walletkit.pb.swift in Sources */,
 				7A2CC35324EF73D000E2605A /* RequestNoteViewController.swift in Sources */,
+				7A2CC35924F1C76B00E2605A /* PaymentNavigationController.swift in Sources */,
 				00665E8224E5C72C00030A13 /* LndCallbacks.swift in Sources */,
 				7A2CC34424EF63E200E2605A /* Theme.swift in Sources */,
 				00665ED424EC55B300030A13 /* LightningStateMonitor.swift in Sources */,
+				7A2CC35D24F1C81100E2605A /* SendPaymentViewController.swift in Sources */,
 				00665EAE24E9185B00030A13 /* router.pb.swift in Sources */,
 				00665EBC24E9185B00030A13 /* verrpc.pb.swift in Sources */,
 				00665EB624E9185B00030A13 /* walletunlocker.pb.swift in Sources */,
 				00665EB824E9185B00030A13 /* watchtower.pb.swift in Sources */,
-				7A2CC34D24EF6FC700E2605A /* RequestPaymentNavigationController.swift in Sources */,
+				7A2CC34D24EF6FC700E2605A /* RequestNavigationController.swift in Sources */,
 				00665EDC24EF07E800030A13 /* Settings.swift in Sources */,
 				7A2CC34224EF634200E2605A /* CheddarViewController.swift in Sources */,
 				7A2CC35124EF73AD00E2605A /* Navigation.swift in Sources */,

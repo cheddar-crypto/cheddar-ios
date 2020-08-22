@@ -163,6 +163,14 @@ class HomeViewController: CheddarViewController {
         presentRequestPayment()
     }
     
+    @objc private func launchOnChainAddress() {
+        presentOnChainAddress()
+    }
+    
+    @objc private func launchPaymentFlow() {
+        presentPayment()
+    }
+    
     private func addDebugButton(_ title: String, action: Selector, topAnchor: NSLayoutYAxisAnchor, topConstant: CGFloat) -> UIButton {
         let button = UIButton()
         button.setTitleColor(Theme.inverseBackgroundColor, for: .normal)
@@ -187,13 +195,15 @@ class HomeViewController: CheddarViewController {
         let getBalanceButton = addDebugButton("Show balance", action: #selector(showBalance), topAnchor: newAddressButton.bottomAnchor, topConstant: 10)
         let openChannelButton = addDebugButton("Open channel", action: #selector(openChannel), topAnchor: getBalanceButton.bottomAnchor, topConstant: 10)
         let wipeButton = addDebugButton("Wipe (and close) wallet", action: #selector(wipeWallet), topAnchor: openChannelButton.bottomAnchor, topConstant: 10)
-        let flowExampleButton = addDebugButton("Launch request invoice flow", action: #selector(launchRequestInvoice), topAnchor: wipeButton.bottomAnchor, topConstant: 10)
+        let requestFlowButton = addDebugButton("Launch request invoice flow", action: #selector(launchRequestInvoice), topAnchor: wipeButton.bottomAnchor, topConstant: 10)
+        let onChainButton = addDebugButton("Launch onchain address vc", action: #selector(launchOnChainAddress), topAnchor: requestFlowButton.bottomAnchor, topConstant: 10)
+        let paymentFlowButton = addDebugButton("Launch LND payment flow", action: #selector(launchPaymentFlow), topAnchor: onChainButton.bottomAnchor, topConstant: 10)
         
         resultMessage = UILabel()
         resultMessage.text = "..."
         resultMessage.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(resultMessage)
-        resultMessage.topAnchor.constraint(equalTo: flowExampleButton.bottomAnchor, constant: 20).isActive = true
+        resultMessage.topAnchor.constraint(equalTo: paymentFlowButton.bottomAnchor, constant: 20).isActive = true
         resultMessage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         resultMessage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         resultMessage.textColor = Theme.inverseBackgroundColor

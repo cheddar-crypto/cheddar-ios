@@ -13,7 +13,15 @@ import Foundation
 extension CheddarViewController {
     
     func presentRequestPayment() {
-        present(RequestPaymentNavigationController(), animated: true, completion: nil)
+        present(RequestNavigationController(), animated: true, completion: nil)
+    }
+    
+    func presentPayment() {
+        present(PaymentNavigationController(), animated: true, completion: nil)
+    }
+    
+    func presentOnChainAddress() {
+        present(OnChainAddressViewController(), animated: true, completion: nil)
     }
     
 }
@@ -26,6 +34,10 @@ extension CheddarNavigationController {
     
     func pushInvoiceQR() {
         pushViewController(RequestInvoiceQRViewController(), animated: true)
+    }
+    
+    func pushSendPayment() {
+        pushViewController(SendPaymentViewController(), animated: true)
     }
     
 }
