@@ -175,6 +175,7 @@ class HomeViewController: CheddarViewController {
         let button = UIButton()
         button.setTitleColor(Theme.inverseBackgroundColor, for: .normal)
         button.setTitle(title, for: .normal)
+        button.titleLabel?.font = Fonts.sofiaPro(weight: .medium)
         button.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button)
         button.topAnchor.constraint(equalTo: topAnchor, constant: topConstant).isActive = true

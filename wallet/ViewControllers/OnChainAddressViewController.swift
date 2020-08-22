@@ -14,6 +14,7 @@ class OnChainAddressViewController: CheddarViewController {
         super.viewDidLoad()
 
         title = "Show address"
+
     }
 
 }
