@@ -47,6 +47,7 @@ class CheddarViewController: UIViewController {
     private func addViewIfNeeded(_ subview: UIView) {
         if (!view.subviews.contains(subview)) {
             view.addSubviewAndFill(subview)
+            view.bringSubviewToFront(subview)
         }
     }
 

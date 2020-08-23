@@ -190,6 +190,7 @@ class HomeViewController: CheddarViewController {
     }
 
     private func setup() {
+        
         let createButton = addDebugButton("Create wallet", action: #selector(createWallet), topAnchor: view.topAnchor, topConstant: 100)
         let unlockButton = addDebugButton("Unlock wallet", action: #selector(unlockWallet), topAnchor: createButton.bottomAnchor, topConstant: 10)
         let newAddressButton = addDebugButton("New address (copies to clipboard)", action: #selector(newAddress), topAnchor: unlockButton.bottomAnchor, topConstant: 10)
@@ -224,6 +225,6 @@ class HomeViewController: CheddarViewController {
         
         // These views will be updated
 //        showLoadingView()
-        showErrorView()
+//        showErrorView()
     }
 }
