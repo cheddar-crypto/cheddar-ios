@@ -221,5 +221,9 @@ class HomeViewController: CheddarViewController {
         debugStatus.textAlignment = .center
         debugStatus.numberOfLines = 0
         debugStatus.text = "Debug status"
+        
+        // These views will be updated
+//        showLoadingView()
+        showErrorView()
     }
 }
