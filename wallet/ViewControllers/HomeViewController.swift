@@ -231,11 +231,11 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
     // and can update the views accordingly as they change in real time
     override func viewModelDidLoad() {
         
-        viewModel.exampleData.observe = { [weak self] boolean in
+        viewModel.randomIntObservable.observe = { [weak self] randomInt in
             self?.showContentView()
         }
         
-        viewModel.exampleError.observe = { [weak self] error in
+        viewModel.errorObservable.observe = { [weak self] error in
             self?.showErrorView()
         }
         
