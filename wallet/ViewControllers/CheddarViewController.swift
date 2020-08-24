@@ -8,7 +8,13 @@
 
 import UIKit
 
-class CheddarViewController: UIViewController {
+class CheddarViewController<VM: ViewModel>: UIViewController {
+    
+    internal var viewModel: VM! {
+        didSet {
+            viewModelDidLoad()
+        }
+    }
     
     lazy var loadingView: LoadingView = {
         return LoadingView()
@@ -20,6 +26,7 @@ class CheddarViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = VM()
         setTheme()
     }
     
@@ -50,5 +57,9 @@ class CheddarViewController: UIViewController {
             view.bringSubviewToFront(subview)
         }
     }
-
+    
+    func viewModelDidLoad() {
+        // Empty
+    }
+    
 }

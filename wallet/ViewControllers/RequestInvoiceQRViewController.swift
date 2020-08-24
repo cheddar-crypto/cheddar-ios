@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RequestInvoiceQRViewController: CheddarViewController {
+class RequestInvoiceQRViewController: CheddarViewController<ViewModel> {
 
     override func viewDidLoad() {
         super.viewDidLoad()

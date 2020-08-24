@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ScanInvoiceViewController: CheddarViewController {
+class ScanInvoiceViewController: CheddarViewController<ViewModel> {
 
     override func viewDidLoad() {
         super.viewDidLoad()

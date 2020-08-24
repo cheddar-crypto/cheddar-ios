@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RequestAmountViewController: CheddarViewController {
+class RequestAmountViewController: CheddarViewController<ViewModel> {
 
     override func viewDidLoad() {
         super.viewDidLoad()

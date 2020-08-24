@@ -8,8 +8,6 @@
 
 import Foundation
 
-// Not sure I like this yet...
-
 extension CheddarViewController {
     
     func presentRequestPayment() {

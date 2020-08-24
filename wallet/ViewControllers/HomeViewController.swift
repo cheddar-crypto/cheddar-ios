@@ -9,7 +9,7 @@
 import UIKit
 import SwiftUI
 
-class HomeViewController: CheddarViewController {
+class HomeViewController: CheddarViewController<HomeViewModel> {
     private let password = "sshhhhhh"
 
     private var debugStatus: UILabel!
@@ -223,8 +223,24 @@ class HomeViewController: CheddarViewController {
         debugStatus.numberOfLines = 0
         debugStatus.text = "Debug status"
         
-        // These views will be updated
-//        showLoadingView()
-//        showErrorView()
+        showLoadingView() // Remove me
     }
+    
+    // This will get called when the ViewModel for this ViewController is ready to use
+    // This gives us a simple place to observe all changes to the datasources
+    // and can update the views accordingly as they change in real time
+    override func viewModelDidLoad() {
+        
+        viewModel.randomIntObservable.observe = { [weak self] randomInt in
+            self?.showContentView()
+        }
+        
+        viewModel.errorObservable.observe = { [weak self] error in
+            self?.showErrorView()
+        }
+        
+        viewModel.load()
+        
+    }
+    
 }
