@@ -73,6 +73,10 @@
 		7A2CC36B24F2D37200E2605A /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC36A24F2D37200E2605A /* ErrorView.swift */; };
 		7A2CC36E24F2D7CD00E2605A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A2CC37024F2D7CD00E2605A /* Localizable.strings */; };
 		7A2CC37224F2D82E00E2605A /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC37124F2D82E00E2605A /* Strings.swift */; };
+		7A2CC37424F3488F00E2605A /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC37324F3488F00E2605A /* Observable.swift */; };
+		7A2CC37724F348FE00E2605A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC37624F348FE00E2605A /* HomeViewModel.swift */; };
+		7A2CC37A24F3495500E2605A /* ExampleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC37924F3495500E2605A /* ExampleRepository.swift */; };
+		7A2CC37C24F3510900E2605A /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC37B24F3510900E2605A /* ViewModel.swift */; };
 		7ABFCBD124E4EBFD0012EF39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD024E4EBFD0012EF39 /* AppDelegate.swift */; };
 		7ABFCBD324E4EBFD0012EF39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD224E4EBFD0012EF39 /* SceneDelegate.swift */; };
 		7ABFCBD724E4EC010012EF39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD624E4EC010012EF39 /* Assets.xcassets */; };
@@ -151,6 +155,10 @@
 		7A2CC36A24F2D37200E2605A /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		7A2CC36F24F2D7CD00E2605A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7A2CC37124F2D82E00E2605A /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		7A2CC37324F3488F00E2605A /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		7A2CC37624F348FE00E2605A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		7A2CC37924F3495500E2605A /* ExampleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleRepository.swift; sourceTree = "<group>"; };
+		7A2CC37B24F3510900E2605A /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		7ABFCBCD24E4EBFD0012EF39 /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ABFCBD024E4EBFD0012EF39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7ABFCBD224E4EBFD0012EF39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -335,6 +343,7 @@
 				7A2CC34824EF6F7A00E2605A /* Fonts.swift */,
 				7A2CC35024EF73AD00E2605A /* Navigation.swift */,
 				7A2CC37124F2D82E00E2605A /* Strings.swift */,
+				7A2CC37324F3488F00E2605A /* Observable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -411,6 +420,23 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		7A2CC37524F348DD00E2605A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7A2CC37624F348FE00E2605A /* HomeViewModel.swift */,
+				7A2CC37B24F3510900E2605A /* ViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7A2CC37824F3493400E2605A /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				7A2CC37924F3495500E2605A /* ExampleRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 		7ABFCBC424E4EBFD0012EF39 = {
 			isa = PBXGroup;
 			children = (
@@ -447,7 +473,9 @@
 				00665E7B24E5C72C00030A13 /* Lightning */,
 				7A2CC34724EF6F6200E2605A /* NavigationControllers */,
 				00665ECA24EC4B3600030A13 /* ViewControllers */,
+				7A2CC37524F348DD00E2605A /* ViewModels */,
 				7A2CC36524F2CD4500E2605A /* Views */,
+				7A2CC37824F3493400E2605A /* Repository */,
 				00665ECB24EC4B6900030A13 /* Utils */,
 				7A2CC36424F1CD6B00E2605A /* Fonts */,
 			);
@@ -729,8 +757,10 @@
 				00665ECE24EC4B9000030A13 /* UIViewController.swift in Sources */,
 				7A2CC35524EF776400E2605A /* RequestInvoiceQRViewController.swift in Sources */,
 				00665EA824E9185B00030A13 /* lncli.pb.swift in Sources */,
+				7A2CC37424F3488F00E2605A /* Observable.swift in Sources */,
 				00665EC924EC494A00030A13 /* HomeViewController.swift in Sources */,
 				7A2CC35B24F1C7B500E2605A /* ScanInvoiceViewController.swift in Sources */,
+				7A2CC37C24F3510900E2605A /* ViewModel.swift in Sources */,
 				7A2CC34B24EF6F9F00E2605A /* CheddarNavigationController.swift in Sources */,
 				00665EB024E9185B00030A13 /* rpc.pb.swift in Sources */,
 				7A2CC35724F1C63E00E2605A /* OnChainAddressViewController.swift in Sources */,
@@ -745,6 +775,7 @@
 				00665E8224E5C72C00030A13 /* LndCallbacks.swift in Sources */,
 				7A2CC34424EF63E200E2605A /* Theme.swift in Sources */,
 				00665ED424EC55B300030A13 /* LightningStateMonitor.swift in Sources */,
+				7A2CC37A24F3495500E2605A /* ExampleRepository.swift in Sources */,
 				7A2CC35D24F1C81100E2605A /* SendPaymentViewController.swift in Sources */,
 				00665EAE24E9185B00030A13 /* router.pb.swift in Sources */,
 				00665EBC24E9185B00030A13 /* verrpc.pb.swift in Sources */,
@@ -754,6 +785,7 @@
 				7A2CC36924F2D24900E2605A /* UIView.swift in Sources */,
 				00665EDC24EF07E800030A13 /* Settings.swift in Sources */,
 				7A2CC34224EF634200E2605A /* CheddarViewController.swift in Sources */,
+				7A2CC37724F348FE00E2605A /* HomeViewModel.swift in Sources */,
 				7A2CC35124EF73AD00E2605A /* Navigation.swift in Sources */,
 				7A2CC34924EF6F7A00E2605A /* Fonts.swift in Sources */,
 				7A2CC36B24F2D37200E2605A /* ErrorView.swift in Sources */,

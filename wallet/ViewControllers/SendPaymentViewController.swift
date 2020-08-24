@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SendPaymentViewController: CheddarViewController {
+class SendPaymentViewController: CheddarViewController<ViewModel> {
 
     override func viewDidLoad() {
         super.viewDidLoad()

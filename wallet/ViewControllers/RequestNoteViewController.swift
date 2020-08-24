@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RequestNoteViewController: CheddarViewController {
+class RequestNoteViewController: CheddarViewController<ViewModel> {
 
     override func viewDidLoad() {
         super.viewDidLoad()

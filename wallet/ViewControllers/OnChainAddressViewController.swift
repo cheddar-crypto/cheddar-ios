@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OnChainAddressViewController: CheddarViewController {
+class OnChainAddressViewController: CheddarViewController<ViewModel> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
