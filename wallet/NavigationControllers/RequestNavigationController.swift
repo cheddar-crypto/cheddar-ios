@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RequestPaymentNavigationController: CheddarNavigationController {
+class RequestNavigationController: CheddarNavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

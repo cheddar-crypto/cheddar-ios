@@ -163,10 +163,19 @@ class HomeViewController: CheddarViewController {
         presentRequestPayment()
     }
     
+    @objc private func launchOnChainAddress() {
+        presentOnChainAddress()
+    }
+    
+    @objc private func launchPaymentFlow() {
+        presentPayment()
+    }
+    
     private func addDebugButton(_ title: String, action: Selector, topAnchor: NSLayoutYAxisAnchor, topConstant: CGFloat) -> UIButton {
         let button = UIButton()
         button.setTitleColor(Theme.inverseBackgroundColor, for: .normal)
         button.setTitle(title, for: .normal)
+        button.titleLabel?.font = Fonts.sofiaPro(weight: .medium)
         button.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button)
         button.topAnchor.constraint(equalTo: topAnchor, constant: topConstant).isActive = true
@@ -181,19 +190,22 @@ class HomeViewController: CheddarViewController {
     }
 
     private func setup() {
+        
         let createButton = addDebugButton("Create wallet", action: #selector(createWallet), topAnchor: view.topAnchor, topConstant: 100)
         let unlockButton = addDebugButton("Unlock wallet", action: #selector(unlockWallet), topAnchor: createButton.bottomAnchor, topConstant: 10)
         let newAddressButton = addDebugButton("New address (copies to clipboard)", action: #selector(newAddress), topAnchor: unlockButton.bottomAnchor, topConstant: 10)
         let getBalanceButton = addDebugButton("Show balance", action: #selector(showBalance), topAnchor: newAddressButton.bottomAnchor, topConstant: 10)
         let openChannelButton = addDebugButton("Open channel", action: #selector(openChannel), topAnchor: getBalanceButton.bottomAnchor, topConstant: 10)
         let wipeButton = addDebugButton("Wipe (and close) wallet", action: #selector(wipeWallet), topAnchor: openChannelButton.bottomAnchor, topConstant: 10)
-        let flowExampleButton = addDebugButton("Launch request invoice flow", action: #selector(launchRequestInvoice), topAnchor: wipeButton.bottomAnchor, topConstant: 10)
+        let requestFlowButton = addDebugButton("Launch request invoice flow", action: #selector(launchRequestInvoice), topAnchor: wipeButton.bottomAnchor, topConstant: 10)
+        let onChainButton = addDebugButton("Launch onchain address vc", action: #selector(launchOnChainAddress), topAnchor: requestFlowButton.bottomAnchor, topConstant: 10)
+        let paymentFlowButton = addDebugButton("Launch LND payment flow", action: #selector(launchPaymentFlow), topAnchor: onChainButton.bottomAnchor, topConstant: 10)
         
         resultMessage = UILabel()
         resultMessage.text = "..."
         resultMessage.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(resultMessage)
-        resultMessage.topAnchor.constraint(equalTo: flowExampleButton.bottomAnchor, constant: 20).isActive = true
+        resultMessage.topAnchor.constraint(equalTo: paymentFlowButton.bottomAnchor, constant: 20).isActive = true
         resultMessage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         resultMessage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         resultMessage.textColor = Theme.inverseBackgroundColor
@@ -210,5 +222,9 @@ class HomeViewController: CheddarViewController {
         debugStatus.textAlignment = .center
         debugStatus.numberOfLines = 0
         debugStatus.text = "Debug status"
+        
+        // These views will be updated
+//        showLoadingView()
+//        showErrorView()
     }
 }
