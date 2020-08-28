@@ -14,6 +14,10 @@ class RequestAmountViewController: CheddarViewController<ViewModel> {
         super.viewDidLoad()
         
         title = "Request Amount"
+        
+        setLeftNavigationButton(.back, action: {
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        })
 
         let button = UIButton()
         button.setTitleColor(Theme.inverseBackgroundColor, for: .normal)

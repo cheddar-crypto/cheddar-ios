@@ -14,6 +14,8 @@ class RequestNoteViewController: CheddarViewController<ViewModel> {
         super.viewDidLoad()
         
         title = "Add Note"
+        
+        setLeftNavigationButton(.back)
 
         let button = UIButton()
         button.setTitleColor(Theme.inverseBackgroundColor, for: .normal)

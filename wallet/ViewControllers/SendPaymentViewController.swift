@@ -14,6 +14,8 @@ class SendPaymentViewController: CheddarViewController<ViewModel> {
         super.viewDidLoad()
 
         title = "Send Payment"
+        
+        setLeftNavigationButton(.back)
 
         let button = UIButton()
         button.setTitleColor(Theme.inverseBackgroundColor, for: .normal)

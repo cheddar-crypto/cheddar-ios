@@ -10,6 +10,10 @@ import UIKit
 
 class CheddarViewController<VM: ViewModel>: UIViewController {
     
+    private lazy var leftNavigationAction: () -> Void = {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     internal var viewModel: VM! {
         didSet {
             viewModelDidLoad()
@@ -60,6 +64,30 @@ class CheddarViewController<VM: ViewModel>: UIViewController {
     
     func viewModelDidLoad() {
         // Empty
+    }
+    
+    @objc private func leftAction() {
+        leftNavigationAction()
+    }
+    
+    func setLeftNavigationButton(_ icon: UIImage, action: (() -> Void)? = nil) {
+        
+        // Attach left action
+        // Or fallback with a pop
+        if let leftAction = action {
+            leftNavigationAction = leftAction
+        } else {
+            leftNavigationAction = {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: .back,
+            style: .plain,
+            target: self,
+            action: #selector(CheddarViewController.leftAction)
+        )
     }
     
 }

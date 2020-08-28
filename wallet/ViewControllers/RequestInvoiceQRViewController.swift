@@ -15,6 +15,8 @@ class RequestInvoiceQRViewController: CheddarViewController<ViewModel> {
         
         title = "Lighning Invoice QR"
         
+        setLeftNavigationButton(.back)
+        
         let button = UIButton()
         button.setTitleColor(Theme.inverseBackgroundColor, for: .normal)
         button.setTitle("Close", for: .normal)
