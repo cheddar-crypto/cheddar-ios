@@ -81,6 +81,8 @@
 		7A811E9C24F8930A00F8D8C8 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A811E9B24F8930A00F8D8C8 /* Icons.swift */; };
 		7A811E9E24F8A66B00F8D8C8 /* Dimens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A811E9D24F8A66B00F8D8C8 /* Dimens.swift */; };
 		7A811EA024FC103E00F8D8C8 /* LightningRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A811E9F24FC103E00F8D8C8 /* LightningRepository.swift */; };
+		7A811EA224FC2A5E00F8D8C8 /* CheddarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A811EA124FC2A5E00F8D8C8 /* CheddarButton.swift */; };
+		7A811EA424FC314000F8D8C8 /* AnimatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A811EA324FC314000F8D8C8 /* AnimatedView.swift */; };
 		7ABFCBD124E4EBFD0012EF39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD024E4EBFD0012EF39 /* AppDelegate.swift */; };
 		7ABFCBD324E4EBFD0012EF39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD224E4EBFD0012EF39 /* SceneDelegate.swift */; };
 		7ABFCBD724E4EC010012EF39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD624E4EC010012EF39 /* Assets.xcassets */; };
@@ -167,6 +169,8 @@
 		7A811E9B24F8930A00F8D8C8 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		7A811E9D24F8A66B00F8D8C8 /* Dimens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimens.swift; sourceTree = "<group>"; };
 		7A811E9F24FC103E00F8D8C8 /* LightningRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightningRepository.swift; sourceTree = "<group>"; };
+		7A811EA124FC2A5E00F8D8C8 /* CheddarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheddarButton.swift; sourceTree = "<group>"; };
+		7A811EA324FC314000F8D8C8 /* AnimatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedView.swift; sourceTree = "<group>"; };
 		7ABFCBCD24E4EBFD0012EF39 /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ABFCBD024E4EBFD0012EF39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7ABFCBD224E4EBFD0012EF39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -427,6 +431,8 @@
 			children = (
 				7A2CC36624F2CD6000E2605A /* LoadingView.swift */,
 				7A2CC36A24F2D37200E2605A /* ErrorView.swift */,
+				7A811EA124FC2A5E00F8D8C8 /* CheddarButton.swift */,
+				7A811EA324FC314000F8D8C8 /* AnimatedView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -761,6 +767,7 @@
 				7A2CC34F24EF722500E2605A /* RequestAmountViewController.swift in Sources */,
 				7A811E9A24F8918D00F8D8C8 /* UIImage.swift in Sources */,
 				00665ED724EF05B700030A13 /* NodePublicKey.swift in Sources */,
+				7A811EA224FC2A5E00F8D8C8 /* CheddarButton.swift in Sources */,
 				7A2CC37224F2D82E00E2605A /* Strings.swift in Sources */,
 				00665EBA24E9185B00030A13 /* wtclient.pb.swift in Sources */,
 				00665ED224EC510400030A13 /* EventBus.swift in Sources */,
@@ -794,6 +801,7 @@
 				7A2CC37A24F3495500E2605A /* ExampleRepository.swift in Sources */,
 				7A2CC35D24F1C81100E2605A /* SendPaymentViewController.swift in Sources */,
 				00665EAE24E9185B00030A13 /* router.pb.swift in Sources */,
+				7A811EA424FC314000F8D8C8 /* AnimatedView.swift in Sources */,
 				00665EBC24E9185B00030A13 /* verrpc.pb.swift in Sources */,
 				00665EB624E9185B00030A13 /* walletunlocker.pb.swift in Sources */,
 				00665EB824E9185B00030A13 /* watchtower.pb.swift in Sources */,

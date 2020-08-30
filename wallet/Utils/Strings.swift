@@ -11,6 +11,7 @@ import Foundation
 extension String {
     
     public static let defaultError = NSLocalizedString("DEFAULT_ERROR", comment: "A fallback error")
-    public static let request = NSLocalizedString("TITLE_REQUEST", comment: "Request")
+    public static let request = NSLocalizedString("REQUEST", comment: "Request")
+    public static let next = NSLocalizedString("NEXT", comment: "Next")
     
 }

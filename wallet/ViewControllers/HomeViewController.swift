@@ -36,71 +36,47 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
         debugStatus.text = LightningStateMonitor.shared.state.debuggingStatus.joined(separator: "\n\n")
     }
     
-    @objc private func createWallet() {
-        viewModel.createWallet(password: self.password)
-    }
-    
-    @objc private func unlockWallet() {
-        viewModel.unlockWallet(password: self.password)
-    }
-    
-    @objc private func newAddress() {
-        viewModel.getNewAddress()
-    }
-    
-    @objc private func showBalance() {
-        viewModel.getWalletBalance()
-    }
-    
-    @objc private func openChannel() {
-        viewModel.openChannel()
-    }
-    
-    @objc private func wipeWallet() {
-        viewModel.wipeWallet()
-    }
-    
-    @objc private func launchRequestInvoice() {
-        presentRequestPayment()
-    }
-    
-    @objc private func launchOnChainAddress() {
-        presentOnChainAddress()
-    }
-    
-    @objc private func launchPaymentFlow() {
-        presentPayment()
-    }
-    
-    private func addDebugButton(_ title: String, action: Selector, topAnchor: NSLayoutYAxisAnchor, topConstant: CGFloat) -> UIButton {
-        let button = UIButton()
-        button.setTitleColor(Theme.inverseBackgroundColor, for: .normal)
-        button.setTitle(title, for: .normal)
-        button.titleLabel?.font = Fonts.sofiaPro(weight: .medium)
-        button.translatesAutoresizingMaskIntoConstraints = false
+    private func addDebugButton(_ title: String, topAnchor: NSLayoutYAxisAnchor, topConstant: CGFloat, action: @escaping () -> Void) -> CheddarButton {
+        let button = CheddarButton(action: action)
+        button.title = title
         view.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: CGFloat(32)).isActive = true
         button.topAnchor.constraint(equalTo: topAnchor, constant: topConstant).isActive = true
         button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        button.addTarget(self, action: action, for: .touchUpInside)
-        button.layer.cornerRadius = 15
-        button.layer.borderWidth = 1
-        button.layer.borderColor = Theme.inverseBackgroundColor.cgColor
-    
         return button
     }
 
     private func setup() {
         
-        let createButton = addDebugButton("Create wallet", action: #selector(createWallet), topAnchor: view.topAnchor, topConstant: 10)
-        let unlockButton = addDebugButton("Unlock wallet", action: #selector(unlockWallet), topAnchor: createButton.bottomAnchor, topConstant: 10)
-        let newAddressButton = addDebugButton("New address (copies to clipboard)", action: #selector(newAddress), topAnchor: unlockButton.bottomAnchor, topConstant: 10)
-        let getBalanceButton = addDebugButton("Show balance", action: #selector(showBalance), topAnchor: newAddressButton.bottomAnchor, topConstant: 10)
-        let openChannelButton = addDebugButton("Open channel", action: #selector(openChannel), topAnchor: getBalanceButton.bottomAnchor, topConstant: 10)
-        let wipeButton = addDebugButton("Wipe (and close) wallet", action: #selector(wipeWallet), topAnchor: openChannelButton.bottomAnchor, topConstant: 10)
-        let requestFlowButton = addDebugButton("Launch request invoice flow", action: #selector(launchRequestInvoice), topAnchor: wipeButton.bottomAnchor, topConstant: 10)
-        let onChainButton = addDebugButton("Launch onchain address vc", action: #selector(launchOnChainAddress), topAnchor: requestFlowButton.bottomAnchor, topConstant: 10)
-        let paymentFlowButton = addDebugButton("Launch LND payment flow", action: #selector(launchPaymentFlow), topAnchor: onChainButton.bottomAnchor, topConstant: 10)
+        let createButton = addDebugButton("Create wallet", topAnchor: view.topAnchor, topConstant: 10, action: {
+            self.viewModel.createWallet(password: self.password)
+        })
+        let unlockButton = addDebugButton("Unlock wallet", topAnchor: createButton.bottomAnchor, topConstant: 10, action: {
+            self.viewModel.unlockWallet(password: self.password)
+        })
+        let newAddressButton = addDebugButton("New address (copies to clipboard)", topAnchor: unlockButton.bottomAnchor, topConstant: 10, action: {
+            self.viewModel.getNewAddress()
+        })
+        let getBalanceButton = addDebugButton("Show balance", topAnchor: newAddressButton.bottomAnchor, topConstant: 10, action: {
+            self.viewModel.getWalletBalance()
+        })
+        let openChannelButton = addDebugButton("Open channel", topAnchor: getBalanceButton.bottomAnchor, topConstant: 10, action: {
+            self.viewModel.openChannel()
+        })
+        let wipeButton = addDebugButton("Wipe (and close) wallet", topAnchor: openChannelButton.bottomAnchor, topConstant: 10, action: {
+            self.viewModel.wipeWallet()
+        })
+        let requestFlowButton = addDebugButton("Launch request invoice flow", topAnchor: wipeButton.bottomAnchor, topConstant: 10, action: {
+            self.presentRequestPayment()
+        })
+        let onChainButton = addDebugButton("Launch onchain address vc", topAnchor: requestFlowButton.bottomAnchor, topConstant: 10, action: {
+            self.presentOnChainAddress()
+        })
+        let paymentFlowButton = addDebugButton("Launch LND payment flow", topAnchor: onChainButton.bottomAnchor, topConstant: 10, action: {
+            self.presentPayment()
+        })
         
         resultMessage = UILabel()
         resultMessage.text = "..."

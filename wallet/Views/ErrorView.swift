@@ -19,7 +19,6 @@ class ErrorView: UIView {
         }
     }
     
-    
     private lazy var label: UILabel = {
         let label = UILabel()
         label.textColor = Theme.inverseBackgroundColor

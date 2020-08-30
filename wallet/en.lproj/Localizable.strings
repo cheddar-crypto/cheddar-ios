@@ -6,5 +6,6 @@
   Copyright © 2020 Michael Miller. All rights reserved.
 */
 
-"TITLE_REQUEST" = "Request";
+"REQUEST" = "Request";
+"NEXT" = "Next";
 "DEFAULT_ERROR" = "An error occured";
