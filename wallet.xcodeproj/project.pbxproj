@@ -80,6 +80,7 @@
 		7A811E9A24F8918D00F8D8C8 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A811E9924F8918D00F8D8C8 /* UIImage.swift */; };
 		7A811E9C24F8930A00F8D8C8 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A811E9B24F8930A00F8D8C8 /* Icons.swift */; };
 		7A811E9E24F8A66B00F8D8C8 /* Dimens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A811E9D24F8A66B00F8D8C8 /* Dimens.swift */; };
+		7A811EA024FC103E00F8D8C8 /* LightningRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A811E9F24FC103E00F8D8C8 /* LightningRepository.swift */; };
 		7ABFCBD124E4EBFD0012EF39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD024E4EBFD0012EF39 /* AppDelegate.swift */; };
 		7ABFCBD324E4EBFD0012EF39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD224E4EBFD0012EF39 /* SceneDelegate.swift */; };
 		7ABFCBD724E4EC010012EF39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD624E4EC010012EF39 /* Assets.xcassets */; };
@@ -165,6 +166,7 @@
 		7A811E9924F8918D00F8D8C8 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		7A811E9B24F8930A00F8D8C8 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		7A811E9D24F8A66B00F8D8C8 /* Dimens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimens.swift; sourceTree = "<group>"; };
+		7A811E9F24FC103E00F8D8C8 /* LightningRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightningRepository.swift; sourceTree = "<group>"; };
 		7ABFCBCD24E4EBFD0012EF39 /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ABFCBD024E4EBFD0012EF39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7ABFCBD224E4EBFD0012EF39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -442,6 +444,7 @@
 			isa = PBXGroup;
 			children = (
 				7A2CC37924F3495500E2605A /* ExampleRepository.swift */,
+				7A811E9F24FC103E00F8D8C8 /* LightningRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -779,6 +782,7 @@
 				00665EB424E9185B00030A13 /* signer.pb.swift in Sources */,
 				00665EBE24E9185B00030A13 /* invoices.pb.swift in Sources */,
 				7A811E9C24F8930A00F8D8C8 /* Icons.swift in Sources */,
+				7A811EA024FC103E00F8D8C8 /* LightningRepository.swift in Sources */,
 				00665E8424E5C72C00030A13 /* Lightning.swift in Sources */,
 				7A2CC33D24EF5C6E00E2605A /* Colors.swift in Sources */,
 				00665EAC24E9185B00030A13 /* walletkit.pb.swift in Sources */,

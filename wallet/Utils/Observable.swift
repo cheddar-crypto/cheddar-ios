@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Observable<T: Equatable> {
+class Observable<T> {
     
     private let thread: DispatchQueue
     var value: T? {

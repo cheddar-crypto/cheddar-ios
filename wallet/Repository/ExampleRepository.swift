@@ -11,7 +11,7 @@ import Foundation
 class ExampleRepository {
     
     // Perform fake request
-    func getRandomInt(onSuccess: @escaping (Int) -> Void, onFailure: @escaping (NSException) -> Void) {
+    func getRandomInt(onSuccess: @escaping (Int) -> Void, onFailure: @escaping (Error) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             onSuccess(Int.random(in: 1..<100))
         }

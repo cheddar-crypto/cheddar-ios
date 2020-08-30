@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftUI
 
 class HomeViewController: CheddarViewController<HomeViewModel> {
     private let password = "sshhhhhh"
@@ -17,7 +16,6 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         title = "Say Cheese"
         setup()
         updateStatus()
@@ -39,124 +37,27 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
     }
     
     @objc private func createWallet() {
-        resultMessage.text = ""
-        
-        Lightning.shared.generateSeed { [weak self] (seed, error) in
-            guard let self = self else { return }
-            
-            guard error == nil else {
-                self.resultMessage.text = "Seed generation failed - \(error?.localizedDescription ?? "")"
-                return
-            }
-            
-            Lightning.shared.createWallet(password: self.password, cipherSeedMnemonic: seed) { [weak self] (error) in
-                guard let self = self else { return }
-                
-                guard error == nil else {
-                    self.resultMessage.text = "Create wallet failed - \(error?.localizedDescription ?? "")"
-                    return
-                }
-                
-                self.resultMessage.text = seed.joined(separator: " ")
-            }
-        }
+        viewModel.createWallet(password: self.password)
     }
     
     @objc private func unlockWallet() {
-        resultMessage.text = ""
-        Lightning.shared.unlockWalet(password: password) { [weak self] (error) in
-            guard let self = self else { return }
-            
-            guard error == nil else {
-                self.resultMessage.text = "Wallet unlock failed - \(error?.localizedDescription ?? "")"
-                return
-            }
-        }
+        viewModel.unlockWallet(password: self.password)
     }
     
     @objc private func newAddress() {
-        resultMessage.text = ""
-        Lightning.shared.newAddress { [weak self] (address, error) in
-            guard let self = self else { return }
-            
-            guard error == nil else {
-                self.resultMessage.text = "New address failed - \(error?.localizedDescription ?? "")"
-                return
-            }
-            
-            self.resultMessage.text = address
-            UIPasteboard.general.string = address
-        }
+        viewModel.getNewAddress()
     }
     
     @objc private func showBalance() {
-        resultMessage.text = ""
-
-        Lightning.shared.walletBalance { [weak self] (balanceResponse, error) in
-            guard let self = self else { return }
-
-            guard error == nil else {
-                self.resultMessage.text = "Wallet balance failed - \(error?.localizedDescription ?? "")"
-                return
-            }
-
-            self.resultMessage.text = "Total: \(balanceResponse.totalBalance)\nConfirmed: \(balanceResponse.confirmedBalance)\nUnconfirmed: \(balanceResponse.unconfirmedBalance)"
-        }
+        viewModel.getWalletBalance()
     }
     
     @objc private func openChannel() {
-        resultMessage.text = ""
-        
-        //TODO allow for passing in a convenient string like 02c72b987ee75223bf3437905c8b40d224ce94e3586da9eee0fc87839ac5842ccd@54.189.108.12:9735
-        
-        let nodePubKey = try! NodePublicKey("02c72b987ee75223bf3437905c8b40d224ce94e3586da9eee0fc87839ac5842ccd")
-        let hostAddress = "54.189.108.12"
-        let hostPort: UInt = 9735
-        let closeAddress = "tb1qylxttvn7wm7vsc2j36cjvmpl7nykcrzqkz6avl"
-        
-        Lightning.shared.connectToNode(nodePubkey: nodePubKey, hostAddress: hostAddress, hostPort: hostPort) { [weak self] (response, error) in
-            guard let self = self else { return }
-
-            guard error == nil else {
-                self.resultMessage.text = "Failed to connect to node - \(error?.localizedDescription ?? "")"
-                return
-            }
-            
-            self.resultMessage.text = "Connected to peer"
-            
-            
-            Lightning.shared.openChannel(localFundingAmount: 20000, closeAddress: closeAddress, nodePubkey: nodePubKey) { [weak self] (response, error) in
-                guard let self = self else { return }
-                
-                guard error == nil else {
-                    self.resultMessage.text = "Channel open failed - \(error?.localizedDescription ?? "")"
-                    return
-                }
-                
-                guard let update = response.update else {
-                  return
-                }
-                
-                switch update {
-                case .chanPending(let pendingUpdate):
-                    self.resultMessage.text = "Channel open pending update\nTXID: \(pendingUpdate.txid.base64EncodedString())"
-                case .chanOpen(let openUpdate):
-                    self.resultMessage.text = "Channel open success update"
-                case .psbtFund(let onpsbtFund):
-                    self.resultMessage.text = "I don't know why you would get this error"
-                }
-            }
-        }
+        viewModel.openChannel()
     }
     
     @objc private func wipeWallet() {
-        Lightning.shared.stop { (error) in
-            Lightning.shared.purge()
-            UIControl().sendAction(#selector(NSXPCConnection.suspend), to: UIApplication.shared, for: nil)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                exit(0)
-            }
-        }
+        viewModel.wipeWallet()
     }
     
     @objc private func launchRequestInvoice() {
@@ -222,8 +123,6 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
         debugStatus.textAlignment = .center
         debugStatus.numberOfLines = 0
         debugStatus.text = "Debug status"
-        
-        showLoadingView() // Remove me
     }
     
     // This will get called when the ViewModel for this ViewController is ready to use
@@ -231,12 +130,36 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
     // and can update the views accordingly as they change in real time
     override func viewModelDidLoad() {
         
-        viewModel.randomIntObservable.observe = { [weak self] randomInt in
+        viewModel.isLoading.observe = { [weak self] isLoading in
+            if (isLoading) {
+                self?.showLoadingView()
+            }
+        }
+        
+        viewModel.randomInt.observe = { [weak self] randomInt in
             self?.showContentView()
         }
         
-        viewModel.errorObservable.observe = { [weak self] error in
+        viewModel.error.observe = { [weak self] error in
             self?.showErrorView()
+        }
+        
+        viewModel.resultMessage.observe = { [weak self] message in
+            self?.resultMessage.text = message
+            self?.showContentView()
+        }
+        
+        viewModel.newAddress.observe = { [weak self] address in
+            self?.resultMessage.text = address
+            UIPasteboard.general.string = address
+            self?.showContentView()
+        }
+        
+        viewModel.walletWipe.observe = { _ in
+            UIControl().sendAction(#selector(NSXPCConnection.suspend), to: UIApplication.shared, for: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                exit(0)
+            }
         }
         
         viewModel.load()
