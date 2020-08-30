@@ -10,6 +10,7 @@ import Foundation
 
 struct Dimens {
     
+    public static let tall = 72
     public static let button = 56
     public static let title = 20
     public static let mediumMargin = 16

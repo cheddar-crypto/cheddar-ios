@@ -83,6 +83,9 @@
 		7A811EA024FC103E00F8D8C8 /* LightningRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A811E9F24FC103E00F8D8C8 /* LightningRepository.swift */; };
 		7A811EA224FC2A5E00F8D8C8 /* CheddarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A811EA124FC2A5E00F8D8C8 /* CheddarButton.swift */; };
 		7A811EA424FC314000F8D8C8 /* AnimatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A811EA324FC314000F8D8C8 /* AnimatedView.swift */; };
+		7A811EA624FC38D000F8D8C8 /* CheddarNumberPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A811EA524FC38D000F8D8C8 /* CheddarNumberPad.swift */; };
+		7A811EA824FC455400F8D8C8 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A811EA724FC455400F8D8C8 /* Misc.swift */; };
+		7A811EAA24FC49A100F8D8C8 /* CheddarNumberPadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A811EA924FC49A100F8D8C8 /* CheddarNumberPadButton.swift */; };
 		7ABFCBD124E4EBFD0012EF39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD024E4EBFD0012EF39 /* AppDelegate.swift */; };
 		7ABFCBD324E4EBFD0012EF39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD224E4EBFD0012EF39 /* SceneDelegate.swift */; };
 		7ABFCBD724E4EC010012EF39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD624E4EC010012EF39 /* Assets.xcassets */; };
@@ -171,6 +174,9 @@
 		7A811E9F24FC103E00F8D8C8 /* LightningRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightningRepository.swift; sourceTree = "<group>"; };
 		7A811EA124FC2A5E00F8D8C8 /* CheddarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheddarButton.swift; sourceTree = "<group>"; };
 		7A811EA324FC314000F8D8C8 /* AnimatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedView.swift; sourceTree = "<group>"; };
+		7A811EA524FC38D000F8D8C8 /* CheddarNumberPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheddarNumberPad.swift; sourceTree = "<group>"; };
+		7A811EA724FC455400F8D8C8 /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
+		7A811EA924FC49A100F8D8C8 /* CheddarNumberPadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheddarNumberPadButton.swift; sourceTree = "<group>"; };
 		7ABFCBCD24E4EBFD0012EF39 /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ABFCBD024E4EBFD0012EF39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7ABFCBD224E4EBFD0012EF39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -368,6 +374,7 @@
 				00665ECD24EC4B9000030A13 /* UIViewController.swift */,
 				7A2CC36824F2D24900E2605A /* UIView.swift */,
 				7A811E9924F8918D00F8D8C8 /* UIImage.swift */,
+				7A811EA724FC455400F8D8C8 /* Misc.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -433,6 +440,8 @@
 				7A2CC36A24F2D37200E2605A /* ErrorView.swift */,
 				7A811EA124FC2A5E00F8D8C8 /* CheddarButton.swift */,
 				7A811EA324FC314000F8D8C8 /* AnimatedView.swift */,
+				7A811EA524FC38D000F8D8C8 /* CheddarNumberPad.swift */,
+				7A811EA924FC49A100F8D8C8 /* CheddarNumberPadButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -769,6 +778,7 @@
 				00665ED724EF05B700030A13 /* NodePublicKey.swift in Sources */,
 				7A811EA224FC2A5E00F8D8C8 /* CheddarButton.swift in Sources */,
 				7A2CC37224F2D82E00E2605A /* Strings.swift in Sources */,
+				7A811EA824FC455400F8D8C8 /* Misc.swift in Sources */,
 				00665EBA24E9185B00030A13 /* wtclient.pb.swift in Sources */,
 				00665ED224EC510400030A13 /* EventBus.swift in Sources */,
 				7ABFCBD124E4EBFD0012EF39 /* AppDelegate.swift in Sources */,
@@ -784,6 +794,7 @@
 				7A2CC37C24F3510900E2605A /* ViewModel.swift in Sources */,
 				7A2CC34B24EF6F9F00E2605A /* CheddarNavigationController.swift in Sources */,
 				00665EB024E9185B00030A13 /* rpc.pb.swift in Sources */,
+				7A811EAA24FC49A100F8D8C8 /* CheddarNumberPadButton.swift in Sources */,
 				7A2CC35724F1C63E00E2605A /* OnChainAddressViewController.swift in Sources */,
 				00665EAA24E9185B00030A13 /* chainnotifier.pb.swift in Sources */,
 				00665EB424E9185B00030A13 /* signer.pb.swift in Sources */,
@@ -809,6 +820,7 @@
 				7A2CC36924F2D24900E2605A /* UIView.swift in Sources */,
 				00665EDC24EF07E800030A13 /* Settings.swift in Sources */,
 				7A2CC34224EF634200E2605A /* CheddarViewController.swift in Sources */,
+				7A811EA624FC38D000F8D8C8 /* CheddarNumberPad.swift in Sources */,
 				7A2CC37724F348FE00E2605A /* HomeViewModel.swift in Sources */,
 				7A2CC35124EF73AD00E2605A /* Navigation.swift in Sources */,
 				7A2CC34924EF6F7A00E2605A /* Fonts.swift in Sources */,

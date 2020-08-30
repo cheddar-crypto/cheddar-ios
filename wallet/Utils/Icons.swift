@@ -11,5 +11,6 @@ import UIKit
 extension UIImage {
     
     public static let back = #imageLiteral(resourceName: "ic_back")
+    public static let delete = #imageLiteral(resourceName: "ic_backspace")
     
 }

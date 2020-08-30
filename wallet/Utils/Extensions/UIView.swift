@@ -10,13 +10,13 @@ import UIKit
 
 extension UIView {
     
-    func addSubviewAndFill(_ view: UIView) {
+    func addSubviewAndFill(_ view: UIView, top: CGFloat = 0.0, bottom: CGFloat = 0.0) {
         addSubview(view)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        view.topAnchor.constraint(equalTo: topAnchor, constant: top).isActive = true
         view.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         view.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        view.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: bottom).isActive = true
     }
     
 }
