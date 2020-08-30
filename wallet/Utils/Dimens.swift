@@ -11,5 +11,6 @@ import Foundation
 struct Dimens {
     
     public static let title = 20
+    public static let shadow = 2
     
 }

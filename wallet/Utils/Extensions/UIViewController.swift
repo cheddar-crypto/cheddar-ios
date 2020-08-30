@@ -14,13 +14,27 @@ extension UIViewController {
         
         view.backgroundColor = Theme.backgroundColor
         
-        //Nav setup
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
-        navigationController?.view.backgroundColor = .clear
+        setNavBarStyles()
         
+    }
+    
+    func setNavBarStyles() {
+
+        // Color
+        navigationController?.navigationBar.barTintColor = Theme.backgroundColor
+        navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.tintColor = Theme.inverseBackgroundColor
+        
+        // Shadow
+        navigationController?.navigationBar.layer.shadowColor = Theme.shadowColor.cgColor
+        navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: CGFloat(Dimens.shadow))
+        navigationController?.navigationBar.layer.shadowRadius = 0.0
+        navigationController?.navigationBar.layer.shadowOpacity = 1.0
+        navigationController?.navigationBar.layer.masksToBounds = false
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
+        // Text
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: Theme.inverseBackgroundColor,
             NSAttributedString.Key.font: Fonts.sofiaPro(weight: .medium, Dimens.title)
