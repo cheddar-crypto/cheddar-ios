@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PaymentNavigationController: CheddarNavigationController {
+class PaymentNavigationController: CheddarNavigationController<ViewModel> {
 
     override func viewDidLoad() {
         super.viewDidLoad()

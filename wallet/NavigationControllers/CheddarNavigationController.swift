@@ -8,12 +8,23 @@
 
 import UIKit
 
-class CheddarNavigationController: UINavigationController, UIGestureRecognizerDelegate {
+class CheddarNavigationController<VM: ViewModel>: UINavigationController, UIGestureRecognizerDelegate {
+    
+    internal var viewModel: VM! {
+        didSet {
+            viewModelDidLoad()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = VM()
         setTheme()
         interactivePopGestureRecognizer?.delegate = self
+    }
+    
+    func viewModelDidLoad() {
+        // Empty
     }
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {

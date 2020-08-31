@@ -30,7 +30,7 @@ class ScanInvoiceViewController: CheddarViewController<ViewModel> {
     }
     
     @objc private func push() {
-        (navigationController as? CheddarNavigationController)?.pushSendPayment()
+        navController?.pushSendPayment()
     }
 
 }

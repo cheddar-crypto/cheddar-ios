@@ -8,29 +8,58 @@
 
 import UIKit
 
-class RequestNoteViewController: CheddarViewController<ViewModel> {
-
+class RequestNoteViewController: CheddarViewController<RequestViewModel> {
+    
+    private lazy var nextButton = {
+        return CheddarButton(action: { [weak self] in
+            if let self = self {
+                self.navController?.pushInvoiceQR(sharedViewModel: self.viewModel)
+            }
+        })
+    }()
+    
+    init(sharedViewModel: RequestViewModel) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = sharedViewModel
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+    }
+    
+    private func setup() {
         
-        title = "Add Note"
-        
+        // Navbar
+        title = .note
         setLeftNavigationButton(.back)
-
-        let button = UIButton()
-        button.setTitleColor(Theme.inverseBackgroundColor, for: .normal)
-        button.setTitle("Show QR Invoice Screen", for: .normal)
-        button.frame = CGRect(x: 0, y: 60, width: 200, height: 50)
-        view.addSubview(button)
-        button.layer.cornerRadius = 15
-        button.layer.borderWidth = 1
-        button.layer.borderColor = Theme.inverseBackgroundColor.cgColor
-        button.addTarget(self, action: #selector(push), for: .touchUpInside)
+        
+        // Input areas
+        addQRButton()
+    }
+    
+    override func viewModelDidLoad() {
+        
+        print(viewModel.amount.value)
+        
+//        viewModel.amount.observe = { amount in
+//            self.button.setTitle("\(amount)", for: .normal)
+//        }
         
     }
     
-    @objc private func push() {
-        (navigationController as? CheddarNavigationController)?.pushInvoiceQR()
+    private func addQRButton() {
+        view.addSubview(nextButton)
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        nextButton.heightAnchor.constraint(equalToConstant: CGFloat(Dimens.button)).isActive = true
+        nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -CGFloat(Dimens.mediumMargin)).isActive = true
+        nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
+        nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -CGFloat(Dimens.mediumMargin)).isActive = true
+        nextButton.title = .createQR
     }
 
 }

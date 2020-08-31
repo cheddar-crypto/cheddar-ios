@@ -7,5 +7,7 @@
 */
 
 "REQUEST" = "Request";
+"NOTE" = "Note";
 "NEXT" = "Next";
+"CREATE_QR" = "Create QR Code";
 "DEFAULT_ERROR" = "An error occured";

@@ -8,7 +8,16 @@
 
 import UIKit
 
-class RequestInvoiceQRViewController: CheddarViewController<ViewModel> {
+class RequestInvoiceQRViewController: CheddarViewController<RequestViewModel> {
+    
+    init(sharedViewModel: RequestViewModel) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = sharedViewModel
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

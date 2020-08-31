@@ -26,12 +26,12 @@ extension CheddarViewController {
 
 extension CheddarNavigationController {
     
-    func pushRequestNote() {
-        pushViewController(RequestNoteViewController(), animated: true)
+    func pushRequestNote(sharedViewModel: RequestViewModel) {
+        pushViewController(RequestNoteViewController(sharedViewModel: sharedViewModel), animated: true)
     }
     
-    func pushInvoiceQR() {
-        pushViewController(RequestInvoiceQRViewController(), animated: true)
+    func pushInvoiceQR(sharedViewModel: RequestViewModel) {
+        pushViewController(RequestInvoiceQRViewController(sharedViewModel: sharedViewModel), animated: true)
     }
     
     func pushSendPayment() {

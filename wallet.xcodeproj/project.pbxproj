@@ -86,6 +86,7 @@
 		7A811EA624FC38D000F8D8C8 /* CheddarNumberPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A811EA524FC38D000F8D8C8 /* CheddarNumberPad.swift */; };
 		7A811EA824FC455400F8D8C8 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A811EA724FC455400F8D8C8 /* Misc.swift */; };
 		7A811EAA24FC49A100F8D8C8 /* CheddarNumberPadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A811EA924FC49A100F8D8C8 /* CheddarNumberPadButton.swift */; };
+		7A811EAC24FC7E1000F8D8C8 /* RequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A811EAB24FC7E0F00F8D8C8 /* RequestViewModel.swift */; };
 		7ABFCBD124E4EBFD0012EF39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD024E4EBFD0012EF39 /* AppDelegate.swift */; };
 		7ABFCBD324E4EBFD0012EF39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD224E4EBFD0012EF39 /* SceneDelegate.swift */; };
 		7ABFCBD724E4EC010012EF39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFCBD624E4EC010012EF39 /* Assets.xcassets */; };
@@ -177,6 +178,7 @@
 		7A811EA524FC38D000F8D8C8 /* CheddarNumberPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheddarNumberPad.swift; sourceTree = "<group>"; };
 		7A811EA724FC455400F8D8C8 /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
 		7A811EA924FC49A100F8D8C8 /* CheddarNumberPadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheddarNumberPadButton.swift; sourceTree = "<group>"; };
+		7A811EAB24FC7E0F00F8D8C8 /* RequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestViewModel.swift; sourceTree = "<group>"; };
 		7ABFCBCD24E4EBFD0012EF39 /* wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ABFCBD024E4EBFD0012EF39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7ABFCBD224E4EBFD0012EF39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 			children = (
 				7A2CC37624F348FE00E2605A /* HomeViewModel.swift */,
 				7A2CC37B24F3510900E2605A /* ViewModel.swift */,
+				7A811EAB24FC7E0F00F8D8C8 /* RequestViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -809,6 +812,7 @@
 				00665E8224E5C72C00030A13 /* LndCallbacks.swift in Sources */,
 				7A2CC34424EF63E200E2605A /* Theme.swift in Sources */,
 				00665ED424EC55B300030A13 /* LightningStateMonitor.swift in Sources */,
+				7A811EAC24FC7E1000F8D8C8 /* RequestViewModel.swift in Sources */,
 				7A2CC37A24F3495500E2605A /* ExampleRepository.swift in Sources */,
 				7A2CC35D24F1C81100E2605A /* SendPaymentViewController.swift in Sources */,
 				00665EAE24E9185B00030A13 /* router.pb.swift in Sources */,

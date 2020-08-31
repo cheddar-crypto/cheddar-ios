@@ -14,7 +14,13 @@ class CheddarViewController<VM: ViewModel>: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    internal var viewModel: VM! {
+    var navController: CheddarNavigationController<VM>? {
+        get {
+            return self.navigationController as? CheddarNavigationController
+        }
+    }
+    
+    var viewModel: VM! {
         didSet {
             viewModelDidLoad()
         }
@@ -30,7 +36,12 @@ class CheddarViewController<VM: ViewModel>: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = VM()
+        
+        // Create the view model if needed
+        if (viewModel == nil) {
+            viewModel = VM()
+        }
+        
         setTheme()
     }
     

@@ -8,11 +8,13 @@
 
 import UIKit
 
-class RequestAmountViewController: CheddarViewController<ViewModel> {
+class RequestAmountViewController: CheddarViewController<RequestViewModel> {
     
     private lazy var nextButton = {
         return CheddarButton(action: { [weak self] in
-            (self?.navigationController as? CheddarNavigationController)?.pushRequestNote()
+            if let self = self {
+                self.navController?.pushRequestNote(sharedViewModel: self.viewModel)
+            }
         })
     }()
     
@@ -27,20 +29,27 @@ class RequestAmountViewController: CheddarViewController<ViewModel> {
     }()
     
     private lazy var numberPadCoordinator = {
-        return CheddarNumberPad.Coordinator(label: amountLabel, onValueChange: { value in
-            print(value)
+        return CheddarNumberPad.Coordinator(label: amountLabel, onValueChange: { [weak self] value in
+            self?.viewModel.amount.value = value
         })
     }()
     
     private lazy var amountLabel = {
         return UILabel()
     }()
+    
+    init(sharedViewModel: RequestViewModel) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = sharedViewModel
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setup()
-        
     }
     
     private func setup() {
@@ -55,6 +64,14 @@ class RequestAmountViewController: CheddarViewController<ViewModel> {
         addNextButton()
         addNumberPad()
         addAmountLabel()
+    }
+    
+    override func viewModelDidLoad() {
+        
+        viewModel.amount.observe = { amount in
+            print(amount)
+        }
+        
     }
     
     private func addNextButton() {
@@ -81,7 +98,7 @@ class RequestAmountViewController: CheddarViewController<ViewModel> {
         amountLabel.textAlignment = .center
         amountLabel.numberOfLines = 0
         amountLabel.translatesAutoresizingMaskIntoConstraints = false
-        amountLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        amountLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
         amountLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         amountLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         amountLabel.text = "0"
