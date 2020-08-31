@@ -27,7 +27,9 @@ class RequestAmountViewController: CheddarViewController<ViewModel> {
     }()
     
     private lazy var numberPadCoordinator = {
-        return CheddarNumberPad.Coordinator(label: amountLabel)
+        return CheddarNumberPad.Coordinator(label: amountLabel, onValueChange: { value in
+            print(value)
+        })
     }()
     
     private lazy var amountLabel = {
@@ -82,7 +84,6 @@ class RequestAmountViewController: CheddarViewController<ViewModel> {
         amountLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
         amountLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         amountLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        
         amountLabel.text = "0"
     }
 

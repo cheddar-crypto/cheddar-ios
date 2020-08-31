@@ -96,10 +96,24 @@ class CheddarNumberPad: UIView {
     class Coordinator {
         
         private let label: UILabel
+        private let onValueChange: (Double) -> Void
         
-        init(label: UILabel) {
+        var value: Double {
+            get {
+                let str = self.label.text ?? "0"
+                return Double(str) ?? 0.0
+            }
+            set(newValue) {
+                let text = String(newValue)
+                self.label.text = format(text)
+                onValueChange(value)
+            }
+        }
+        
+        init(label: UILabel, onValueChange: @escaping (Double) -> Void) {
             self.label = label
             self.label.text = "0"
+            self.onValueChange = onValueChange
         }
         
         func addCharacter(char: String) {
@@ -128,7 +142,8 @@ class CheddarNumberPad: UIView {
             }
             
             // Update the value
-            self.label.text = text
+            self.label.text = format(text)
+            onValueChange(value)
         }
         
         func removeCharacter() {
@@ -138,11 +153,19 @@ class CheddarNumberPad: UIView {
                 text = "0"
             }
             
-            self.label.text = text
+            self.label.text = format(text)
+            onValueChange(value)
         }
         
-        func setValue(value: Float) {
-            self.label.text = String(value)
+        private func format(_ text: String) -> String {
+            
+            // TODO
+//            let formatter = NumberFormatter()
+//            formatter.locale = Locale.current
+//            formatter.numberStyle = .decimal
+            
+            return text
+            
         }
         
     }
