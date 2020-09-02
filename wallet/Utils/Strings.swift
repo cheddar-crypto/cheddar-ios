@@ -15,5 +15,7 @@ extension String {
     public static let note = NSLocalizedString("NOTE", comment: "Note")
     public static let next = NSLocalizedString("NEXT", comment: "Next")
     public static let createQR = NSLocalizedString("CREATE_QR", comment: "Create a QR code")
+    public static let forLabel = NSLocalizedString("FOR", comment: "For")
+    public static let requestNotePlaceholder = NSLocalizedString("NOTE_PLACEHOLDER", comment: "Placeholder for the note")
     
 }

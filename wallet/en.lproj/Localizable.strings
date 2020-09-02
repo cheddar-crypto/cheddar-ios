@@ -9,5 +9,7 @@
 "REQUEST" = "Request";
 "NOTE" = "Note";
 "NEXT" = "Next";
+"FOR" = "For";
+"NOTE_PLACEHOLDER" = "Write a message";
 "CREATE_QR" = "Create QR Code";
 "DEFAULT_ERROR" = "An error occured";

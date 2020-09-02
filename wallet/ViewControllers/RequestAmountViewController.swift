@@ -29,13 +29,16 @@ class RequestAmountViewController: CheddarViewController<RequestViewModel> {
     }()
     
     private lazy var numberPadCoordinator = {
-        return CheddarNumberPad.Coordinator(label: amountLabel, onValueChange: { [weak self] value in
+        return CheddarNumberPad.Coordinator(inputView: amountLabel, onValueChange: { [weak self] value in
             self?.viewModel.amount.value = value
         })
     }()
     
     private lazy var amountLabel = {
-        return UILabel()
+        return CurrencyInputView(
+            action: { [weak self] in
+                print("TODO")
+            })
     }()
     
     init(sharedViewModel: RequestViewModel) {
@@ -94,14 +97,11 @@ class RequestAmountViewController: CheddarViewController<RequestViewModel> {
     
     private func addAmountLabel() {
         view.addSubview(amountLabel)
-        amountLabel.textColor = Theme.inverseBackgroundColor
-        amountLabel.textAlignment = .center
-        amountLabel.numberOfLines = 0
         amountLabel.translatesAutoresizingMaskIntoConstraints = false
         amountLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
         amountLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         amountLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        amountLabel.text = "0"
+        amountLabel.title = "0"
     }
 
 }

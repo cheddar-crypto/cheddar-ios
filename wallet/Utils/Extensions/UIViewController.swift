@@ -37,7 +37,7 @@ extension UIViewController {
         // Text
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: Theme.inverseBackgroundColor,
-            NSAttributedString.Key.font: Fonts.sofiaPro(weight: .medium, Dimens.title)
+            NSAttributedString.Key.font: Fonts.sofiaPro(weight: .medium, Dimens.titleText)
         ]
         
     }

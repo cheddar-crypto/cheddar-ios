@@ -1,17 +1,16 @@
 //
-//  CheddarButton.swift
+//  CurrencyInputView.swift
 //  wallet
 //
-//  Created by Michael Miller on 8/30/20.
+//  Created by Michael Miller on 9/1/20.
 //  Copyright © 2020 Michael Miller. All rights reserved.
 //
 
 import UIKit
 
-class CheddarButton: AnimatedView {
-    
+class CurrencyInputView: AnimatedView {
+
     @objc private var action: () -> Void
-    private var didSetCorners = false
     private let label = UILabel()
     var title: String? {
         get {
@@ -33,7 +32,6 @@ class CheddarButton: AnimatedView {
     }
     
     private func setup() {
-        backgroundColor = Theme.primaryColor
         clipsToBounds = true
         addLabel()
         addTapRecognizer()
@@ -49,18 +47,10 @@ class CheddarButton: AnimatedView {
     }
     
     private func addLabel() {
-        label.textColor = .gray900
+        label.textColor = Theme.inverseBackgroundColor
         label.textAlignment = .center
         label.font = Fonts.sofiaPro(weight: .bold, Dimens.titleText)
-        self.addSubviewAndFill(label, top: 2.0)
+        self.addSubviewAndFill(label)
     }
-    
-    override func layoutSublayers(of layer: CALayer) {
-        super.layoutSublayers(of: layer)
-        if (!didSetCorners) {
-            didSetCorners = true
-            layer.cornerRadius = frame.height / 2
-        }
-    }
-    
+
 }

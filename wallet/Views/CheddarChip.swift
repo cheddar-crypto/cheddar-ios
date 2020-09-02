@@ -1,15 +1,15 @@
 //
-//  CheddarButton.swift
+//  CheddarChip.swift
 //  wallet
 //
-//  Created by Michael Miller on 8/30/20.
+//  Created by Michael Miller on 9/1/20.
 //  Copyright © 2020 Michael Miller. All rights reserved.
 //
 
 import UIKit
 
-class CheddarButton: AnimatedView {
-    
+class CheddarChip: AnimatedView {
+
     @objc private var action: () -> Void
     private var didSetCorners = false
     private let label = UILabel()
@@ -18,10 +18,10 @@ class CheddarButton: AnimatedView {
             return label.text
         }
         set(newTitle) {
-            label.text = newTitle?.uppercased()
+            label.text = newTitle
         }
     }
-
+    
     init(action: @escaping () -> Void) {
         self.action = action
         super.init(frame: .zero)
@@ -51,8 +51,8 @@ class CheddarButton: AnimatedView {
     private func addLabel() {
         label.textColor = .gray900
         label.textAlignment = .center
-        label.font = Fonts.sofiaPro(weight: .bold, Dimens.titleText)
-        self.addSubviewAndFill(label, top: 2.0)
+        label.font = Fonts.sofiaPro(weight: .regular, Dimens.titleText)
+        self.addSubviewAndFill(label, top: 2.0, leading: 12.0, trailing: -12.0)
     }
     
     override func layoutSublayers(of layer: CALayer) {
@@ -62,5 +62,5 @@ class CheddarButton: AnimatedView {
             layer.cornerRadius = frame.height / 2
         }
     }
-    
+
 }

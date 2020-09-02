@@ -10,6 +10,10 @@ import UIKit
 
 class RequestInvoiceQRViewController: CheddarViewController<RequestViewModel> {
     
+    private lazy var imageView = {
+        return UIImageView()
+    }()
+    
     init(sharedViewModel: RequestViewModel) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = sharedViewModel
@@ -21,25 +25,40 @@ class RequestInvoiceQRViewController: CheddarViewController<RequestViewModel> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "Lighning Invoice QR"
-        
+        setup()
+    }
+    
+    private func setup() {
         setLeftNavigationButton(.back)
+        addQRImageView()
+    }
+    
+    override func viewModelDidLoad() {
+        super.viewModelDidLoad()
         
-        let button = UIButton()
-        button.setTitleColor(Theme.inverseBackgroundColor, for: .normal)
-        button.setTitle("Close", for: .normal)
-        button.frame = CGRect(x: 0, y: 60, width: 200, height: 50)
-        view.addSubview(button)
-        button.layer.cornerRadius = 15
-        button.layer.borderWidth = 1
-        button.layer.borderColor = Theme.inverseBackgroundColor.cgColor
-        button.addTarget(self, action: #selector(close), for: .touchUpInside)
+        title = String(viewModel.amount.value ?? 0.0) // TODO: Clean me
+        imageView.image = generateQRCode(from: viewModel.note.value as? String)
         
     }
     
-    @objc private func close() {
-        navigationController?.dismiss(animated: true, completion: nil)
+    private func addQRImageView() {
+        imageView.contentMode = .center
+        view.addSubviewAndFill(imageView)
+    }
+    
+    func generateQRCode(from string: String?) -> UIImage? {
+        let data = string?.data(using: String.Encoding.ascii)
+
+        if let filter = CIFilter(name: "CIQRCodeGenerator") {
+            filter.setValue(data, forKey: "inputMessage")
+            let transform = CGAffineTransform(scaleX: 3, y: 3)
+
+            if let output = filter.outputImage?.transformed(by: transform) {
+                return UIImage(ciImage: output)
+            }
+        }
+
+        return nil
     }
 
 }

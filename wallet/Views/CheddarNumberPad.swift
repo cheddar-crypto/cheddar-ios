@@ -95,29 +95,29 @@ class CheddarNumberPad: UIView {
     // Coordinates the number pad and what is shown in another field
     class Coordinator {
         
-        private let label: UILabel
+        private let inputView: CurrencyInputView
         private let onValueChange: (Double) -> Void
         
         var value: Double {
             get {
-                let str = self.label.text ?? "0"
+                let str = self.inputView.title ?? "0"
                 return Double(str) ?? 0.0
             }
             set(newValue) {
                 let text = String(newValue)
-                self.label.text = format(text)
+                self.inputView.title = format(text)
                 onValueChange(value)
             }
         }
         
-        init(label: UILabel, onValueChange: @escaping (Double) -> Void) {
-            self.label = label
-            self.label.text = "0"
+        init(inputView: CurrencyInputView, onValueChange: @escaping (Double) -> Void) {
+            self.inputView = inputView
+            self.inputView.title = "0"
             self.onValueChange = onValueChange
         }
         
         func addCharacter(char: String) {
-            let str = (self.label.text ?? "")
+            let str = (self.inputView.title ?? "")
             
             // Prevent "." duplicates
             if (char == "." && str.contains(".")) {
@@ -142,18 +142,18 @@ class CheddarNumberPad: UIView {
             }
             
             // Update the value
-            self.label.text = format(text)
+            self.inputView.title = format(text)
             onValueChange(value)
         }
         
         func removeCharacter() {
-            var text = String(self.label.text?.dropLast() ?? "")
+            var text = String(self.inputView.title?.dropLast() ?? "")
             
             if (text.isEmpty) {
                 text = "0"
             }
             
-            self.label.text = format(text)
+            self.inputView.title = format(text)
             onValueChange(value)
         }
         
