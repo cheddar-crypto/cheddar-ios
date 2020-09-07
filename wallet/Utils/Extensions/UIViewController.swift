@@ -11,11 +11,8 @@ import UIKit
 extension UIViewController {
     
     func setTheme() {
-        
         view.backgroundColor = Theme.backgroundColor
-        
         setNavBarStyles()
-        
     }
     
     func setNavBarStyles() {

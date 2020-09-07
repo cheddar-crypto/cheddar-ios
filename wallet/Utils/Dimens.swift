@@ -12,6 +12,8 @@ struct Dimens {
     
     public static let tall = 72
     public static let button = 56
+    public static let bar = 88
+    public static let minButtonWidth = 140
     public static let chip = 44
     public static let titleText = 20
     public static let normalText = 16
