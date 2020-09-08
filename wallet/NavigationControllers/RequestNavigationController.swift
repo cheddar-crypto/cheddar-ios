@@ -8,11 +8,11 @@
 
 import UIKit
 
-class RequestNavigationController: CheddarNavigationController {
+class RequestNavigationController: CheddarNavigationController<RequestViewModel> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setViewControllers([RequestAmountViewController()], animated: false)
+        setViewControllers([RequestAmountViewController(sharedViewModel: self.viewModel)], animated: false)
     }
 
 }
