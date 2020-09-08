@@ -215,6 +215,19 @@ class Lightning {
             completion(Lnrpc_OpenStatusUpdate(), nil)
         }
     }
+    
+    func listChannels(_ completion: @escaping (Lnrpc_ListChannelsResponse, Error?) -> Void) {
+        do {
+            LndmobileListChannels(
+                try Lnrpc_ListChannelsRequest().serializedData(),
+                LndCallback<Lnrpc_ListChannelsResponse> { (response, error) in
+                    completion(response, error)
+                }
+            )
+        } catch {
+            completion(Lnrpc_ListChannelsResponse(), error)
+        }
+    }
 }
 
 //Utils

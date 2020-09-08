@@ -65,7 +65,10 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
         let openChannelButton = addDebugButton("Open channel", topAnchor: getBalanceButton.bottomAnchor, topConstant: 10, action: {
             self.viewModel.openChannel()
         })
-        let wipeButton = addDebugButton("Wipe (and close) wallet", topAnchor: openChannelButton.bottomAnchor, topConstant: 10, action: {
+        let listChannelsButton = addDebugButton("List channels", topAnchor: openChannelButton.bottomAnchor, topConstant: 10, action: {
+            self.viewModel.listChannels()
+        })
+        let wipeButton = addDebugButton("Wipe (and close) wallet", topAnchor: listChannelsButton.bottomAnchor, topConstant: 10, action: {
             self.viewModel.wipeWallet()
         })
         let requestFlowButton = addDebugButton("Launch request invoice flow", topAnchor: wipeButton.bottomAnchor, topConstant: 10, action: {
