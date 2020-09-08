@@ -50,4 +50,14 @@ struct Theme {
         }
     }()
     
+    public static let shadowColor: UIColor = {
+        return UIColor { (UITraitCollection) -> UIColor in
+            if UITraitCollection.userInterfaceStyle == .dark {
+                return UIColor.white500.withAlphaComponent(0.25)
+            } else {
+                return UIColor.gray900.withAlphaComponent(0.25)
+            }
+        }
+    }()
+    
 }
