@@ -36,8 +36,8 @@ class LightningRepository {
         
         Lightning.shared.connectToNode(nodePubkey: nodePubKey, hostAddress: host, hostPort: port) { [weak self] (response, error) in
             guard let self = self else { return }
-
-            guard error == nil else {
+            
+            if error != nil && error?.localizedDescription.contains("already connected to peer") == false {
                 onFailure(error)
                 return
             }
