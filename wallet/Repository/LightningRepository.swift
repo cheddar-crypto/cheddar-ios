@@ -35,18 +35,14 @@ class LightningRepository {
     func openChannel(host: String, port: UInt, nodePubKey: NodePublicKey, closeAddress: String, onSuccess: @escaping (String) -> Void, onFailure: @escaping (Error?) -> Void) {
         
         Lightning.shared.connectToNode(nodePubkey: nodePubKey, hostAddress: host, hostPort: port) { [weak self] (response, error) in
-            guard let self = self else { return }
-
-            guard error == nil else {
+            if error != nil && error?.localizedDescription.contains("already connected to peer") == false {
                 onFailure(error)
                 return
             }
             
             onSuccess("Connected to peer")
             
-            Lightning.shared.openChannel(localFundingAmount: 20000, closeAddress: closeAddress, nodePubkey: nodePubKey) { [weak self] (response, error) in
-                guard self != nil else { return }
-                
+            Lightning.shared.openChannel(localFundingAmount: 20000, closeAddress: closeAddress, nodePubkey: nodePubKey) { (response, error) in
                 guard error == nil else {
                     onFailure(error)
                     return
@@ -65,6 +61,18 @@ class LightningRepository {
                     onSuccess("I don't know why you would get this error")
                 }
             }
+        }
+    }
+    
+    func listChannels(onSuccess: @escaping (Lnrpc_ListChannelsResponse) -> Void, onFailure: @escaping (Error?) -> Void) {
+        
+        Lightning.shared.listChannels { (response, error) in
+            guard error == nil else {
+                onFailure(error)
+                return
+            }
+
+            onSuccess(response)
         }
     }
     

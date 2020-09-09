@@ -20,11 +20,10 @@ class HomeViewModel: ViewModel {
     let walletWipe = Observable<Void>()
     let newAddress = Observable<String>()
     
-    // Hardcoded values
-    // TODO: Change these later
-    private let nodePubKey = try! NodePublicKey("02c72b987ee75223bf3437905c8b40d224ce94e3586da9eee0fc87839ac5842ccd")
-    private let hostAddress = "54.189.108.12"
-    private let hostPort: UInt = 9735
+    //TODO: Hardcoded values. Change these later.
+    private let nodePubKey = try! NodePublicKey("02d1ae7c35e0cc8774f889cdaeccdd76920801fcc203956b8d5169d0c74014bcfc")
+    private let hostAddress = "127.0.0.1"
+    private let hostPort: UInt = 9739
     private let closeAddress = "tb1qylxttvn7wm7vsc2j36cjvmpl7nykcrzqkz6avl"
     
     func load() {
@@ -98,6 +97,22 @@ class HomeViewModel: ViewModel {
                 self?.isLoading.value = false
                 self?.resultMessage.value = error?.localizedDescription // TODO: Change to error
             })
+    }
+    
+    func listChannels() {
+        
+        self.resultMessage.value = ""
+        self.isLoading.value = true
+        
+        lightningRepo.listChannels(onSuccess: { [weak self] (response) in
+            self?.isLoading.value = false
+            self?.resultMessage.value = response.channels.map({ (channel) in
+                return "\(channel.remotePubkey):\nCan send: \(channel.localBalance) - Can receive: \(channel.remoteBalance)"
+            }).joined(separator: "\n\n")
+        }) { [weak self] (error) in
+            self?.isLoading.value = false
+            self?.resultMessage.value = error?.localizedDescription
+        }
     }
     
     func wipeWallet() {

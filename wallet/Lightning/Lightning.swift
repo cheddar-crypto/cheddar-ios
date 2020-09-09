@@ -27,7 +27,7 @@ class Lightning {
         return directory
     }
     
-    private let confName = "lnd.conf"
+    private let confName = "lnd-regtest.conf" //TODO build this config file in code
     
     private var confFile: URL {
         return storage.appendingPathComponent(confName)
@@ -210,9 +210,22 @@ class Lightning {
         request.spendUnconfirmed = false
         
         do {
-            LndmobileConnectPeer(try request.serializedData(), LndCallback<Lnrpc_OpenStatusUpdate>(completion))
+            LndmobileOpenChannel(try request.serializedData(), LndCallback<Lnrpc_OpenStatusUpdate>(completion))
         } catch {
             completion(Lnrpc_OpenStatusUpdate(), nil)
+        }
+    }
+    
+    func listChannels(_ completion: @escaping (Lnrpc_ListChannelsResponse, Error?) -> Void) {
+        do {
+            LndmobileListChannels(
+                try Lnrpc_ListChannelsRequest().serializedData(),
+                LndCallback<Lnrpc_ListChannelsResponse> { (response, error) in
+                    completion(response, error)
+                }
+            )
+        } catch {
+            completion(Lnrpc_ListChannelsResponse(), error)
         }
     }
 }
