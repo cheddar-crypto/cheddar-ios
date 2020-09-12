@@ -25,6 +25,7 @@ class HomeViewModel: ViewModel {
     private let hostAddress = "127.0.0.1"
     private let hostPort: UInt = 9739
     private let closeAddress = "tb1qylxttvn7wm7vsc2j36cjvmpl7nykcrzqkz6avl"
+    private let invoice = "lnbcrt1u1p04e4cypp5qyxj3u8dm2pjsdang94lj6c0d9p33l05999945atjrfyw0nle0ssdqqcqzpgsp5dqlzsd63a0akx9wgv8v9scryj3gn7fe3s8ca9l26s9tjlwkvtv4q9qy9qsq4kv825h86yummfcerkvctfh8c4aw6vc0r986dsyjtp6dun5ysurq2zh0nj6qd4cuf5qskpn9pwre5u26ncce4qy3ataw88p6j08y0xcqy4uxa7"
     
     func load() {
         
@@ -113,6 +114,21 @@ class HomeViewModel: ViewModel {
             self?.isLoading.value = false
             self?.resultMessage.value = error?.localizedDescription
         }
+    }
+    
+    func payInvoice() {
+        
+        self.resultMessage.value = ""
+        self.isLoading.value = true
+        
+        lightningRepo.pay(paymentRequest: invoice, onSuccess: { [weak self] (response) in
+            self?.isLoading.value = false
+            self?.resultMessage.value = "Paid \(response.numSatoshis) sats to \(response.destination)"
+        },
+        onFailure: { [weak self] error in
+            self?.isLoading.value = false
+            self?.resultMessage.value = error?.localizedDescription // TODO: Change to error
+        })
     }
     
     func wipeWallet() {

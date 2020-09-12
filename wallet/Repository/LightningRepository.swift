@@ -133,4 +133,28 @@ class LightningRepository {
         }
     }
     
+    func pay(paymentRequest: String, onSuccess: @escaping (Lnrpc_PayReq) -> Void, onFailure: @escaping (Error?) -> Void) {
+        Lightning.shared.decodePaymentRequest(paymentRequest) { [weak self] (decodedResponse, error) in
+            guard self != nil else { return }
+
+            guard error == nil else {
+                onFailure(error)
+                return
+            }
+            
+            //Requst decoded succesfully so can be used to make the payment
+            Lightning.shared.payRequest(paymentRequest) { [weak self] (sendResponse, error) in
+                guard self != nil else { return }
+
+                guard error == nil else {
+                    onFailure(error)
+                    return
+                }
+                
+                onSuccess(decodedResponse)
+
+            }
+        }
+    }
+    
 }

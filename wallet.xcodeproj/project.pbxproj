@@ -49,6 +49,7 @@
 		00665EDA24EF067900030A13 /* LightningStateMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665ED324EC55B300030A13 /* LightningStateMonitor.swift */; };
 		00665EDC24EF07E800030A13 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665EDB24EF07E800030A13 /* Settings.swift */; };
 		00665EDD24EF07E800030A13 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00665EDB24EF07E800030A13 /* Settings.swift */; };
+		00B045C0250CDFDE0060D4D1 /* LightningError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B045BF250CDFDE0060D4D1 /* LightningError.swift */; };
 		00FB66A82507FCBD003461CD /* lnd-regtest.conf in Resources */ = {isa = PBXBuildFile; fileRef = 00FB66A72507FCBD003461CD /* lnd-regtest.conf */; };
 		3C42530BF0760EAA4F38CEDD /* Pods_wallet_walletUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8169844622EC1A934F64E4C8 /* Pods_wallet_walletUITests.framework */; };
 		4029655179169C028F45B373 /* Pods_walletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6665EF031EDC3E364CE652 /* Pods_walletTests.framework */; };
@@ -142,6 +143,7 @@
 		00665ED324EC55B300030A13 /* LightningStateMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightningStateMonitor.swift; sourceTree = "<group>"; };
 		00665ED624EF05B700030A13 /* NodePublicKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodePublicKey.swift; sourceTree = "<group>"; };
 		00665EDB24EF07E800030A13 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		00B045BF250CDFDE0060D4D1 /* LightningError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightningError.swift; sourceTree = "<group>"; };
 		00FB66A72507FCBD003461CD /* lnd-regtest.conf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "lnd-regtest.conf"; sourceTree = "<group>"; };
 		22C1F2815F66B3F1B4C860DC /* Pods-wallet-walletUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet-walletUITests.release.xcconfig"; path = "Target Support Files/Pods-wallet-walletUITests/Pods-wallet-walletUITests.release.xcconfig"; sourceTree = "<group>"; };
 		49151D7AE89BC38CAB768074 /* Pods-walletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletTests.debug.xcconfig"; path = "Target Support Files/Pods-walletTests/Pods-walletTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 				00665ED124EC510400030A13 /* EventBus.swift */,
 				00665ED324EC55B300030A13 /* LightningStateMonitor.swift */,
 				00665ED624EF05B700030A13 /* NodePublicKey.swift */,
+				00B045BF250CDFDE0060D4D1 /* LightningError.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -834,6 +837,7 @@
 				00665EAE24E9185B00030A13 /* router.pb.swift in Sources */,
 				7A811EA424FC314000F8D8C8 /* AnimatedView.swift in Sources */,
 				00665EBC24E9185B00030A13 /* verrpc.pb.swift in Sources */,
+				00B045C0250CDFDE0060D4D1 /* LightningError.swift in Sources */,
 				00665EB624E9185B00030A13 /* walletunlocker.pb.swift in Sources */,
 				00665EB824E9185B00030A13 /* watchtower.pb.swift in Sources */,
 				7A2CC34D24EF6FC700E2605A /* RequestNavigationController.swift in Sources */,
