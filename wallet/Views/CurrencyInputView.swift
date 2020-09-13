@@ -9,7 +9,16 @@
 import UIKit
 
 class CurrencyInputView: AnimatedView {
+    
+    public enum Style {
+        case Expanded
+        case Collapsed
+    }
+    
+    public static let minHeight = CGFloat(56.0)
+    public static let maxHeight = CGFloat(104.0)
 
+    var prefixChar: String // TODO: Use image
     @objc private var action: () -> Void
     private let label = UILabel()
     var title: String? {
@@ -21,7 +30,8 @@ class CurrencyInputView: AnimatedView {
         }
     }
 
-    init(action: @escaping () -> Void) {
+    init(prefixChar: String, action: @escaping () -> Void) {
+        self.prefixChar = prefixChar
         self.action = action
         super.init(frame: .zero)
         setup()
@@ -35,6 +45,8 @@ class CurrencyInputView: AnimatedView {
         clipsToBounds = true
         addLabel()
         addTapRecognizer()
+        layer.borderWidth = CGFloat(Dimens.shadow)
+        layer.borderColor = Theme.shadowColor.cgColor
     }
     
     private func addTapRecognizer() {
@@ -51,6 +63,18 @@ class CurrencyInputView: AnimatedView {
         label.textAlignment = .center
         label.font = Fonts.sofiaPro(weight: .bold, Dimens.titleText)
         self.addSubviewAndFill(label)
+    }
+    
+    // TODO: Add animation
+    func setStyle(style: Style) {
+        switch (style) {
+        case .Expanded:
+            layer.borderColor = Theme.primaryColor.cgColor
+            label.font = Fonts.sofiaPro(weight: .bold, Dimens.headerText)
+        case .Collapsed:
+            layer.borderColor = Theme.shadowColor.cgColor
+            label.font = Fonts.sofiaPro(weight: .medium, Dimens.titleText)
+        }
     }
 
 }

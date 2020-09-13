@@ -14,6 +14,7 @@ public enum EventTypes: String {
     case lndStopped = "lnd-stopped"
     case lndRpcReady = "lnd-rpc-ready"
     case lndWalletUnlocked = "lnd-wallet-unlocked"
+    case fbPriceUpdate = "fb-price-update"
 }
 
 private let identifier = "app.cheddar.wallet.eventbus"

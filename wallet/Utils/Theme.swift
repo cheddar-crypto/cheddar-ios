@@ -60,4 +60,6 @@ struct Theme {
         }
     }()
     
+    public static let defaultAnimationDuration = 0.1
+    
 }

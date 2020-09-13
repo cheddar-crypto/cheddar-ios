@@ -26,14 +26,14 @@ class AnimatedView: UIView {
     }
     
     private func animatedDown() {
-        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.allowUserInteraction], animations: {
+        UIView.animate(withDuration: Theme.defaultAnimationDuration, delay: 0.0, options: [.allowUserInteraction], animations: {
             self.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
             self.alpha = 0.6
         })
     }
 
     private func animateUp() {
-        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.allowUserInteraction], animations: {
+        UIView.animate(withDuration: Theme.defaultAnimationDuration, delay: 0.0, options: [.allowUserInteraction], animations: {
             self.transform = CGAffineTransform(scaleX: 1, y: 1)
             self.alpha = 1
         })

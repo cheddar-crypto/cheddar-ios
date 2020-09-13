@@ -13,6 +13,19 @@ class RequestViewModel: ViewModel {
     let amount = Observable<Double>()
     let note = Observable<String?>()
     let invoice = Observable<String>()
+    let price = Observable<Double>()
+    
+    func load() {
+        
+        // Register
+        EventBus.onBackgroundThread(self, eventType: .fbPriceUpdate, handler: { notification in
+            if let price = notification?.object {
+                self.price.value = price as? Double
+            }
+        })
+    
+        
+    }
     
     // TODO: Add the proper repo or values in here to handle creating the lnd invoice
     func createInvoice() {
@@ -21,6 +34,10 @@ class RequestViewModel: ViewModel {
         
         invoice.value = example
         
+    }
+    
+    deinit {
+        EventBus.unregister(self)
     }
     
 }
