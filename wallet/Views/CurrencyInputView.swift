@@ -17,7 +17,8 @@ class CurrencyInputView: AnimatedView {
     
     public static let minHeight = CGFloat(56.0)
     public static let maxHeight = CGFloat(104.0)
-
+    
+    private var currentStyle = Style.Collapsed
     var prefixChar: String // TODO: Use image
     @objc private var action: () -> Void
     private let label = UILabel()
@@ -65,15 +66,44 @@ class CurrencyInputView: AnimatedView {
         self.addSubviewAndFill(label)
     }
     
-    // TODO: Add animation
-    func setStyle(style: Style) {
+    func setStyle(style: Style, animated: Bool) {
+        
+        // Set the style if needed
+        if (style == currentStyle) {
+            return
+        }
+        currentStyle = style
+        
+        // Handle the change
         switch (style) {
         case .Expanded:
             layer.borderColor = Theme.primaryColor.cgColor
-            label.font = Fonts.sofiaPro(weight: .bold, Dimens.headerText)
+            
+            if (animated) {
+                ValueAnimator(
+                from: Double(Dimens.titleText),
+                to: Double(Dimens.headerText),
+                duration: animated ? Theme.defaultAnimationDuration : 0,
+                valueUpdater: { value in
+                    self.label.font = Fonts.sofiaPro(weight: .bold, Int(value))
+                }).start()
+            } else {
+                label.font = Fonts.sofiaPro(weight: .bold, Dimens.headerText)
+            }
+
         case .Collapsed:
             layer.borderColor = Theme.shadowColor.cgColor
-            label.font = Fonts.sofiaPro(weight: .medium, Dimens.titleText)
+            if (animated) {
+                ValueAnimator(
+                from: Double(Dimens.headerText),
+                to: Double(Dimens.titleText),
+                duration: animated ? Theme.defaultAnimationDuration : 0,
+                valueUpdater: { value in
+                    self.label.font = Fonts.sofiaPro(weight: .medium, Int(value))
+                }).start()
+            } else {
+                label.font = Fonts.sofiaPro(weight: .medium, Dimens.titleText)
+            }
         }
     }
 
