@@ -10,12 +10,6 @@ import Foundation
 class Lightning {
     static let shared = Lightning()
     
-    enum LightningError: Error {
-        case unknown
-        case mapping
-        case invalidPassword
-    }
-    
     private var storage: URL {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let directory = documentsDirectory.appendingPathComponent("lnd")
@@ -27,7 +21,7 @@ class Lightning {
         return directory
     }
     
-    private let confName = "lnd-regtest.conf" //TODO build this config file in code
+    private let confName = "lnd.conf"
     
     private var confFile: URL {
         return storage.appendingPathComponent(confName)
@@ -43,7 +37,9 @@ class Lightning {
         try? FileManager.default.removeItem(at: confFile)
         //Copy new config into LND directory
         do {
-            try FileManager.default.copyItem(at: Bundle.main.bundleURL.appendingPathComponent(confName), to: confFile)
+            //TODO build this config file in code
+            let originalConf = "lnd.conf"
+            try FileManager.default.copyItem(at: Bundle.main.bundleURL.appendingPathComponent(originalConf), to: confFile)
         } catch {
             return completion(error)
         }
@@ -226,6 +222,39 @@ class Lightning {
             )
         } catch {
             completion(Lnrpc_ListChannelsResponse(), error)
+        }
+    }
+    
+    func decodePaymentRequest(_ paymentRequest: String, _ completion: @escaping (Lnrpc_PayReq, Error?) -> Void) {
+        var request = Lnrpc_PayReqString()
+        request.payReq = paymentRequest
+                
+        do {
+            LndmobileDecodePayReq(try request.serializedData(), LndCallback<Lnrpc_PayReq>(completion))
+        } catch {
+            completion(Lnrpc_PayReq(), nil)
+        }
+    }
+    
+    func payRequest(_ paymentRequest: String, _ completion: @escaping (Lnrpc_SendResponse, Error?) -> Void) {
+        var request = Lnrpc_SendRequest()
+        request.paymentRequest = paymentRequest
+        
+        do {
+            //LND returns payment errors in the response and not with a real error. This just intercepts the callback and will return the custom error if applicable.
+            LndmobileSendPaymentSync(
+                try request.serializedData(),
+                LndCallback<Lnrpc_SendResponse> { (response, error) in
+                    guard response.paymentError.isEmpty else {
+                        completion(response, LightningError.paymentError(response.paymentError))
+                        return
+                    }
+                        
+                    completion(response, error)
+                })
+            
+        } catch {
+            completion(Lnrpc_SendResponse(), nil)
         }
     }
 }
