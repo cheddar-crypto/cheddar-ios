@@ -40,7 +40,7 @@ class CheddarActionBar: UIView {
     
     func setLeftAction(title: String, action: @escaping () -> Void) {
         leftButton?.removeFromSuperview()
-        leftButton = CheddarButton(action: action)
+        leftButton = CheddarButton(style: .bordered, action: action)
         leftButton!.title = title
         addSubview(leftButton!)
         leftButton!.translatesAutoresizingMaskIntoConstraints = false

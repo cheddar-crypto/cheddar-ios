@@ -19,6 +19,7 @@ struct Dimens {
     public static let titleText = 20
     public static let normalText = 16
     public static let mediumMargin = 16
+    public static let largeMargin = 32
     public static let shadow = 2
     
 }

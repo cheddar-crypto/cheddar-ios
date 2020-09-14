@@ -10,6 +10,7 @@
 "NOTE" = "Note";
 "NEXT" = "Next";
 "FOR" = "For";
+"COPY" = "Copy";
 "NOTE_PLACEHOLDER" = "Tap to write a message";
 "CREATE_QR" = "Create QR Code";
 "DEFAULT_ERROR" = "An error occured";

@@ -14,8 +14,8 @@ class RequestInvoiceQRViewController: CheddarViewController<RequestViewModel> {
         return CheddarActionBar()
     }()
     
-    private lazy var imageStackView = {
-        return UIStackView()
+    private lazy var imageContainer = {
+        return UIView()
     }()
     
     private lazy var imageView = {
@@ -23,7 +23,7 @@ class RequestInvoiceQRViewController: CheddarViewController<RequestViewModel> {
     }()
     
     private lazy var copyButton = {
-        return CheddarButton(action: { [weak self] in
+        return CheddarButton(style: .bordered, action: { [weak self] in
             UIPasteboard.general.string = self?.viewModel.invoice.value ?? "" // TODO: Use proper lnd invoice
         })
     }()
@@ -52,10 +52,8 @@ class RequestInvoiceQRViewController: CheddarViewController<RequestViewModel> {
     
     override func viewModelDidLoad() {
         super.viewModelDidLoad()
-        
-        title = String(viewModel.amount.value ?? 0.0) // TODO: Clean me
+        title = viewModel.getAmountTitle()
         imageView.image = viewModel.invoice.value?.toQR()
-        
     }
     
     private func addActionBar() {
@@ -77,27 +75,34 @@ class RequestInvoiceQRViewController: CheddarViewController<RequestViewModel> {
     }
     
     private func addImageStack() {
-        imageStackView.spacing = CGFloat(Dimens.mediumMargin)
-        imageStackView.axis = .vertical
-        imageStackView.distribution = .equalCentering
-        view.addSubview(imageStackView)
-        imageStackView.translatesAutoresizingMaskIntoConstraints = false
-        imageStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
-        imageStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
-        imageStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -CGFloat(Dimens.mediumMargin)).isActive = true
-        imageStackView.bottomAnchor.constraint(equalTo: actionBar.topAnchor, constant: 0).isActive = true
+        view.addSubview(imageContainer)
+        imageContainer.translatesAutoresizingMaskIntoConstraints = false
+        imageContainer.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        imageContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        imageContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        imageContainer.bottomAnchor.constraint(equalTo: actionBar.topAnchor).isActive = true
     }
     
     private func addQRImageView() {
         imageView.contentMode = .scaleAspectFit
-        imageStackView.addArrangedSubview(imageView)
+        imageContainer.addSubview(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: imageContainer.centerYAnchor, constant: -CGFloat(Dimens.largeMargin)).isActive = true
+        let margins = CGFloat(Dimens.largeMargin * 2)
+        let size = view.frame.width - margins
+        imageView.widthAnchor.constraint(equalToConstant: size).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: size).isActive = true
     }
     
     private func addCopyButton() {
-        copyButton.title = "Copy" // TODO Localization
-        imageStackView.addArrangedSubview(copyButton)
+        copyButton.title = .copy
+        imageContainer.addSubview(copyButton)
+        copyButton.translatesAutoresizingMaskIntoConstraints = false
         copyButton.heightAnchor.constraint(equalToConstant: CGFloat(Dimens.button)).isActive = true
         copyButton.widthAnchor.constraint(greaterThanOrEqualToConstant: CGFloat(Dimens.minButtonWidth)).isActive = true
+        copyButton.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor).isActive = true
+        copyButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
     }
 
 }
