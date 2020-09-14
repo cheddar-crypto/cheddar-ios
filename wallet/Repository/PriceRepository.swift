@@ -14,7 +14,7 @@ class PriceRepository {
     func registerPriceChangeListener(onSuccess: @escaping (Price) -> Void, onFailure: @escaping (Error) -> Void) {
         
         // This gets called every 10 seconds
-        Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { (timer) in
+        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { (timer) in
             let value = Double.random(in: 9000.0...12000.0)
             let price = Price(usd: value)
             onSuccess(price)

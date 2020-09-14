@@ -10,12 +10,12 @@
 "NOTE" = "Note";
 "NEXT" = "Next";
 "FOR" = "For";
-"NOTE_PLACEHOLDER" = "Write a message";
+"NOTE_PLACEHOLDER" = "Tap to write a message";
 "CREATE_QR" = "Create QR Code";
 "DEFAULT_ERROR" = "An error occured";
 
 
-//LND errors
+// LND errors
 "LND_ERROR_UNKNOWN" = "An error unknown occured";
 "LND_ERROR_MAPPING" = "An error unknown occured";
 "LND_ERROR_INVALID_PASSWORD" = "Invalid wallet password";

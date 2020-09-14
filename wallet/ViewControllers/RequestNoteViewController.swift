@@ -76,6 +76,7 @@ class RequestNoteViewController: CheddarViewController<RequestViewModel>, UIText
     
     override func viewModelDidLoad() {
         textView.text = viewModel.note.value ?? ""
+        textViewPlaceholder.isHidden = textView.text.count > 0
     }
     
     private func addQRButton() {
@@ -95,7 +96,13 @@ class RequestNoteViewController: CheddarViewController<RequestViewModel>, UIText
         amountChip.heightAnchor.constraint(equalToConstant: CGFloat(Dimens.chip)).isActive = true
         amountChip.topAnchor.constraint(equalTo: view.topAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
         amountChip.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
-        amountChip.title = "\(viewModel.amount.value ?? 0.0)" // TODO: Localize
+        
+        if let price = viewModel.price.value {
+            let count = viewModel.amount.value ?? 0.0
+            let bitcoins = String.bitcoinCount(count: Float(count))
+            let cost = "$\(count * price.usd)" // TODO: Localize
+            amountChip.title = "\(bitcoins) (\(cost))"
+        }
     }
     
     private func addDivider() {
@@ -136,19 +143,18 @@ class RequestNoteViewController: CheddarViewController<RequestViewModel>, UIText
         textView.delegate = self
         
         // TextView Placeholder
-        // This isn't working for some reason. Check back later
-//        textViewPlaceholder.text = String.requestNotePlaceholder.lowercased()
-//        textViewPlaceholder.textColor = Theme.inverseBackgroundColor.withAlphaComponent(0.25)
-//        textViewPlaceholder.font = Fonts.sofiaPro(weight: .regular, Dimens.titleText)
-//        textViewPlaceholder.backgroundColor = .red
-//        view.addSubview(textViewPlaceholder)
-//        textViewPlaceholder.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
-//        textViewPlaceholder.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
-//        textViewPlaceholder.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        textViewPlaceholder.text = String.requestNotePlaceholder.lowercased()
+        textViewPlaceholder.textColor = Theme.inverseBackgroundColor.withAlphaComponent(0.25)
+        textViewPlaceholder.font = Fonts.sofiaPro(weight: .regular, Dimens.titleText)
+        view.addSubview(textViewPlaceholder)
+        textViewPlaceholder.translatesAutoresizingMaskIntoConstraints = false
+        textViewPlaceholder.topAnchor.constraint(equalTo: textView.topAnchor, constant: padding).isActive = true
+        textViewPlaceholder.leadingAnchor.constraint(equalTo: textView.leadingAnchor, constant: padding + 4).isActive = true
     }
     
     func textViewDidChange(_ textView: UITextView) {
         viewModel.note.value = textView.text
+        textViewPlaceholder.isHidden = textView.text.count > 0
     }
     
     deinit {
