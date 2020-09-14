@@ -54,6 +54,10 @@ class RequestNoteViewController: CheddarViewController<RequestViewModel>, UIText
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.textView.endEditing(true)
+
+        // Fixes layout issue with next button
+        // ignoring the safe area bottom
+        self.view.layoutIfNeeded()
     }
     
     private func setup() {

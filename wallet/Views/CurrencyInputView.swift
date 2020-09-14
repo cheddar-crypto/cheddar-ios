@@ -78,32 +78,16 @@ class CurrencyInputView: AnimatedView {
         switch (style) {
         case .Expanded:
             layer.borderColor = Theme.primaryColor.cgColor
-            
-            if (animated) {
-                ValueAnimator(
-                from: Double(Dimens.titleText),
-                to: Double(Dimens.headerText),
-                duration: animated ? Theme.defaultAnimationDuration : 0,
-                valueUpdater: { value in
-                    self.label.font = Fonts.sofiaPro(weight: .bold, Int(value))
-                }).start()
-            } else {
-                label.font = Fonts.sofiaPro(weight: .bold, Dimens.headerText)
-            }
-
+            label.setFont(
+                animationDuration: animated ? Theme.defaultAnimationDuration : 0,
+                weight: .bold,
+                newSize: Double(Dimens.headerText))
         case .Collapsed:
             layer.borderColor = Theme.shadowColor.cgColor
-            if (animated) {
-                ValueAnimator(
-                from: Double(Dimens.headerText),
-                to: Double(Dimens.titleText),
-                duration: animated ? Theme.defaultAnimationDuration : 0,
-                valueUpdater: { value in
-                    self.label.font = Fonts.sofiaPro(weight: .medium, Int(value))
-                }).start()
-            } else {
-                label.font = Fonts.sofiaPro(weight: .medium, Dimens.titleText)
-            }
+            label.setFont(
+                animationDuration: animated ? Theme.defaultAnimationDuration : 0,
+                weight: .medium,
+                newSize: Double(Dimens.titleText))
         }
     }
 

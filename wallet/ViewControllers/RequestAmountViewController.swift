@@ -122,7 +122,7 @@ class RequestAmountViewController: CheddarViewController<RequestViewModel> {
     override func viewModelDidLoad() {
         
         viewModel.price.observe = { [weak self] price in
-            self?.numberPadCoordinator.currentPrice = price
+            self?.numberPadCoordinator.currentPrice = price.forLocale()
         }
         
         viewModel.amount.observe = { amount in

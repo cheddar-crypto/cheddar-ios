@@ -11,22 +11,7 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    private let priceRepo = PriceRepository()
-//    private let eventBus = EventBus()
-//    public static let onPriceChange = "onPriceChange"
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        // Update the global price while user is navigating app
-        // This will be moved to firebase at somepoint
-        priceRepo.registerPriceChangeListener(
-            onSuccess: { price in
-                EventBus.postToMainThread(.fbPriceUpdate, sender: price)
-            },
-            onFailure: { error in
-                // TODO
-            })
-        
         return true
     }
 
