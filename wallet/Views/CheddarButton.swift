@@ -10,6 +10,12 @@ import UIKit
 
 class CheddarButton: AnimatedView {
     
+    enum Style {
+        case primary
+        case bordered
+    }
+    
+    private var style: Style = .primary
     @objc private var action: () -> Void
     private var didSetCorners = false
     private let label = UILabel()
@@ -22,7 +28,8 @@ class CheddarButton: AnimatedView {
         }
     }
 
-    init(action: @escaping () -> Void) {
+    init(style: Style = .primary, action: @escaping () -> Void) {
+        self.style = style
         self.action = action
         super.init(frame: .zero)
         setup()
@@ -33,10 +40,23 @@ class CheddarButton: AnimatedView {
     }
     
     private func setup() {
-        backgroundColor = Theme.primaryColor
         clipsToBounds = true
         addLabel()
         addTapRecognizer()
+        setStyle()
+    }
+    
+    private func setStyle() {
+        switch style {
+        case .primary:
+            label.textColor = .gray900
+            backgroundColor = Theme.primaryColor
+        case .bordered:
+            label.textColor = Theme.inverseBackgroundColor
+            backgroundColor = Theme.backgroundColor
+            layer.borderWidth = CGFloat(Dimens.shadow)
+            layer.borderColor = Theme.shadowColor.cgColor
+        }
     }
     
     private func addTapRecognizer() {
@@ -49,7 +69,6 @@ class CheddarButton: AnimatedView {
     }
     
     private func addLabel() {
-        label.textColor = .gray900
         label.textAlignment = .center
         label.font = Fonts.sofiaPro(weight: .bold, Dimens.titleText)
         self.addSubviewAndFill(label, top: 2.0, leading: CGFloat(Dimens.mediumMargin), trailing: -CGFloat(Dimens.mediumMargin))

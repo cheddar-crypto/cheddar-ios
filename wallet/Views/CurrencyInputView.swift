@@ -9,7 +9,17 @@
 import UIKit
 
 class CurrencyInputView: AnimatedView {
-
+    
+    public enum Style {
+        case expanded
+        case collapsed
+    }
+    
+    public static let minHeight = CGFloat(56.0)
+    public static let maxHeight = CGFloat(104.0)
+    
+    private var currentStyle = Style.collapsed
+    var prefixChar: String // TODO: Use image
     @objc private var action: () -> Void
     private let label = UILabel()
     var title: String? {
@@ -21,7 +31,8 @@ class CurrencyInputView: AnimatedView {
         }
     }
 
-    init(action: @escaping () -> Void) {
+    init(prefixChar: String, action: @escaping () -> Void) {
+        self.prefixChar = prefixChar
         self.action = action
         super.init(frame: .zero)
         setup()
@@ -35,6 +46,8 @@ class CurrencyInputView: AnimatedView {
         clipsToBounds = true
         addLabel()
         addTapRecognizer()
+        layer.borderWidth = CGFloat(Dimens.shadow)
+        layer.borderColor = Theme.shadowColor.cgColor
     }
     
     private func addTapRecognizer() {
@@ -51,6 +64,31 @@ class CurrencyInputView: AnimatedView {
         label.textAlignment = .center
         label.font = Fonts.sofiaPro(weight: .bold, Dimens.titleText)
         self.addSubviewAndFill(label)
+    }
+    
+    func setStyle(style: Style, animated: Bool) {
+        
+        // Set the style if needed
+        if (style == currentStyle) {
+            return
+        }
+        currentStyle = style
+        
+        // Handle the change
+        switch (style) {
+        case .expanded:
+            layer.borderColor = Theme.primaryColor.cgColor
+            label.setFont(
+                animationDuration: animated ? Theme.defaultAnimationDuration : 0,
+                weight: .bold,
+                newSize: Double(Dimens.headerText))
+        case .collapsed:
+            layer.borderColor = Theme.shadowColor.cgColor
+            label.setFont(
+                animationDuration: animated ? Theme.defaultAnimationDuration : 0,
+                weight: .medium,
+                newSize: Double(Dimens.titleText))
+        }
     }
 
 }

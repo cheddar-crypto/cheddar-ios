@@ -95,29 +95,34 @@ class CheddarNumberPad: UIView {
     // Coordinates the number pad and what is shown in another field
     class Coordinator {
         
-        private let inputView: CurrencyInputView
+        private let cryptoView: CurrencyInputView
+        private let fiatView: CurrencyInputView
         private let onValueChange: (Double) -> Void
+        
+        public var currentPrice: Double = 0.0
+        public var selectedInputView: CurrencyInputView
         
         var value: Double {
             get {
-                let str = self.inputView.title ?? "0"
+                let str = cryptoView.title ?? "0"
                 return Double(str) ?? 0.0
             }
             set(newValue) {
                 let text = String(newValue)
-                self.inputView.title = format(text)
+                cryptoView.title = format(text)
                 onValueChange(value)
             }
         }
         
-        init(inputView: CurrencyInputView, onValueChange: @escaping (Double) -> Void) {
-            self.inputView = inputView
-            self.inputView.title = "0"
+        init(fiatView: CurrencyInputView, cryptoView: CurrencyInputView, onValueChange: @escaping (Double) -> Void) {
+            self.fiatView = fiatView
+            self.cryptoView = cryptoView
+            self.selectedInputView = fiatView
             self.onValueChange = onValueChange
         }
         
         func addCharacter(char: String) {
-            let str = (self.inputView.title ?? "")
+            let str = (selectedInputView.title ?? "")
             
             // Prevent "." duplicates
             if (char == "." && str.contains(".")) {
@@ -142,18 +147,20 @@ class CheddarNumberPad: UIView {
             }
             
             // Update the value
-            self.inputView.title = format(text)
+            selectedInputView.title = format(text)
+            refresh()
             onValueChange(value)
         }
         
         func removeCharacter() {
-            var text = String(self.inputView.title?.dropLast() ?? "")
+            var text = String(selectedInputView.title?.dropLast() ?? "")
             
             if (text.isEmpty) {
                 text = "0"
             }
             
-            self.inputView.title = format(text)
+            selectedInputView.title = format(text)
+            refresh()
             onValueChange(value)
         }
         
@@ -166,6 +173,20 @@ class CheddarNumberPad: UIView {
             
             return text
             
+        }
+        
+        private func refresh() {
+            if (selectedInputView == fiatView) {
+                let str = fiatView.title ?? "0"
+                let fiatAmount = Double(str) ?? 0.0
+                let cryptoAmount = fiatAmount / currentPrice
+                cryptoView.title = String(cryptoAmount)
+            } else {
+                let str = cryptoView.title ?? "0"
+                let cryptoAmount = Double(str) ?? 0.0
+                let fiatAmount = cryptoAmount * currentPrice
+                fiatView.title = String(fiatAmount)
+            }
         }
         
     }

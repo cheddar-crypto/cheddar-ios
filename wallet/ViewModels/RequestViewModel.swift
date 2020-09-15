@@ -13,6 +13,22 @@ class RequestViewModel: ViewModel {
     let amount = Observable<Double>()
     let note = Observable<String?>()
     let invoice = Observable<String>()
+    let price = Observable<Price>()
+    
+    func load() {
+        self.price.value = GlobalSettings.price
+    }
+    
+    func getAmountTitle() -> String {
+        if let price = price.value {
+            let count = amount.value ?? 0.0
+            let bitcoins = String.bitcoinCount(count: Float(count))
+            let cost = "$\(count * price.usd)" // TODO: Localize
+            return "\(bitcoins) (\(cost))"
+        } else {
+            return ""
+        }
+    }
     
     // TODO: Add the proper repo or values in here to handle creating the lnd invoice
     func createInvoice() {

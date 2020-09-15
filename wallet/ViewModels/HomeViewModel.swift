@@ -10,11 +10,11 @@ import Foundation
 
 class HomeViewModel: ViewModel {
     
-    private let exampleRepo = ExampleRepository()
     private let lightningRepo = LightningRepository()
+    private let priceRepo = PriceRepository()
     
     let isLoading = Observable<Bool>()
-    let randomInt = Observable<Int>()
+    let price = Observable<Price>()
     let error = Observable<Error>()
     let resultMessage = Observable<String>()
     let walletWipe = Observable<Void>()
@@ -31,16 +31,16 @@ class HomeViewModel: ViewModel {
         
         isLoading.value = true
         
-        // This is an example of a fetch to some data provider (i.e. an http api or something else)
-        // and where you can place the observed response
-        exampleRepo.getRandomInt(
-            onSuccess: { [weak self] someInt in
+        // Gets the current price
+        priceRepo.registerPriceChangeListener(
+            onSuccess: { [weak self] price in
+                GlobalSettings.price = price
                 self?.isLoading.value = false
-                self?.randomInt.value = someInt
+                self?.price.value = price
             },
             onFailure: { [weak self] error in
+                print(error)
                 self?.isLoading.value = false
-                self?.error.value = error
             })
         
     }

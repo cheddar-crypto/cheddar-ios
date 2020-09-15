@@ -118,7 +118,7 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
             }
         }
         
-        viewModel.randomInt.observe = { [weak self] randomInt in
+        viewModel.price.observe = { [weak self] price in
             self?.showContentView()
         }
         
