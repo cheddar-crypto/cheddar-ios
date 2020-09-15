@@ -82,7 +82,7 @@ class RequestAmountViewController: CheddarViewController<RequestViewModel> {
         let inputViews = [fiatInputView, cryptoInputView]
         inputViews.forEach { view in
             view.setStyle(
-                style: inputView == view ? CurrencyInputView.Style.Expanded : CurrencyInputView.Style.Collapsed,
+                style: inputView == view ? CurrencyInputView.Style.expanded : CurrencyInputView.Style.collapsed,
                 animated: true)
         }
         self.numberPadCoordinator.selectedInputView = inputView
@@ -177,7 +177,7 @@ class RequestAmountViewController: CheddarViewController<RequestViewModel> {
         amountHeightConstraint = fiatInputView.heightAnchor.constraint(equalToConstant: CurrencyInputView.maxHeight)
         amountHeightConstraint?.isActive = true
         fiatInputView.title = "0"
-        fiatInputView.setStyle(style: CurrencyInputView.Style.Expanded, animated: false)
+        fiatInputView.setStyle(style: CurrencyInputView.Style.expanded, animated: false)
     }
     
     private func addFiatLabel() {
@@ -190,7 +190,7 @@ class RequestAmountViewController: CheddarViewController<RequestViewModel> {
         fiatHeightConstraint = cryptoInputView.heightAnchor.constraint(equalToConstant: CurrencyInputView.minHeight)
         fiatHeightConstraint?.isActive = true
         cryptoInputView.title = "0"
-        cryptoInputView.setStyle(style: CurrencyInputView.Style.Collapsed, animated: false)
+        cryptoInputView.setStyle(style: CurrencyInputView.Style.collapsed, animated: false)
     }
 
 }

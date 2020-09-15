@@ -11,14 +11,14 @@ import UIKit
 class CurrencyInputView: AnimatedView {
     
     public enum Style {
-        case Expanded
-        case Collapsed
+        case expanded
+        case collapsed
     }
     
     public static let minHeight = CGFloat(56.0)
     public static let maxHeight = CGFloat(104.0)
     
-    private var currentStyle = Style.Collapsed
+    private var currentStyle = Style.collapsed
     var prefixChar: String // TODO: Use image
     @objc private var action: () -> Void
     private let label = UILabel()
@@ -76,13 +76,13 @@ class CurrencyInputView: AnimatedView {
         
         // Handle the change
         switch (style) {
-        case .Expanded:
+        case .expanded:
             layer.borderColor = Theme.primaryColor.cgColor
             label.setFont(
                 animationDuration: animated ? Theme.defaultAnimationDuration : 0,
                 weight: .bold,
                 newSize: Double(Dimens.headerText))
-        case .Collapsed:
+        case .collapsed:
             layer.borderColor = Theme.shadowColor.cgColor
             label.setFont(
                 animationDuration: animated ? Theme.defaultAnimationDuration : 0,

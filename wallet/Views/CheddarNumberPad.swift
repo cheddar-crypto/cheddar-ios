@@ -104,12 +104,12 @@ class CheddarNumberPad: UIView {
         
         var value: Double {
             get {
-                let str = self.cryptoView.title ?? "0"
+                let str = cryptoView.title ?? "0"
                 return Double(str) ?? 0.0
             }
             set(newValue) {
                 let text = String(newValue)
-                self.cryptoView.title = format(text)
+                cryptoView.title = format(text)
                 onValueChange(value)
             }
         }
@@ -122,7 +122,7 @@ class CheddarNumberPad: UIView {
         }
         
         func addCharacter(char: String) {
-            let str = (self.selectedInputView.title ?? "")
+            let str = (selectedInputView.title ?? "")
             
             // Prevent "." duplicates
             if (char == "." && str.contains(".")) {
@@ -147,20 +147,20 @@ class CheddarNumberPad: UIView {
             }
             
             // Update the value
-            self.selectedInputView.title = format(text)
-            self.refresh()
+            selectedInputView.title = format(text)
+            refresh()
             onValueChange(value)
         }
         
         func removeCharacter() {
-            var text = String(self.selectedInputView.title?.dropLast() ?? "")
+            var text = String(selectedInputView.title?.dropLast() ?? "")
             
             if (text.isEmpty) {
                 text = "0"
             }
             
-            self.selectedInputView.title = format(text)
-            self.refresh()
+            selectedInputView.title = format(text)
+            refresh()
             onValueChange(value)
         }
         
@@ -177,15 +177,15 @@ class CheddarNumberPad: UIView {
         
         private func refresh() {
             if (selectedInputView == fiatView) {
-                let str = self.fiatView.title ?? "0"
+                let str = fiatView.title ?? "0"
                 let fiatAmount = Double(str) ?? 0.0
                 let cryptoAmount = fiatAmount / currentPrice
-                self.cryptoView.title = String(cryptoAmount)
+                cryptoView.title = String(cryptoAmount)
             } else {
-                let str = self.cryptoView.title ?? "0"
+                let str = cryptoView.title ?? "0"
                 let cryptoAmount = Double(str) ?? 0.0
                 let fiatAmount = cryptoAmount * currentPrice
-                self.fiatView.title = String(fiatAmount)
+                fiatView.title = String(fiatAmount)
             }
         }
         
