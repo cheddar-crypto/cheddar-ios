@@ -63,13 +63,11 @@
 		7A2CC34424EF63E200E2605A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34324EF63E200E2605A /* Theme.swift */; };
 		7A2CC34924EF6F7A00E2605A /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34824EF6F7A00E2605A /* Fonts.swift */; };
 		7A2CC34B24EF6F9F00E2605A /* CheddarNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34A24EF6F9F00E2605A /* CheddarNavigationController.swift */; };
-		7A2CC34D24EF6FC700E2605A /* RequestNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34C24EF6FC700E2605A /* RequestNavigationController.swift */; };
 		7A2CC34F24EF722500E2605A /* RequestAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34E24EF722500E2605A /* RequestAmountViewController.swift */; };
 		7A2CC35124EF73AD00E2605A /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35024EF73AD00E2605A /* Navigator.swift */; };
 		7A2CC35324EF73D000E2605A /* RequestNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35224EF73D000E2605A /* RequestNoteViewController.swift */; };
 		7A2CC35524EF776400E2605A /* RequestInvoiceQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35424EF776400E2605A /* RequestInvoiceQRViewController.swift */; };
 		7A2CC35724F1C63E00E2605A /* OnChainAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35624F1C63E00E2605A /* OnChainAddressViewController.swift */; };
-		7A2CC35924F1C76B00E2605A /* PaymentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35824F1C76B00E2605A /* PaymentNavigationController.swift */; };
 		7A2CC35B24F1C7B500E2605A /* ScanInvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35A24F1C7B500E2605A /* ScanInvoiceViewController.swift */; };
 		7A2CC35D24F1C81100E2605A /* SendPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35C24F1C81100E2605A /* SendPaymentViewController.swift */; };
 		7A2CC36124F1CD3400E2605A /* sofia_pro_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A2CC35E24F1CD3400E2605A /* sofia_pro_medium.ttf */; };
@@ -168,13 +166,11 @@
 		7A2CC34324EF63E200E2605A /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		7A2CC34824EF6F7A00E2605A /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		7A2CC34A24EF6F9F00E2605A /* CheddarNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheddarNavigationController.swift; sourceTree = "<group>"; };
-		7A2CC34C24EF6FC700E2605A /* RequestNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNavigationController.swift; sourceTree = "<group>"; };
 		7A2CC34E24EF722500E2605A /* RequestAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAmountViewController.swift; sourceTree = "<group>"; };
 		7A2CC35024EF73AD00E2605A /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		7A2CC35224EF73D000E2605A /* RequestNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNoteViewController.swift; sourceTree = "<group>"; };
 		7A2CC35424EF776400E2605A /* RequestInvoiceQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInvoiceQRViewController.swift; sourceTree = "<group>"; };
 		7A2CC35624F1C63E00E2605A /* OnChainAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnChainAddressViewController.swift; sourceTree = "<group>"; };
-		7A2CC35824F1C76B00E2605A /* PaymentNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentNavigationController.swift; sourceTree = "<group>"; };
 		7A2CC35A24F1C7B500E2605A /* ScanInvoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanInvoiceViewController.swift; sourceTree = "<group>"; };
 		7A2CC35C24F1C81100E2605A /* SendPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPaymentViewController.swift; sourceTree = "<group>"; };
 		7A2CC35E24F1CD3400E2605A /* sofia_pro_medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sofia_pro_medium.ttf; sourceTree = "<group>"; };
@@ -459,8 +455,6 @@
 			children = (
 				7A2CC34A24EF6F9F00E2605A /* CheddarNavigationController.swift */,
 				7A1450C1251197480065C7FD /* RootNavigationController.swift */,
-				7A2CC34C24EF6FC700E2605A /* RequestNavigationController.swift */,
-				7A2CC35824F1C76B00E2605A /* PaymentNavigationController.swift */,
 			);
 			path = NavigationControllers;
 			sourceTree = "<group>";
@@ -872,7 +866,6 @@
 				7A2CC33D24EF5C6E00E2605A /* Colors.swift in Sources */,
 				00665EAC24E9185B00030A13 /* walletkit.pb.swift in Sources */,
 				7A2CC35324EF73D000E2605A /* RequestNoteViewController.swift in Sources */,
-				7A2CC35924F1C76B00E2605A /* PaymentNavigationController.swift in Sources */,
 				00665E8224E5C72C00030A13 /* LndCallbacks.swift in Sources */,
 				7A2CC34424EF63E200E2605A /* Theme.swift in Sources */,
 				7A537833250EE76800CBA67C /* Price.swift in Sources */,
@@ -888,7 +881,6 @@
 				00B045C0250CDFDE0060D4D1 /* LightningError.swift in Sources */,
 				00665EB624E9185B00030A13 /* walletunlocker.pb.swift in Sources */,
 				00665EB824E9185B00030A13 /* watchtower.pb.swift in Sources */,
-				7A2CC34D24EF6FC700E2605A /* RequestNavigationController.swift in Sources */,
 				7A2CC36924F2D24900E2605A /* UIView.swift in Sources */,
 				00665EDC24EF07E800030A13 /* Settings.swift in Sources */,
 				7A2CC34224EF634200E2605A /* CheddarViewController.swift in Sources */,
