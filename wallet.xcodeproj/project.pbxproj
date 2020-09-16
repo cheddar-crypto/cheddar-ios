@@ -55,6 +55,7 @@
 		4029655179169C028F45B373 /* Pods_walletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6665EF031EDC3E364CE652 /* Pods_walletTests.framework */; };
 		7A1450C0250EF49A0065C7FD /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7A1450BF250EF49A0065C7FD /* Localizable.stringsdict */; };
 		7A1450C2251197480065C7FD /* RootNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1450C1251197480065C7FD /* RootNavigationController.swift */; };
+		7A1450C52511ADB80065C7FD /* TransactionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1450C42511ADB80065C7FD /* TransactionCollectionViewCell.swift */; };
 		7A25B6DA2505C9610077E731 /* CheddarActionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A25B6D92505C9610077E731 /* CheddarActionBar.swift */; };
 		7A2CC33D24EF5C6E00E2605A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC33C24EF5C6E00E2605A /* Colors.swift */; };
 		7A2CC34224EF634200E2605A /* CheddarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34124EF634200E2605A /* CheddarViewController.swift */; };
@@ -158,6 +159,7 @@
 		61751AE73E16766A4665327B /* Pods-wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet.release.xcconfig"; path = "Target Support Files/Pods-wallet/Pods-wallet.release.xcconfig"; sourceTree = "<group>"; };
 		7A1450BF250EF49A0065C7FD /* Localizable.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		7A1450C1251197480065C7FD /* RootNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigationController.swift; sourceTree = "<group>"; };
+		7A1450C42511ADB80065C7FD /* TransactionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCollectionViewCell.swift; sourceTree = "<group>"; };
 		7A25B6D92505C9610077E731 /* CheddarActionBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheddarActionBar.swift; sourceTree = "<group>"; };
 		7A2CC33C24EF5C6E00E2605A /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		7A2CC34124EF634200E2605A /* CheddarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheddarViewController.swift; sourceTree = "<group>"; };
@@ -441,6 +443,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7A1450C32511AD970065C7FD /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7A1450C42511ADB80065C7FD /* TransactionCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		7A2CC34724EF6F6200E2605A /* NavigationControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -546,6 +556,7 @@
 				7A2CC37524F348DD00E2605A /* ViewModels */,
 				7A537831250EE75700CBA67C /* Models */,
 				7A2CC36524F2CD4500E2605A /* Views */,
+				7A1450C32511AD970065C7FD /* Cells */,
 				7A2CC37824F3493400E2605A /* Repository */,
 				00665ECB24EC4B6900030A13 /* Utils */,
 				7A2CC36424F1CD6B00E2605A /* Fonts */,
@@ -822,6 +833,7 @@
 				7A811EB024FF3EA500F8D8C8 /* CurrencyInputView.swift in Sources */,
 				7A2CC34F24EF722500E2605A /* RequestAmountViewController.swift in Sources */,
 				7A811E9A24F8918D00F8D8C8 /* UIImage.swift in Sources */,
+				7A1450C52511ADB80065C7FD /* TransactionCollectionViewCell.swift in Sources */,
 				00665ED724EF05B700030A13 /* NodePublicKey.swift in Sources */,
 				7A811EA224FC2A5E00F8D8C8 /* CheddarButton.swift in Sources */,
 				7A537835250EE84700CBA67C /* UserDefaults.swift in Sources */,
