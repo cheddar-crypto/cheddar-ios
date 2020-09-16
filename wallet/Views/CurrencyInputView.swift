@@ -11,6 +11,7 @@ import UIKit
 class CurrencyInputView: AnimatedView {
     
     public enum Style {
+        case header
         case expanded
         case collapsed
     }
@@ -63,7 +64,7 @@ class CurrencyInputView: AnimatedView {
         label.textColor = Theme.inverseBackgroundColor
         label.textAlignment = .center
         label.font = Fonts.sofiaPro(weight: .bold, Dimens.titleText)
-        self.addSubviewAndFill(label)
+        addSubviewAndFill(label)
     }
     
     func setStyle(style: Style, animated: Bool) {
@@ -76,6 +77,12 @@ class CurrencyInputView: AnimatedView {
         
         // Handle the change
         switch (style) {
+        case .header:
+            layer.borderColor = UIColor.clear.cgColor
+            label.setFont(
+                animationDuration: animated ? Theme.defaultAnimationDuration : 0,
+                weight: .bold,
+                newSize: Double(Dimens.headerText))
         case .expanded:
             layer.borderColor = Theme.primaryColor.cgColor
             label.setFont(

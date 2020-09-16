@@ -10,35 +10,48 @@ import UIKit
 
 class HomeViewController: CheddarViewController<HomeViewModel> {
     
-    let exampleTransactions = ["asdjkhasjd asjkldh ahjklsd ahjksda sdk ashjkd ", "asdasdasd", "asdasdasdklashdaklhj dalkjhsd ashjkld asklhjd ashjkld ahjklsd ahjksd asdjl a", "asdasdasd", "asdasdasd", "asdasdasd", "asdasdasd", "asdasdasd", "asdasdasd"]
+    let exampleTransactions = ["asdjkhasjd asjkldh ahjklsd ahjksda sdk ashjkd ", "asdasdasd", "asdasdasdklashdaklhj dalkjhsd ashjkld asklhjd ashjkld ahjklsd ahjksd asdjl a", "asdasdasd", "asdasdasd", "asdasdasd", "asdasdasd", "asdasdasd", "asdasdasd", "asdjkhasjd asjkldh ahjklsd ahjksda sdk ashjkd ", "asdasdasd", "asdasdasdklashdaklhj dalkjhsd ashjkld asklhjd ashjkld ahjklsd ahjksd asdjl a", "asdasdasd", "asdasdasd", "asdasdasd", "asdasdasd", "asdasdasd", "asdasdasd"]
     
-    private lazy var collectionView = { () -> UICollectionView in
+    private lazy var actionBar: CheddarActionBar = {
+        let actionBar = CheddarActionBar()
+        actionBar.setLeftAction(title: "Request", action: { [weak self] in
+            if let self = self {
+                Navigator.pushRequestAmount(self)
+            }
+        })
+        actionBar.setRightAction(title: "Pay", action: { [weak self] in
+            if let self = self {
+                Navigator.pushPaymentScan(self)
+            }
+        })
+        actionBar.translatesAutoresizingMaskIntoConstraints = false
+        return actionBar
+    }()
+    
+    private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        return UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.delaysContentTouches = false
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(TransactionCollectionViewCell.self, forCellWithReuseIdentifier: TransactionCollectionViewCell.id)
+        collectionView.register(WalletHeaderCollectionViewCell.self, forCellWithReuseIdentifier: WalletHeaderCollectionViewCell.id)
+        collectionView.backgroundColor = .clear
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
-
-    private func setup() {
-        setupCollectionView()
-    }
-    
-    private func setupCollectionView() {
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(TransactionCollectionViewCell.self, forCellWithReuseIdentifier: TransactionCollectionViewCell.id)
-        view.addSubviewAndFill(collectionView)
-    }
     
     override func viewModelDidLoad() {
-        
+            
         viewModel.isLoading.observe = { [weak self] isLoading in
             if (isLoading) {
                 self?.showLoadingView()
@@ -74,16 +87,49 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
         viewModel.load()
         
     }
+
+    private func setup() {
+        addActionBar()
+        addCollectionView()
+        view.bringSubviewToFront(actionBar)
+    }
+    
+    private func addCollectionView() {
+        view.addSubview(collectionView)
+        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: actionBar.topAnchor).isActive = true
+        collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+    }
+    
+    private func addActionBar() {
+        view.addSubview(actionBar)
+        actionBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        actionBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        actionBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        actionBar.heightAnchor.constraint(equalToConstant: CGFloat(Dimens.bar)).isActive = true
+    }
     
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TransactionCollectionViewCell.id, for: indexPath) as! TransactionCollectionViewCell
-        cell.textView.text = exampleTransactions[indexPath.row]
-        cell.maxWidth = collectionView.frame.width
-        return cell
+        if (indexPath.section == 0) {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WalletHeaderCollectionViewCell.id, for: indexPath) as! WalletHeaderCollectionViewCell
+            cell.currencyView.title = "100" // TODO
+            cell.amountLabel.text = "123 bitcoins"
+            cell.addressButtonClick = {
+                Navigator.showOnChainAddress(self)
+            }
+            cell.maxWidth = collectionView.frame.width
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TransactionCollectionViewCell.id, for: indexPath) as! TransactionCollectionViewCell
+            cell.textView.text = exampleTransactions[indexPath.row]
+            cell.maxWidth = collectionView.frame.width
+            return cell
+        }
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

@@ -18,6 +18,7 @@ extension String {
     public static let forLabel = NSLocalizedString("FOR", comment: "For")
     public static let copy = NSLocalizedString("COPY", comment: "Copy")
     public static let requestNotePlaceholder = NSLocalizedString("NOTE_PLACEHOLDER", comment: "Placeholder for the note")
+    public static let seeBitcoinAddress = NSLocalizedString("SEE_BITCOIN_ADDRESS", comment: "See the bitcoin address for wallet")
     
     public static func bitcoinCount(count: Float) -> String {
         let formatString = NSLocalizedString("BITCOIN_COUNT", comment: "A count of bitcoins")
