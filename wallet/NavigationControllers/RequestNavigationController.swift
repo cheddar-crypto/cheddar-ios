@@ -12,7 +12,7 @@ class RequestNavigationController: CheddarNavigationController<RequestViewModel>
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setViewControllers([RequestAmountViewController(sharedViewModel: self.viewModel)], animated: false)
+        setViewControllers([RequestAmountViewController()], animated: false)
     }
 
 }

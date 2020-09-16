@@ -9,33 +9,29 @@
 import UIKit
 
 class HomeViewController: CheddarViewController<HomeViewModel> {
-    private let password = "sshhhhhh"
-
-    private var debugStatus: UILabel!
-    private var resultMessage: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Say Cheese"
+//        title = "Say Cheese"
         setup()
-        updateStatus()
+//        updateStatus()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        subscribe()
-    }
-    
-    private func subscribe() {
-        EventBus.onMainThread(self, eventType: .lndStateChange) { [weak self] (_) in
-            self?.updateStatus()
-        }
-    }
-    
-    private func updateStatus() {
-        debugStatus.text = LightningStateMonitor.shared.state.debuggingStatus.joined(separator: "\n\n")
-    }
-    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        subscribe()
+//    }
+
+//    private func subscribe() {
+//        EventBus.onMainThread(self, eventType: .lndStateChange) { [weak self] (_) in
+//            self?.updateStatus()
+//        }
+//    }
+
+//    private func updateStatus() {
+//        debugStatus.text = LightningStateMonitor.shared.state.debuggingStatus.joined(separator: "\n\n")
+//    }
+
     private func addDebugButton(_ title: String, topAnchor: NSLayoutYAxisAnchor, topConstant: CGFloat, action: @escaping () -> Void) -> CheddarButton {
         let button = CheddarButton(action: action)
         button.title = title
@@ -49,12 +45,12 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
     }
 
     private func setup() {
-        
+
         let createButton = addDebugButton("Create wallet", topAnchor: view.topAnchor, topConstant: 10, action: {
-            self.viewModel.createWallet(password: self.password)
+            self.viewModel.createWallet(password: "")
         })
         let unlockButton = addDebugButton("Unlock wallet", topAnchor: createButton.bottomAnchor, topConstant: 10, action: {
-            self.viewModel.unlockWallet(password: self.password)
+            self.viewModel.unlockWallet(password: "")
         })
         let newAddressButton = addDebugButton("New address (copies to clipboard)", topAnchor: unlockButton.bottomAnchor, topConstant: 10, action: {
             self.viewModel.getNewAddress()
@@ -75,41 +71,41 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
             self.viewModel.wipeWallet()
         })
         let requestFlowButton = addDebugButton("Launch request invoice flow", topAnchor: wipeButton.bottomAnchor, topConstant: 10, action: {
-            self.presentRequestPayment()
+//            self.pushRequestAmount()
+            Navigator.pushRequestAmount(self)
         })
         let onChainButton = addDebugButton("Launch onchain address vc", topAnchor: requestFlowButton.bottomAnchor, topConstant: 10, action: {
-            self.presentOnChainAddress()
+//            self.presentOnChainAddress()
+            Navigator.showOnChainAddress(self)
         })
         let paymentFlowButton = addDebugButton("Launch LND payment flow", topAnchor: onChainButton.bottomAnchor, topConstant: 10, action: {
-            self.presentPayment()
+//            self.presentPayment()
+            Navigator.pushPaymentScan(self)
         })
-        
-        resultMessage = UILabel()
-        resultMessage.text = "..."
-        resultMessage.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(resultMessage)
-        resultMessage.topAnchor.constraint(equalTo: paymentFlowButton.bottomAnchor, constant: 20).isActive = true
-        resultMessage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        resultMessage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        resultMessage.textColor = Theme.inverseBackgroundColor
-        resultMessage.textAlignment = .center
-        resultMessage.numberOfLines = 0
-        
-        debugStatus = UILabel()
-        debugStatus.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(debugStatus)
-        debugStatus.topAnchor.constraint(equalTo: resultMessage.bottomAnchor, constant: 50).isActive = true
-        debugStatus.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        debugStatus.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        debugStatus.textColor = Theme.inverseBackgroundColor
-        debugStatus.textAlignment = .center
-        debugStatus.numberOfLines = 0
-        debugStatus.text = "Debug status"
+
+//        resultMessage = UILabel()
+//        resultMessage.text = "..."
+//        resultMessage.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(resultMessage)
+//        resultMessage.topAnchor.constraint(equalTo: paymentFlowButton.bottomAnchor, constant: 20).isActive = true
+//        resultMessage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+//        resultMessage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+//        resultMessage.textColor = Theme.inverseBackgroundColor
+//        resultMessage.textAlignment = .center
+//        resultMessage.numberOfLines = 0
+//
+//        debugStatus = UILabel()
+//        debugStatus.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(debugStatus)
+//        debugStatus.topAnchor.constraint(equalTo: resultMessage.bottomAnchor, constant: 50).isActive = true
+//        debugStatus.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+//        debugStatus.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+//        debugStatus.textColor = Theme.inverseBackgroundColor
+//        debugStatus.textAlignment = .center
+//        debugStatus.numberOfLines = 0
+//        debugStatus.text = "Debug status"
     }
     
-    // This will get called when the ViewModel for this ViewController is ready to use
-    // This gives us a simple place to observe all changes to the datasources
-    // and can update the views accordingly as they change in real time
     override func viewModelDidLoad() {
         
         viewModel.isLoading.observe = { [weak self] isLoading in
@@ -127,12 +123,12 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
         }
         
         viewModel.resultMessage.observe = { [weak self] message in
-            self?.resultMessage.text = message
+//            self?.resultMessage.text = message
             self?.showContentView()
         }
         
         viewModel.newAddress.observe = { [weak self] address in
-            self?.resultMessage.text = address
+//            self?.resultMessage.text = address
             UIPasteboard.general.string = address
             self?.showContentView()
         }

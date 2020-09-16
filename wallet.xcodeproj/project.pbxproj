@@ -54,6 +54,7 @@
 		3C42530BF0760EAA4F38CEDD /* Pods_wallet_walletUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8169844622EC1A934F64E4C8 /* Pods_wallet_walletUITests.framework */; };
 		4029655179169C028F45B373 /* Pods_walletTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6665EF031EDC3E364CE652 /* Pods_walletTests.framework */; };
 		7A1450C0250EF49A0065C7FD /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7A1450BF250EF49A0065C7FD /* Localizable.stringsdict */; };
+		7A1450C2251197480065C7FD /* RootNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1450C1251197480065C7FD /* RootNavigationController.swift */; };
 		7A25B6DA2505C9610077E731 /* CheddarActionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A25B6D92505C9610077E731 /* CheddarActionBar.swift */; };
 		7A2CC33D24EF5C6E00E2605A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC33C24EF5C6E00E2605A /* Colors.swift */; };
 		7A2CC34224EF634200E2605A /* CheddarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34124EF634200E2605A /* CheddarViewController.swift */; };
@@ -62,7 +63,7 @@
 		7A2CC34B24EF6F9F00E2605A /* CheddarNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34A24EF6F9F00E2605A /* CheddarNavigationController.swift */; };
 		7A2CC34D24EF6FC700E2605A /* RequestNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34C24EF6FC700E2605A /* RequestNavigationController.swift */; };
 		7A2CC34F24EF722500E2605A /* RequestAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34E24EF722500E2605A /* RequestAmountViewController.swift */; };
-		7A2CC35124EF73AD00E2605A /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35024EF73AD00E2605A /* Navigation.swift */; };
+		7A2CC35124EF73AD00E2605A /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35024EF73AD00E2605A /* Navigator.swift */; };
 		7A2CC35324EF73D000E2605A /* RequestNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35224EF73D000E2605A /* RequestNoteViewController.swift */; };
 		7A2CC35524EF776400E2605A /* RequestInvoiceQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35424EF776400E2605A /* RequestInvoiceQRViewController.swift */; };
 		7A2CC35724F1C63E00E2605A /* OnChainAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35624F1C63E00E2605A /* OnChainAddressViewController.swift */; };
@@ -156,6 +157,7 @@
 		59841CD97AB95EE18B1586B5 /* Pods-wallet-walletUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet-walletUITests.debug.xcconfig"; path = "Target Support Files/Pods-wallet-walletUITests/Pods-wallet-walletUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		61751AE73E16766A4665327B /* Pods-wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet.release.xcconfig"; path = "Target Support Files/Pods-wallet/Pods-wallet.release.xcconfig"; sourceTree = "<group>"; };
 		7A1450BF250EF49A0065C7FD /* Localizable.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
+		7A1450C1251197480065C7FD /* RootNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigationController.swift; sourceTree = "<group>"; };
 		7A25B6D92505C9610077E731 /* CheddarActionBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheddarActionBar.swift; sourceTree = "<group>"; };
 		7A2CC33C24EF5C6E00E2605A /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		7A2CC34124EF634200E2605A /* CheddarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheddarViewController.swift; sourceTree = "<group>"; };
@@ -164,7 +166,7 @@
 		7A2CC34A24EF6F9F00E2605A /* CheddarNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheddarNavigationController.swift; sourceTree = "<group>"; };
 		7A2CC34C24EF6FC700E2605A /* RequestNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNavigationController.swift; sourceTree = "<group>"; };
 		7A2CC34E24EF722500E2605A /* RequestAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAmountViewController.swift; sourceTree = "<group>"; };
-		7A2CC35024EF73AD00E2605A /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
+		7A2CC35024EF73AD00E2605A /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		7A2CC35224EF73D000E2605A /* RequestNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNoteViewController.swift; sourceTree = "<group>"; };
 		7A2CC35424EF776400E2605A /* RequestInvoiceQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInvoiceQRViewController.swift; sourceTree = "<group>"; };
 		7A2CC35624F1C63E00E2605A /* OnChainAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnChainAddressViewController.swift; sourceTree = "<group>"; };
@@ -382,7 +384,6 @@
 				7A2CC33C24EF5C6E00E2605A /* Colors.swift */,
 				7A2CC34324EF63E200E2605A /* Theme.swift */,
 				7A2CC34824EF6F7A00E2605A /* Fonts.swift */,
-				7A2CC35024EF73AD00E2605A /* Navigation.swift */,
 				7A2CC37124F2D82E00E2605A /* Strings.swift */,
 				7A2CC37324F3488F00E2605A /* Observable.swift */,
 				7A811E9B24F8930A00F8D8C8 /* Icons.swift */,
@@ -444,6 +445,7 @@
 			isa = PBXGroup;
 			children = (
 				7A2CC34A24EF6F9F00E2605A /* CheddarNavigationController.swift */,
+				7A1450C1251197480065C7FD /* RootNavigationController.swift */,
 				7A2CC34C24EF6FC700E2605A /* RequestNavigationController.swift */,
 				7A2CC35824F1C76B00E2605A /* PaymentNavigationController.swift */,
 			);
@@ -537,6 +539,7 @@
 				7ABFCBDE24E4EC010012EF39 /* Info.plist */,
 				7A2CC37024F2D7CD00E2605A /* Localizable.strings */,
 				7A1450BF250EF49A0065C7FD /* Localizable.stringsdict */,
+				7A2CC35024EF73AD00E2605A /* Navigator.swift */,
 				00665E7B24E5C72C00030A13 /* Lightning */,
 				7A2CC34724EF6F6200E2605A /* NavigationControllers */,
 				00665ECA24EC4B3600030A13 /* ViewControllers */,
@@ -863,6 +866,7 @@
 				7A811EAC24FC7E1000F8D8C8 /* RequestViewModel.swift in Sources */,
 				7A2CC35D24F1C81100E2605A /* SendPaymentViewController.swift in Sources */,
 				00665EAE24E9185B00030A13 /* router.pb.swift in Sources */,
+				7A1450C2251197480065C7FD /* RootNavigationController.swift in Sources */,
 				7A811EA424FC314000F8D8C8 /* AnimatedView.swift in Sources */,
 				00665EBC24E9185B00030A13 /* verrpc.pb.swift in Sources */,
 				00B045C0250CDFDE0060D4D1 /* LightningError.swift in Sources */,
@@ -874,7 +878,7 @@
 				7A2CC34224EF634200E2605A /* CheddarViewController.swift in Sources */,
 				7A811EA624FC38D000F8D8C8 /* CheddarNumberPad.swift in Sources */,
 				7A2CC37724F348FE00E2605A /* HomeViewModel.swift in Sources */,
-				7A2CC35124EF73AD00E2605A /* Navigation.swift in Sources */,
+				7A2CC35124EF73AD00E2605A /* Navigator.swift in Sources */,
 				7A2CC34924EF6F7A00E2605A /* Fonts.swift in Sources */,
 				7A2CC36B24F2D37200E2605A /* ErrorView.swift in Sources */,
 				00665EB224E9185B00030A13 /* autopilot.pb.swift in Sources */,

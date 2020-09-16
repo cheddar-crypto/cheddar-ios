@@ -13,7 +13,7 @@ class RequestAmountViewController: CheddarViewController<RequestViewModel> {
     private lazy var nextButton = {
         return CheddarButton(action: { [weak self] in
             if let self = self {
-                self.navController?.pushRequestNote(sharedViewModel: self.viewModel)
+                Navigator.pushRequestNote(self, sharedViewModel: self.viewModel)
             }
         })
     }()
@@ -87,15 +87,6 @@ class RequestAmountViewController: CheddarViewController<RequestViewModel> {
         }
         self.numberPadCoordinator.selectedInputView = inputView
     }
-    
-    init(sharedViewModel: RequestViewModel) {
-        super.init(nibName: nil, bundle: nil)
-        self.viewModel = sharedViewModel
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,9 +98,7 @@ class RequestAmountViewController: CheddarViewController<RequestViewModel> {
         
         // Navbar
         title = .request
-        setLeftNavigationButton(.back, action: {
-            self.navigationController?.dismiss(animated: true, completion: nil)
-        })
+        setLeftNavigationButton(.back)
         
         // Input areas
         addNextButton()

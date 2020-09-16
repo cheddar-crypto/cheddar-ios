@@ -14,7 +14,7 @@ class RequestNoteViewController: CheddarViewController<RequestViewModel>, UIText
         return CheddarButton(action: { [weak self] in
             if let self = self {
                 self.viewModel.createInvoice()
-                self.navController?.pushInvoiceQR(sharedViewModel: self.viewModel)
+                Navigator.pushPaymentQR(self, sharedViewModel: self.viewModel)
             }
         })
     }()

@@ -21,6 +21,7 @@ class HomeViewModel: ViewModel {
     let newAddress = Observable<String>()
     
     //TODO: Hardcoded values. Change these later.
+    public static let password = "sshhhhhh"
     private let nodePubKey = try! NodePublicKey("02d1ae7c35e0cc8774f889cdaeccdd76920801fcc203956b8d5169d0c74014bcfc")
     private let hostAddress = "127.0.0.1"
     private let hostPort: UInt = 9739
