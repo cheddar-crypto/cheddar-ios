@@ -10,8 +10,6 @@ import UIKit
 
 class HomeViewController: CheddarViewController<HomeViewModel> {
     
-    let exampleTransactions = ["asdjkhasjd asjkldh ahjklsd ahjksda sdk ashjkd ", "asdasdasd", "asdasdasdklashdaklhj dalkjhsd ashjkld asklhjd ashjkld ahjklsd ahjksd asdjl a", "asdasdasd", "asdasdasd", "asdasdasd", "asdasdasd", "asdasdasd", "asdasdasd", "asdjkhasjd asjkldh ahjklsd ahjksda sdk ashjkd ", "asdasdasd", "asdasdasdklashdaklhj dalkjhsd ashjkld asklhjd ashjkld ahjklsd ahjksd asdjl a", "asdasdasd", "asdasdasd", "asdasdasd", "asdasdasd", "asdasdasd", "asdasdasd"]
-    
     private lazy var actionBar: CheddarActionBar = {
         let actionBar = CheddarActionBar()
         actionBar.setLeftAction(title: "Request", action: { [weak self] in
@@ -58,8 +56,13 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
             }
         }
         
-        viewModel.price.observe = { [weak self] price in
+        viewModel.price.observe = { price in
+            //
+        }
+        
+        viewModel.transactions.observe = { [weak self] transaction in
             self?.showContentView()
+            self?.collectionView.reloadData()
         }
         
         viewModel.error.observe = { [weak self] error in
@@ -126,7 +129,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TransactionCollectionViewCell.id, for: indexPath) as! TransactionCollectionViewCell
-            cell.textView.text = exampleTransactions[indexPath.row]
+            if let txs = viewModel.transactions.value {
+                cell.transaction = txs[indexPath.row]
+            }
             cell.maxWidth = collectionView.frame.width
             return cell
         }
@@ -143,7 +148,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 1 ? exampleTransactions.count : 1
+        return section == 1 ? viewModel.transactions.value?.count ?? 0 : 1
     }
     
 }

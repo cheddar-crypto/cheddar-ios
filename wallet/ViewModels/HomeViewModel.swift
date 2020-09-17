@@ -19,6 +19,7 @@ class HomeViewModel: ViewModel {
     let resultMessage = Observable<String>()
     let walletWipe = Observable<Void>()
     let newAddress = Observable<String>()
+    let transactions = Observable<[Transaction]>()
     
     //TODO: Hardcoded values. Change these later.
     public static let password = "sshhhhhh"
@@ -27,6 +28,9 @@ class HomeViewModel: ViewModel {
     private let hostPort: UInt = 9739
     private let closeAddress = "tb1qylxttvn7wm7vsc2j36cjvmpl7nykcrzqkz6avl"
     private let invoice = "lnbcrt1u1p04e4cypp5qyxj3u8dm2pjsdang94lj6c0d9p33l05999945atjrfyw0nle0ssdqqcqzpgsp5dqlzsd63a0akx9wgv8v9scryj3gn7fe3s8ca9l26s9tjlwkvtv4q9qy9qsq4kv825h86yummfcerkvctfh8c4aw6vc0r986dsyjtp6dun5ysurq2zh0nj6qd4cuf5qskpn9pwre5u26ncce4qy3ataw88p6j08y0xcqy4uxa7"
+    let dummyTransactions = [
+        Transaction(isSent: true, amount: 0.0001, message: "Great message", date: Date())
+    ]
     
     func load() {
         
@@ -38,6 +42,12 @@ class HomeViewModel: ViewModel {
                 GlobalSettings.price = price
                 self?.isLoading.value = false
                 self?.price.value = price
+                
+                // REMOVE ME LATER
+                if (self?.transactions.value == nil) {
+                    self?.transactions.value = self?.dummyTransactions
+                }
+                
             },
             onFailure: { [weak self] error in
                 print(error)

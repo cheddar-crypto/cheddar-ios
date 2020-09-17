@@ -11,6 +11,7 @@ import UIKit
 class WalletHeaderCollectionViewCell: UICollectionViewCell {
     
     public static let id = "WalletHeaderCollectionViewCell"
+    public static let cellHeight: CGFloat = 200
     
     private let containerView: UIView = {
         let view = UIView()
@@ -47,12 +48,20 @@ class WalletHeaderCollectionViewCell: UICollectionViewCell {
     
     var addressButtonClick: (() -> Void)? = nil
     
+    private let bottomBorder: UIView = {
+        let view = UIView()
+        view.backgroundColor = Theme.shadowColor
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private var containerViewWidthAnchor: NSLayoutConstraint!
     private var containerViewHeightContraint: NSLayoutConstraint!
     var maxWidth: CGFloat? {
         didSet {
             guard let maxWidth = maxWidth else { return }
             containerViewWidthAnchor.constant = maxWidth
+            containerViewHeightContraint.isActive = true
             containerViewWidthAnchor.isActive = true
         }
     }
@@ -71,12 +80,12 @@ class WalletHeaderCollectionViewCell: UICollectionViewCell {
         addCurrencyView()
         addAmountView()
         addAddressButton()
+        addBottomBorder()
     }
     
     private func addContainer() {
         contentView.addSubviewAndFill(containerView)
-        containerViewHeightContraint = contentView.heightAnchor.constraint(equalToConstant: 200)
-        containerViewHeightContraint.isActive = true
+        containerViewHeightContraint = contentView.heightAnchor.constraint(equalToConstant: WalletHeaderCollectionViewCell.cellHeight)
         containerViewWidthAnchor = containerView.widthAnchor.constraint(equalToConstant: 0)
     }
     
@@ -102,6 +111,14 @@ class WalletHeaderCollectionViewCell: UICollectionViewCell {
         addressButton.heightAnchor.constraint(equalToConstant: CGFloat(Dimens.button)).isActive = true
         addressButton.widthAnchor.constraint(greaterThanOrEqualToConstant: CGFloat(Dimens.minButtonWidth)).isActive = true
         addressButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+    }
+    
+    private func addBottomBorder() {
+        contentView.addSubview(bottomBorder)
+        bottomBorder.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        bottomBorder.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        bottomBorder.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        bottomBorder.heightAnchor.constraint(equalToConstant: CGFloat(Dimens.shadow)).isActive = true
     }
     
 }
