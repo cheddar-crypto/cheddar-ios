@@ -26,6 +26,8 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
         return actionBar
     }()
     
+    private let refreshControl = UIRefreshControl()
+    
     private lazy var collectionView: UICollectionView = {
         
         // Create the layout
@@ -47,6 +49,10 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
         collectionView.register(WalletHeaderCollectionViewCell.self, forCellWithReuseIdentifier: WalletHeaderCollectionViewCell.id)
         collectionView.backgroundColor = .clear
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        collectionView.addSubview(refreshControl)
+        
         return collectionView
         
     }()
@@ -59,23 +65,26 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
     override func viewModelDidLoad() {
             
         viewModel.isLoading.observe = { [weak self] isLoading in
-            if (isLoading) {
+            if (isLoading && !(self?.refreshControl.isRefreshing ?? true)) {
                 self?.showLoadingView()
             }
         }
         
         viewModel.price.observe = { [weak self] price in
             self?.refreshPrice(price)
+            self?.refreshControl.endRefreshing()
         }
         
         viewModel.transactions.observe = { [weak self] transaction in
             self?.visibleCells.removeAll()
             self?.collectionView.reloadData()
             self?.showContentView()
+            self?.refreshControl.endRefreshing()
         }
         
         viewModel.error.observe = { [weak self] error in
             self?.showErrorView()
+            self?.refreshControl.endRefreshing()
         }
         
         viewModel.resultMessage.observe = { [weak self] message in
@@ -98,6 +107,11 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
         
         viewModel.load()
         
+    }
+    
+    @objc private func refresh() {
+        // TODO
+        print("Pull to refresh triggered")
     }
 
     private func setup() {

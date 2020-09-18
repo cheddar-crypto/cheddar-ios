@@ -167,16 +167,16 @@ class TransactionCollectionViewCell: UICollectionViewCell {
         self.price = price
         
         // Update UI
-        senderLabel.text = "\(transaction.isSent)"
-        cryptoAmountLabel.text = "\(transaction.amount)"
+        senderLabel.text = (transaction.isSent ? String.youSent : String.youReceived).lowercased()
+        cryptoAmountLabel.text = String.bitcoinCount(count: Float(transaction.amount)).lowercased()
         messageLabel.text = transaction.message
         let image = transaction.isSent ? UIImage.send : UIImage.receive
         imageView.image = image.tint(Theme.inverseBackgroundColor)
-        dateLabel.text = "\(transaction.date)"
+        dateLabel.text = transaction.date.toTimeAgo()
         
         // Update the total
         let newTotal = transaction.amount * price.forLocale()
-        fiatAmountLabel.text = String(newTotal)
+        fiatAmountLabel.text = addPrefix(isSent: transaction.isSent, value: newTotal)
         
         // Fix bug where nil message gets pushed up
         messageTopConstraint.constant = transaction.message == nil ? 0 : CGFloat(Dimens.shortMargin)
@@ -203,10 +203,18 @@ class TransactionCollectionViewCell: UICollectionViewCell {
                 to: newTotal,
                 duration: Theme.defaultAnimationDuration,
                 valueUpdater: { value in
-                    self.fiatAmountLabel.text = String(value)
+                    self.fiatAmountLabel.text = self.addPrefix(isSent: tx.isSent, value: value)
                 }).start()
             
+            // Update the date as a bonus
+            dateLabel.text = tx.date.toTimeAgo()
+            
         }
+        
+    }
+    
+    private func addPrefix(isSent: Bool, value: Double) -> String {
+        return isSent ? "-\(value)" : "+\(value)" // TODO: Add currency formating
     }
     
 }

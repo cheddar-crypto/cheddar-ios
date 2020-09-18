@@ -121,7 +121,7 @@ class WalletHeaderCollectionViewCell: UICollectionViewCell {
         // Set the total
         let newTotal = wallet.balance * price.forLocale()
         currencyView.title = String(newTotal)
-        amountLabel.text = "\(wallet.balance) bitcoins"
+        amountLabel.text = String.bitcoinCount(count: Float(wallet.balance)).lowercased()
         
     }
     
