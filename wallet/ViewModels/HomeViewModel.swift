@@ -20,6 +20,7 @@ class HomeViewModel: ViewModel {
     let walletWipe = Observable<Void>()
     let newAddress = Observable<String>()
     let transactions = Observable<[Transaction]>()
+    let wallet = Observable<Wallet>()
     
     //TODO: Hardcoded values. Change these later.
     public static let password = "sshhhhhh"
@@ -29,14 +30,14 @@ class HomeViewModel: ViewModel {
     private let closeAddress = "tb1qylxttvn7wm7vsc2j36cjvmpl7nykcrzqkz6avl"
     private let invoice = "lnbcrt1u1p04e4cypp5qyxj3u8dm2pjsdang94lj6c0d9p33l05999945atjrfyw0nle0ssdqqcqzpgsp5dqlzsd63a0akx9wgv8v9scryj3gn7fe3s8ca9l26s9tjlwkvtv4q9qy9qsq4kv825h86yummfcerkvctfh8c4aw6vc0r986dsyjtp6dun5ysurq2zh0nj6qd4cuf5qskpn9pwre5u26ncce4qy3ataw88p6j08y0xcqy4uxa7"
     let dummyTransactions = [
-        Transaction(isSent: true, amount: 0.00000001, message: "(First) Lorem ipsum dolor sit amet.", date: Date()),
-        Transaction(isSent: true, amount: 12.345, message: nil, date: Date()),
-        Transaction(isSent: true, amount: 0.0001, message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit.", date: Date()),
+        Transaction(isSent: true, amount: 1.0, message: "(First) Lorem ipsum dolor sit amet. 🤗", date: Date()),
+        Transaction(isSent: true, amount: 1.0, message: nil, date: Date()),
+        Transaction(isSent: true, amount: 1.0, message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit.", date: Date()),
         Transaction(isSent: false, amount: 0.0001, message: "Lorem ipsum dolor sit amet.", date: Date()),
         Transaction(isSent: false, amount: 0.1, message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit.", date: Date()),
         Transaction(isSent: true, amount: 0.0001, message: "Lorem ipsum dolor sit amet.", date: Date()),
         Transaction(isSent: true, amount: 0.04123423, message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit.", date: Date()),
-        Transaction(isSent: true, amount: 0.0001, message: "Lorem ipsum dolor sit amet.", date: Date()),
+        Transaction(isSent: true, amount: 0.00000001, message: "Lorem ipsum dolor sit amet.", date: Date()),
         Transaction(isSent: false, amount: 0.0001, message: "Lorem ipsum dolor sit amet.", date: Date()),
         Transaction(isSent: true, amount: 0.0001, message: "Lorem ipsum dolor sit amet.", date: Date()),
         Transaction(isSent: false, amount: 0.0001, message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit.", date: Date()),
@@ -56,7 +57,9 @@ class HomeViewModel: ViewModel {
                 self?.price.value = price
                 
                 // REMOVE ME LATER
+                // Move me to a required data live data? Probably
                 if (self?.transactions.value == nil) {
+                    self?.wallet.value = Wallet(balance: 1.0)
                     self?.transactions.value = self?.dummyTransactions
                 }
                 

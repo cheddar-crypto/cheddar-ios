@@ -55,6 +55,9 @@ class WalletHeaderCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
+    private var price: Price? = nil
+    private var wallet: Wallet? = nil
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -107,6 +110,45 @@ class WalletHeaderCollectionViewCell: UICollectionViewCell {
         bottomBorder.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         bottomBorder.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         bottomBorder.heightAnchor.constraint(equalToConstant: CGFloat(Dimens.shadow)).isActive = true
+    }
+    
+    public func setWallet(_ wallet: Wallet, price: Price) {
+        
+        // Add datasource
+        self.wallet = wallet
+        self.price = price
+        
+        // Set the total
+        let newTotal = wallet.balance * price.forLocale()
+        currencyView.title = String(newTotal)
+        amountLabel.text = "\(wallet.balance) bitcoins"
+        
+    }
+    
+    // Handles refreshing the price in real time
+    public func updatePrice(_ price: Price) {
+        if let wallet = self.wallet {
+            
+            // Get the previous price
+            let prevPrice = self.price
+            let fallbackPrice = GlobalSettings.price
+            let usablePrice = prevPrice ?? fallbackPrice
+            let prevTotal = wallet.balance * usablePrice.forLocale()
+            
+            // Update to the new price
+            let newTotal = wallet.balance * price.forLocale()
+            self.price = price
+            
+            // Animate the change
+            ValueAnimator(
+                from: prevTotal,
+                to: newTotal,
+                duration: Theme.defaultAnimationDuration,
+                valueUpdater: { value in
+                    self.currencyView.title = String(value)
+                }).start()
+            
+        }
     }
     
 }

@@ -58,6 +58,7 @@
 		7A1450C52511ADB80065C7FD /* TransactionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1450C42511ADB80065C7FD /* TransactionCollectionViewCell.swift */; };
 		7A1450C72511B6360065C7FD /* WalletHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1450C62511B6360065C7FD /* WalletHeaderCollectionViewCell.swift */; };
 		7A1450C92512EE9B0065C7FD /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1450C82512EE9B0065C7FD /* Transaction.swift */; };
+		7A1450CB25143C320065C7FD /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1450CA25143C320065C7FD /* Wallet.swift */; };
 		7A25B6DA2505C9610077E731 /* CheddarActionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A25B6D92505C9610077E731 /* CheddarActionBar.swift */; };
 		7A2CC33D24EF5C6E00E2605A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC33C24EF5C6E00E2605A /* Colors.swift */; };
 		7A2CC34224EF634200E2605A /* CheddarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34124EF634200E2605A /* CheddarViewController.swift */; };
@@ -162,6 +163,7 @@
 		7A1450C42511ADB80065C7FD /* TransactionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCollectionViewCell.swift; sourceTree = "<group>"; };
 		7A1450C62511B6360065C7FD /* WalletHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		7A1450C82512EE9B0065C7FD /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		7A1450CA25143C320065C7FD /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		7A25B6D92505C9610077E731 /* CheddarActionBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheddarActionBar.swift; sourceTree = "<group>"; };
 		7A2CC33C24EF5C6E00E2605A /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		7A2CC34124EF634200E2605A /* CheddarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheddarViewController.swift; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 			children = (
 				7A537832250EE76800CBA67C /* Price.swift */,
 				7A1450C82512EE9B0065C7FD /* Transaction.swift */,
+				7A1450CA25143C320065C7FD /* Wallet.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -830,6 +833,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A1450CB25143C320065C7FD /* Wallet.swift in Sources */,
 				7A811EB024FF3EA500F8D8C8 /* CurrencyInputView.swift in Sources */,
 				7A2CC34F24EF722500E2605A /* RequestAmountViewController.swift in Sources */,
 				7A811E9A24F8918D00F8D8C8 /* UIImage.swift in Sources */,

@@ -12,6 +12,12 @@ class TransactionCollectionViewCell: UICollectionViewCell {
     
     public static let id = "TransactionCollectionViewCell"
     
+    private let containerView: AnimatedView = {
+        let view = AnimatedView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private let imageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -56,7 +62,7 @@ class TransactionCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    let messageLabel: UILabel = {
+    private let messageLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.numberOfLines = 0
@@ -74,21 +80,8 @@ class TransactionCollectionViewCell: UICollectionViewCell {
     }()
     
     private var messageTopConstraint: NSLayoutConstraint!
-    
-    var transaction: Transaction? = nil {
-        didSet {
-            senderLabel.text = "\(transaction!.isSent)"
-            cryptoAmountLabel.text = "\(transaction!.amount)"
-            messageLabel.text = transaction?.message
-            let image = transaction!.isSent ? UIImage.send : UIImage.receive
-            imageView.image = image.tint(Theme.inverseBackgroundColor)
-            fiatAmountLabel.text = "-$12.00"
-            dateLabel.text = "\(transaction!.date)"
-            
-            // Fix bug where nil message gets pushed up
-            messageTopConstraint.constant = transaction?.message == nil ? 0 : CGFloat(Dimens.shortMargin)
-        }
-    }
+    private var price: Price? = nil
+    private var transaction: Transaction? = nil
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -101,6 +94,7 @@ class TransactionCollectionViewCell: UICollectionViewCell {
     
     private func setup() {
         backgroundColor = .clear
+        addContainerView()
         addImageView()
         addSenderLabel()
         addCryptoLabel()
@@ -110,56 +104,109 @@ class TransactionCollectionViewCell: UICollectionViewCell {
         addBottomBorder()
     }
     
+    private func addContainerView() {
+        contentView.addSubviewAndFill(containerView)
+    }
+    
     private func addImageView() {
-        contentView.addSubview(imageView)
-        imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
-        imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: CGFloat(Dimens.mmdnMargin)).isActive = true
+        containerView.addSubview(imageView)
+        imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
+        imageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: CGFloat(Dimens.mmdnMargin)).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 24).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 24).isActive = true
     }
     
     private func addSenderLabel() {
-        contentView.addSubview(senderLabel)
+        containerView.addSubview(senderLabel)
         senderLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
-        senderLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        senderLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         senderLabel.topAnchor.constraint(equalTo: imageView.topAnchor).isActive = true
     }
     
     private func addCryptoLabel() {
-        contentView.addSubview(cryptoAmountLabel)
+        containerView.addSubview(cryptoAmountLabel)
         cryptoAmountLabel.leadingAnchor.constraint(equalTo: senderLabel.leadingAnchor).isActive = true
-        cryptoAmountLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        cryptoAmountLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         cryptoAmountLabel.topAnchor.constraint(equalTo: senderLabel.bottomAnchor, constant: CGFloat(Dimens.shortMargin)).isActive = true
     }
     
     private func addFiatLabel() {
-        contentView.addSubview(fiatAmountLabel)
-        fiatAmountLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -CGFloat(Dimens.mediumMargin)).isActive = true
-        fiatAmountLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: CGFloat(Dimens.mmdnMargin)).isActive = true
+        containerView.addSubview(fiatAmountLabel)
+        fiatAmountLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -CGFloat(Dimens.mediumMargin)).isActive = true
+        fiatAmountLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: CGFloat(Dimens.mmdnMargin)).isActive = true
     }
     
     private func addDateLabel() {
-        contentView.addSubview(dateLabel)
-        dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -CGFloat(Dimens.mediumMargin)).isActive = true
+        containerView.addSubview(dateLabel)
+        dateLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -CGFloat(Dimens.mediumMargin)).isActive = true
         dateLabel.topAnchor.constraint(greaterThanOrEqualTo: cryptoAmountLabel.topAnchor).isActive = true
-        dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -CGFloat(Dimens.mmdnMargin)).isActive = true
+        dateLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -CGFloat(Dimens.mmdnMargin)).isActive = true
     }
     
     private func addMessage() {
-        contentView.addSubview(messageLabel)
+        containerView.addSubview(messageLabel)
         messageLabel.leadingAnchor.constraint(equalTo: senderLabel.leadingAnchor).isActive = true
-        messageLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -CGFloat(Dimens.button)).isActive = true
+        messageLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -CGFloat(Dimens.button)).isActive = true
         messageTopConstraint = messageLabel.topAnchor.constraint(equalTo: cryptoAmountLabel.bottomAnchor) // May get set when transaction is set
         messageTopConstraint.isActive = true
-        messageLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -CGFloat(Dimens.mmdnMargin)).isActive = true
+        messageLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -CGFloat(Dimens.mmdnMargin)).isActive = true
     }
     
     private func addBottomBorder() {
         contentView.addSubview(bottomBorder)
-        bottomBorder.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        bottomBorder.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        bottomBorder.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        bottomBorder.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
+        bottomBorder.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        bottomBorder.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
         bottomBorder.heightAnchor.constraint(equalToConstant: CGFloat(Dimens.shadow)).isActive = true
+    }
+    
+    public func setTransaction(_ transaction: Transaction, price: Price) {
+        
+        // Add datasource
+        self.transaction = transaction
+        self.price = price
+        
+        // Update UI
+        senderLabel.text = "\(transaction.isSent)"
+        cryptoAmountLabel.text = "\(transaction.amount)"
+        messageLabel.text = transaction.message
+        let image = transaction.isSent ? UIImage.send : UIImage.receive
+        imageView.image = image.tint(Theme.inverseBackgroundColor)
+        dateLabel.text = "\(transaction.date)"
+        
+        // Update the total
+        let newTotal = transaction.amount * price.forLocale()
+        fiatAmountLabel.text = String(newTotal)
+        
+        // Fix bug where nil message gets pushed up
+        messageTopConstraint.constant = transaction.message == nil ? 0 : CGFloat(Dimens.shortMargin)
+        
+    }
+    
+    // Handles refreshing the price in real time
+    public func updatePrice(_ price: Price) {
+        if let tx = transaction {
+            
+            // Get the previous price
+            let prevPrice = self.price
+            let fallbackPrice = GlobalSettings.price
+            let usablePrice = prevPrice ?? fallbackPrice
+            let prevTotal = tx.amount * usablePrice.forLocale()
+            
+            // Update to the new price
+            let newTotal = tx.amount * price.forLocale()
+            self.price = price
+            
+            // Animate the change
+            ValueAnimator(
+                from: prevTotal,
+                to: newTotal,
+                duration: Theme.defaultAnimationDuration,
+                valueUpdater: { value in
+                    self.fiatAmountLabel.text = String(value)
+                }).start()
+            
+        }
     }
     
 }

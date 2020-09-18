@@ -64,13 +64,14 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
             }
         }
         
-        viewModel.price.observe = { price in
-            //
+        viewModel.price.observe = { [weak self] price in
+            self?.refreshPrice(price)
         }
         
         viewModel.transactions.observe = { [weak self] transaction in
-            self?.showContentView()
+            self?.visibleCells.removeAll()
             self?.collectionView.reloadData()
+            self?.showContentView()
         }
         
         viewModel.error.observe = { [weak self] error in
@@ -121,6 +122,47 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
         actionBar.heightAnchor.constraint(equalToConstant: CGFloat(Dimens.bar)).isActive = true
     }
     
+    // MARK: Cell Refreshing
+    // This is for handling realtime price updates
+    
+    private var visibleCells: [IndexPath] = []
+    
+    private func cacheIndexPath(_ indexPath: IndexPath) {
+        if (!visibleCells.contains(indexPath)) {
+            visibleCells.append(indexPath)
+        }
+    }
+    
+    private func unchacheIndexPath(_ indexPath: IndexPath) {
+        visibleCells = visibleCells.filter { $0 != indexPath }
+    }
+    
+    // Update all the visible cells with the current price
+    private func refreshPrice(_ price: Price) {
+        visibleCells.forEach { indexPath in
+            let cell = collectionView.cellForItem(at: indexPath)
+            
+            // Wallet cell
+            if let walletCell = cell as? WalletHeaderCollectionViewCell {
+                walletCell.updatePrice(price)
+            }
+            
+            // Transaction cells
+            if let txCell = cell as? TransactionCollectionViewCell {
+                txCell.updatePrice(price)
+            }
+            
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        cacheIndexPath(indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        unchacheIndexPath(indexPath)
+    }
+    
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -128,20 +170,18 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if (indexPath.section == 0) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WalletHeaderCollectionViewCell.id, for: indexPath) as! WalletHeaderCollectionViewCell
-            cell.currencyView.title = "100" // TODO
-            cell.amountLabel.text = "123 bitcoins"
+            if let wallet = viewModel.wallet.value, let price = viewModel.price.value {
+                cell.setWallet(wallet, price: price)
+            }
             cell.addressButtonClick = {
                 Navigator.showOnChainAddress(self)
             }
-//            cell.maxWidth = collectionView.frame.width
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TransactionCollectionViewCell.id, for: indexPath) as! TransactionCollectionViewCell
-            cell.frame.size.width = collectionView.frame.width
-            if let txs = viewModel.transactions.value {
-                cell.transaction = txs[indexPath.row]
+            if let txs = viewModel.transactions.value, let price = viewModel.price.value {
+                cell.setTransaction(txs[indexPath.row], price: price)
             }
-//            cell.maxWidth = collectionView.frame.width
             return cell
         }
     }
@@ -158,6 +198,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return section == 1 ? viewModel.transactions.value?.count ?? 0 : 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath)
     }
     
 }
