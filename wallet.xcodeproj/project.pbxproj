@@ -59,6 +59,7 @@
 		7A1450C72511B6360065C7FD /* WalletHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1450C62511B6360065C7FD /* WalletHeaderCollectionViewCell.swift */; };
 		7A1450C92512EE9B0065C7FD /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1450C82512EE9B0065C7FD /* Transaction.swift */; };
 		7A1450CB25143C320065C7FD /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1450CA25143C320065C7FD /* Wallet.swift */; };
+		7A1450CD251453280065C7FD /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1450CC251453280065C7FD /* Formatting.swift */; };
 		7A25B6DA2505C9610077E731 /* CheddarActionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A25B6D92505C9610077E731 /* CheddarActionBar.swift */; };
 		7A2CC33D24EF5C6E00E2605A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC33C24EF5C6E00E2605A /* Colors.swift */; };
 		7A2CC34224EF634200E2605A /* CheddarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC34124EF634200E2605A /* CheddarViewController.swift */; };
@@ -164,6 +165,7 @@
 		7A1450C62511B6360065C7FD /* WalletHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		7A1450C82512EE9B0065C7FD /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		7A1450CA25143C320065C7FD /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
+		7A1450CC251453280065C7FD /* Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
 		7A25B6D92505C9610077E731 /* CheddarActionBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheddarActionBar.swift; sourceTree = "<group>"; };
 		7A2CC33C24EF5C6E00E2605A /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		7A2CC34124EF634200E2605A /* CheddarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheddarViewController.swift; sourceTree = "<group>"; };
@@ -368,8 +370,8 @@
 		00665ECA24EC4B3600030A13 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				00665EC824EC494A00030A13 /* HomeViewController.swift */,
 				7A2CC34124EF634200E2605A /* CheddarViewController.swift */,
+				00665EC824EC494A00030A13 /* HomeViewController.swift */,
 				7A2CC34E24EF722500E2605A /* RequestAmountViewController.swift */,
 				7A2CC35224EF73D000E2605A /* RequestNoteViewController.swift */,
 				7A2CC35424EF776400E2605A /* RequestInvoiceQRViewController.swift */,
@@ -406,6 +408,7 @@
 				7A811E9924F8918D00F8D8C8 /* UIImage.swift */,
 				7A811EA724FC455400F8D8C8 /* Misc.swift */,
 				7A53782F250EE4B700CBA67C /* UILabel.swift */,
+				7A1450CC251453280065C7FD /* Formatting.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -492,8 +495,8 @@
 		7A2CC37524F348DD00E2605A /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				7A2CC37624F348FE00E2605A /* HomeViewModel.swift */,
 				7A2CC37B24F3510900E2605A /* ViewModel.swift */,
+				7A2CC37624F348FE00E2605A /* HomeViewModel.swift */,
 				7A811EAB24FC7E0F00F8D8C8 /* RequestViewModel.swift */,
 			);
 			path = ViewModels;
@@ -869,6 +872,7 @@
 				7A53782E250EC24600CBA67C /* ValueAnimator.swift in Sources */,
 				7A811EA024FC103E00F8D8C8 /* LightningRepository.swift in Sources */,
 				7A1450C72511B6360065C7FD /* WalletHeaderCollectionViewCell.swift in Sources */,
+				7A1450CD251453280065C7FD /* Formatting.swift in Sources */,
 				00665E8424E5C72C00030A13 /* Lightning.swift in Sources */,
 				7A2CC33D24EF5C6E00E2605A /* Colors.swift in Sources */,
 				00665EAC24E9185B00030A13 /* walletkit.pb.swift in Sources */,

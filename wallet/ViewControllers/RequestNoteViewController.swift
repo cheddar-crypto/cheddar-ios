@@ -21,7 +21,7 @@ class RequestNoteViewController: CheddarViewController<RequestViewModel>, UIText
     
     private lazy var amountChip = {
         return CheddarChip(action: { [weak self] in
-            self?.navController?.popViewController(animated: true)
+            self?.navigationController?.popViewController(animated: true)
         })
     }()
     

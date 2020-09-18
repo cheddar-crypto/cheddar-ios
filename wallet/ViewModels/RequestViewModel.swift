@@ -22,8 +22,8 @@ class RequestViewModel: ViewModel {
     func getAmountTitle() -> String {
         if let price = price.value {
             let count = amount.value ?? 0.0
-            let bitcoins = String.bitcoinCount(count: Float(count))
-            let cost = "$\(count * price.usd)" // TODO: Localize
+            let bitcoins = String.bitcoinCount(count).lowercased()
+            let cost = (count * price.forLocale()).toFiat()
             return "\(bitcoins) (\(cost))"
         } else {
             return ""

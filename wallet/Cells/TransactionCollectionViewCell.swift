@@ -168,7 +168,7 @@ class TransactionCollectionViewCell: UICollectionViewCell {
         
         // Update UI
         senderLabel.text = (transaction.isSent ? String.youSent : String.youReceived).lowercased()
-        cryptoAmountLabel.text = String.bitcoinCount(count: Float(transaction.amount)).lowercased()
+        cryptoAmountLabel.text = String.bitcoinCount(transaction.amount).lowercased()
         messageLabel.text = transaction.message
         let image = transaction.isSent ? UIImage.send : UIImage.receive
         imageView.image = image.tint(Theme.inverseBackgroundColor)
@@ -214,7 +214,7 @@ class TransactionCollectionViewCell: UICollectionViewCell {
     }
     
     private func addPrefix(isSent: Bool, value: Double) -> String {
-        return isSent ? "-\(value)" : "+\(value)" // TODO: Add currency formating
+        return isSent ? "- \(value.toFiat())" : "+ \(value.toFiat())"
     }
     
 }

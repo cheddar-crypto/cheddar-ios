@@ -22,9 +22,10 @@ extension String {
     public static let youSent = NSLocalizedString("TX_YOU_SENT", comment: "You sent")
     public static let youReceived = NSLocalizedString("TX_YOU_RECEIVED", comment: "You received")
     
-    public static func bitcoinCount(count: Float) -> String {
-        let formatString = NSLocalizedString("BITCOIN_COUNT", comment: "A count of bitcoins")
-        return String.localizedStringWithFormat(formatString, count)
+    // TODO: Support satoshis
+    public static func bitcoinCount(_ count: Double) -> String {
+        let str = NSLocalizedString("BITCOIN_COUNT", comment: "A count of bitcoins")
+        return String.localizedStringWithFormat(str, Float(count), count.toBitcoins())
     }
     
 }

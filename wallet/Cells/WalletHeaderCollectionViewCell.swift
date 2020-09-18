@@ -120,8 +120,8 @@ class WalletHeaderCollectionViewCell: UICollectionViewCell {
         
         // Set the total
         let newTotal = wallet.balance * price.forLocale()
-        currencyView.title = String(newTotal)
-        amountLabel.text = String.bitcoinCount(count: Float(wallet.balance)).lowercased()
+        currencyView.title = newTotal.toFiat()
+        amountLabel.text = String.bitcoinCount(wallet.balance).lowercased()
         
     }
     
@@ -145,7 +145,7 @@ class WalletHeaderCollectionViewCell: UICollectionViewCell {
                 to: newTotal,
                 duration: Theme.defaultAnimationDuration,
                 valueUpdater: { value in
-                    self.currencyView.title = String(value)
+                    self.currencyView.title = value.toFiat()
                 }).start()
             
         }
