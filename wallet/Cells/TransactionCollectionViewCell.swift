@@ -25,6 +25,7 @@ class TransactionCollectionViewCell: UICollectionViewCell {
         label.backgroundColor = .clear
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Fonts.sofiaPro(weight: .bold, Dimens.titleText)
+        label.textColor = Theme.inverseBackgroundColor
         return label
     }()
     
@@ -33,6 +34,7 @@ class TransactionCollectionViewCell: UICollectionViewCell {
         label.backgroundColor = .clear
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Fonts.sofiaPro(weight: .regular, Dimens.titleText)
+        label.textColor = Theme.inverseBackgroundColor
         return label
     }()
     
@@ -41,6 +43,7 @@ class TransactionCollectionViewCell: UICollectionViewCell {
         label.backgroundColor = .clear
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Fonts.sofiaPro(weight: .bold, Dimens.titleTallText)
+        label.textColor = Theme.inverseBackgroundColor
         return label
     }()
     
@@ -49,19 +52,18 @@ class TransactionCollectionViewCell: UICollectionViewCell {
         label.backgroundColor = .clear
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Fonts.sofiaPro(weight: .regular, Dimens.titleText)
+        label.textColor = Theme.shadowColor
         return label
     }()
     
-    let messageTextView: UITextView = {
-        let textView = UITextView()
-        textView.backgroundColor = .clear
-        textView.font = Fonts.sofiaPro(weight: .regular, Dimens.titleText)
-        textView.isScrollEnabled = false
-        textView.isUserInteractionEnabled = false
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.textContainerInset = .zero
-        textView.textContainer.lineFragmentPadding = 0
-        return textView
+    let messageLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .clear
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = Fonts.sofiaPro(weight: .regular, Dimens.titleText)
+        label.textColor = Theme.inverseBackgroundColor
+        return label
     }()
     
     private let bottomBorder: UIView = {
@@ -71,28 +73,20 @@ class TransactionCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    private var contentViewWidthConstraint: NSLayoutConstraint!
-    private var textViewHeightContraint: NSLayoutConstraint!
-    var maxWidth: CGFloat? {
-        didSet {
-            guard let maxWidth = maxWidth else { return }
-            contentViewWidthConstraint.constant = maxWidth
-            contentViewWidthConstraint.isActive = true
-            let sizeToFitIn = CGSize(width: maxWidth, height: CGFloat(MAXFLOAT))
-            let newSize = messageTextView.sizeThatFits(sizeToFitIn)
-            textViewHeightContraint.constant = newSize.height
-        }
-    }
+    private var messageTopConstraint: NSLayoutConstraint!
     
     var transaction: Transaction? = nil {
         didSet {
             senderLabel.text = "\(transaction!.isSent)"
             cryptoAmountLabel.text = "\(transaction!.amount)"
-            messageTextView.text = transaction?.message
+            messageLabel.text = transaction?.message
             let image = transaction!.isSent ? UIImage.send : UIImage.receive
             imageView.image = image.tint(Theme.inverseBackgroundColor)
             fiatAmountLabel.text = "-$12.00"
             dateLabel.text = "\(transaction!.date)"
+            
+            // Fix bug where nil message gets pushed up
+            messageTopConstraint.constant = transaction?.message == nil ? 0 : CGFloat(Dimens.shortMargin)
         }
     }
     
@@ -106,12 +100,7 @@ class TransactionCollectionViewCell: UICollectionViewCell {
     }
     
     private func setup() {
-        
-        // Setup content view
-        contentView.backgroundColor = .clear
-        contentViewWidthConstraint = contentView.widthAnchor.constraint(equalToConstant: 0)
-        
-        // Add other views
+        backgroundColor = .clear
         addImageView()
         addSenderLabel()
         addCryptoLabel()
@@ -119,7 +108,6 @@ class TransactionCollectionViewCell: UICollectionViewCell {
         addDateLabel()
         addMessage()
         addBottomBorder()
-        
     }
     
     private func addImageView() {
@@ -153,17 +141,17 @@ class TransactionCollectionViewCell: UICollectionViewCell {
     private func addDateLabel() {
         contentView.addSubview(dateLabel)
         dateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -CGFloat(Dimens.mediumMargin)).isActive = true
-        dateLabel.topAnchor.constraint(greaterThanOrEqualTo: fiatAmountLabel.bottomAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
+        dateLabel.topAnchor.constraint(greaterThanOrEqualTo: cryptoAmountLabel.topAnchor).isActive = true
         dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -CGFloat(Dimens.mmdnMargin)).isActive = true
     }
     
     private func addMessage() {
-        contentView.addSubview(messageTextView)
-        messageTextView.leadingAnchor.constraint(equalTo: senderLabel.leadingAnchor).isActive = true
-        messageTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        messageTextView.topAnchor.constraint(equalTo: cryptoAmountLabel.bottomAnchor, constant: CGFloat(Dimens.shortMargin)).isActive = true
-        messageTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: CGFloat(Dimens.mmdnMargin)).isActive = true
-        textViewHeightContraint = messageTextView.heightAnchor.constraint(equalToConstant: 0)
+        contentView.addSubview(messageLabel)
+        messageLabel.leadingAnchor.constraint(equalTo: senderLabel.leadingAnchor).isActive = true
+        messageLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -CGFloat(Dimens.button)).isActive = true
+        messageTopConstraint = messageLabel.topAnchor.constraint(equalTo: cryptoAmountLabel.bottomAnchor) // May get set when transaction is set
+        messageTopConstraint.isActive = true
+        messageLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -CGFloat(Dimens.mmdnMargin)).isActive = true
     }
     
     private func addBottomBorder() {

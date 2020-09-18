@@ -55,17 +55,6 @@ class WalletHeaderCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    private var containerViewWidthAnchor: NSLayoutConstraint!
-    private var containerViewHeightContraint: NSLayoutConstraint!
-    var maxWidth: CGFloat? {
-        didSet {
-            guard let maxWidth = maxWidth else { return }
-            containerViewWidthAnchor.constant = maxWidth
-            containerViewHeightContraint.isActive = true
-            containerViewWidthAnchor.isActive = true
-        }
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -85,13 +74,11 @@ class WalletHeaderCollectionViewCell: UICollectionViewCell {
     
     private func addContainer() {
         contentView.addSubviewAndFill(containerView)
-        containerViewHeightContraint = contentView.heightAnchor.constraint(equalToConstant: WalletHeaderCollectionViewCell.cellHeight)
-        containerViewWidthAnchor = containerView.widthAnchor.constraint(equalToConstant: 0)
     }
     
     private func addCurrencyView() {
         containerView.addSubview(currencyView)
-        currencyView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+        currencyView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: CGFloat(Dimens.largeMargin)).isActive = true
         currencyView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         currencyView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         currencyView.setStyle(style: .header, animated: false)
@@ -108,6 +95,7 @@ class WalletHeaderCollectionViewCell: UICollectionViewCell {
         containerView.addSubview(addressButton)
         addressButton.title = .seeBitcoinAddress
         addressButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -CGFloat(Dimens.largeMargin)).isActive = true
+        addressButton.topAnchor.constraint(equalTo: amountLabel.bottomAnchor, constant: CGFloat(Dimens.largeMargin)).isActive = true
         addressButton.heightAnchor.constraint(equalToConstant: CGFloat(Dimens.button)).isActive = true
         addressButton.widthAnchor.constraint(greaterThanOrEqualToConstant: CGFloat(Dimens.minButtonWidth)).isActive = true
         addressButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true

@@ -27,11 +27,18 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
     }()
     
     private lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        
+        // Create the layout
+        let size = NSCollectionLayoutSize(
+            widthDimension: NSCollectionLayoutDimension.fractionalWidth(1),
+            heightDimension: NSCollectionLayoutDimension.estimated(WalletHeaderCollectionViewCell.cellHeight)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: size)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: size, subitem: item, count: 1)
+        let section = NSCollectionLayoutSection(group: group)
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        
+        // Create the collection view
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.delaysContentTouches = false
         collectionView.dataSource = self
@@ -41,6 +48,7 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
         collectionView.backgroundColor = .clear
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
+        
     }()
     
     override func viewDidLoad() {
@@ -125,14 +133,15 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.addressButtonClick = {
                 Navigator.showOnChainAddress(self)
             }
-            cell.maxWidth = collectionView.frame.width
+//            cell.maxWidth = collectionView.frame.width
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TransactionCollectionViewCell.id, for: indexPath) as! TransactionCollectionViewCell
+            cell.frame.size.width = collectionView.frame.width
             if let txs = viewModel.transactions.value {
                 cell.transaction = txs[indexPath.row]
             }
-            cell.maxWidth = collectionView.frame.width
+//            cell.maxWidth = collectionView.frame.width
             return cell
         }
     }
