@@ -62,6 +62,11 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
         setup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavBarStyles()
+    }
+    
     override func viewModelDidLoad() {
             
         viewModel.isLoading.observe = { [weak self] isLoading in
