@@ -35,6 +35,16 @@ extension String {
         return nil
     }
     
+    var isLightningInvoice: Bool {
+        // TODO: Add functionality
+        return self.contains("lightning:")
+    }
+    
+    var isBitcoinAddress: Bool {
+        // TODO: Add functionality
+        return self.contains("bitcoin:")
+    }
+    
 }
 
 extension Date {

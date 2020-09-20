@@ -39,6 +39,26 @@ extension UIViewController {
         
     }
     
+    func setNavBarTransparent() {
+        
+        // Color
+        navigationController?.navigationBar.barTintColor = .clear
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.tintColor = Theme.inverseBackgroundColor
+        
+        // Shadow
+        navigationController?.navigationBar.layer.shadowColor = UIColor.clear.cgColor
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
+        // Text
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: Theme.inverseBackgroundColor,
+            NSAttributedString.Key.font: Fonts.sofiaPro(weight: .medium, Dimens.titleText)
+        ]
+        
+    }
+    
     func hideKeyboardWhenSwipedDown() {
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         swipeDown.direction = UISwipeGestureRecognizer.Direction.down

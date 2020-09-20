@@ -8,7 +8,16 @@
 
 import UIKit
 
-class SendPaymentViewController: CheddarViewController<ViewModel> {
+class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
+    
+    init(sharedViewModel: PaymentViewModel) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = sharedViewModel
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

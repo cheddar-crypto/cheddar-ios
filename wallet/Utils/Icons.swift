@@ -15,5 +15,6 @@ extension UIImage {
     public static let send = #imageLiteral(resourceName: "ic_send")
     public static let receive = #imageLiteral(resourceName: "ic_receive")
     public static let share = #imageLiteral(resourceName: "ic_share")
+    public static let qrFrame = #imageLiteral(resourceName: "ic_qr_frame")
     
 }
