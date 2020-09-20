@@ -33,7 +33,7 @@ class Navigator {
     
     public static func pushPaymentScan(_ viewController: UIViewController) {
         if let navController = viewController.navigationController {
-            let vc = ScanInvoiceViewController()
+            let vc = ScanAddressViewController()
             navController.pushViewController(vc, animated: true)
         }
     }

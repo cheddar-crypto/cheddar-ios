@@ -71,7 +71,7 @@
 		7A2CC35324EF73D000E2605A /* RequestNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35224EF73D000E2605A /* RequestNoteViewController.swift */; };
 		7A2CC35524EF776400E2605A /* RequestInvoiceQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35424EF776400E2605A /* RequestInvoiceQRViewController.swift */; };
 		7A2CC35724F1C63E00E2605A /* OnChainAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35624F1C63E00E2605A /* OnChainAddressViewController.swift */; };
-		7A2CC35B24F1C7B500E2605A /* ScanInvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35A24F1C7B500E2605A /* ScanInvoiceViewController.swift */; };
+		7A2CC35B24F1C7B500E2605A /* ScanAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35A24F1C7B500E2605A /* ScanAddressViewController.swift */; };
 		7A2CC35D24F1C81100E2605A /* SendPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35C24F1C81100E2605A /* SendPaymentViewController.swift */; };
 		7A2CC36124F1CD3400E2605A /* sofia_pro_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A2CC35E24F1CD3400E2605A /* sofia_pro_medium.ttf */; };
 		7A2CC36224F1CD3400E2605A /* sofia_pro_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A2CC35F24F1CD3400E2605A /* sofia_pro_regular.ttf */; };
@@ -177,7 +177,7 @@
 		7A2CC35224EF73D000E2605A /* RequestNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNoteViewController.swift; sourceTree = "<group>"; };
 		7A2CC35424EF776400E2605A /* RequestInvoiceQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInvoiceQRViewController.swift; sourceTree = "<group>"; };
 		7A2CC35624F1C63E00E2605A /* OnChainAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnChainAddressViewController.swift; sourceTree = "<group>"; };
-		7A2CC35A24F1C7B500E2605A /* ScanInvoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanInvoiceViewController.swift; sourceTree = "<group>"; };
+		7A2CC35A24F1C7B500E2605A /* ScanAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanAddressViewController.swift; sourceTree = "<group>"; };
 		7A2CC35C24F1C81100E2605A /* SendPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPaymentViewController.swift; sourceTree = "<group>"; };
 		7A2CC35E24F1CD3400E2605A /* sofia_pro_medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sofia_pro_medium.ttf; sourceTree = "<group>"; };
 		7A2CC35F24F1CD3400E2605A /* sofia_pro_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sofia_pro_regular.ttf; sourceTree = "<group>"; };
@@ -376,7 +376,7 @@
 				7A2CC35224EF73D000E2605A /* RequestNoteViewController.swift */,
 				7A2CC35424EF776400E2605A /* RequestInvoiceQRViewController.swift */,
 				7A2CC35624F1C63E00E2605A /* OnChainAddressViewController.swift */,
-				7A2CC35A24F1C7B500E2605A /* ScanInvoiceViewController.swift */,
+				7A2CC35A24F1C7B500E2605A /* ScanAddressViewController.swift */,
 				7A2CC35C24F1C81100E2605A /* SendPaymentViewController.swift */,
 			);
 			path = ViewControllers;
@@ -859,7 +859,7 @@
 				7A2CC37424F3488F00E2605A /* Observable.swift in Sources */,
 				00665EC924EC494A00030A13 /* HomeViewController.swift in Sources */,
 				7A811E9E24F8A66B00F8D8C8 /* Dimens.swift in Sources */,
-				7A2CC35B24F1C7B500E2605A /* ScanInvoiceViewController.swift in Sources */,
+				7A2CC35B24F1C7B500E2605A /* ScanAddressViewController.swift in Sources */,
 				7A2CC37C24F3510900E2605A /* ViewModel.swift in Sources */,
 				7A2CC34B24EF6F9F00E2605A /* CheddarNavigationController.swift in Sources */,
 				00665EB024E9185B00030A13 /* rpc.pb.swift in Sources */,

@@ -21,6 +21,7 @@ extension String {
     public static let seeBitcoinAddress = NSLocalizedString("SEE_BITCOIN_ADDRESS", comment: "See the bitcoin address for wallet")
     public static let youSent = NSLocalizedString("TX_YOU_SENT", comment: "You sent")
     public static let youReceived = NSLocalizedString("TX_YOU_RECEIVED", comment: "You received")
+    public static let scanAddressTitle = NSLocalizedString("SCAN_ADDRESS_TITLE", comment: "Scan Address")
     
     // TODO: Support satoshis
     public static func bitcoinCount(_ count: Double) -> String {

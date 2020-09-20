@@ -17,6 +17,7 @@
 "DEFAULT_ERROR" = "An error occured";
 "TX_YOU_SENT" = "You sent";
 "TX_YOU_RECEIVED" = "You received";
+"SCAN_ADDRESS_TITLE" = "Scan Invoice";
 
 // Date
 "SECONDS_AGO" = "%@s";
