@@ -23,4 +23,13 @@ class PaymentViewModel: ViewModel {
         }
     }
     
+    func getAmountTitle() -> String {
+        // TODO
+        return "0.0001 bitcoins ($1.24)"
+    }
+    
+    func getReceiver() -> String {
+        return bitcoinAddress.value ?? invoice.value ?? "invalid"
+    }
+    
 }

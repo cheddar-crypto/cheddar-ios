@@ -66,14 +66,18 @@ class ScanAddressViewController: CheddarViewController<PaymentViewModel>, AVCapt
         super.viewModelDidLoad()
         
         viewModel.bitcoinAddress.observe = { [weak self] address in
+            
             // TODO: Handle flow slightly better here
+            
             if let self = self {
+                UIPasteboard.general.string = address
                 Navigator.pushPaymentSend(self, sharedViewModel: self.viewModel)
             }
         }
         
         viewModel.invoice.observe = { [weak self] invoice in
             if let self = self {
+                UIPasteboard.general.string = invoice
                 Navigator.pushPaymentSend(self, sharedViewModel: self.viewModel)
             }
         }

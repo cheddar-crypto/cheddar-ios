@@ -26,6 +26,8 @@ extension String {
     public static let scanAddressTitle = NSLocalizedString("SCAN_ADDRESS_TITLE", comment: "Scan Address")
     public static let requestCameraAccess = NSLocalizedString("ACCESS_CAMERA", comment: "Request Camera Access")
     public static let requestCameraAccessTitle = NSLocalizedString("ACCESS_CAMERA_DESCRIPTION", comment: "Request Camera Access title")
+    public static let pay = NSLocalizedString("PAY", comment: "Pay")
+    public static let to = NSLocalizedString("TO", comment: "To")
     
     // TODO: Support satoshis
     public static func bitcoinCount(_ count: Double) -> String {

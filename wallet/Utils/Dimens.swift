@@ -24,6 +24,7 @@ struct Dimens {
     public static let mediumMargin = 16
     public static let mmdnMargin = 20
     public static let midMargin = 28
+    public static let 🖖 = 12
     public static let largeMargin = 32
     public static let shadow = 2
     

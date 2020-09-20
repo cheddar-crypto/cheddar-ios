@@ -18,7 +18,12 @@ class CheddarButton: AnimatedView {
     private var style: Style = .primary
     @objc private var action: () -> Void
     private var didSetCorners = false
-    private let label = UILabel()
+    private let label: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = Fonts.sofiaPro(weight: .bold, Dimens.titleText)
+        return label
+    }()
     var title: String? {
         get {
             return label.text
@@ -69,9 +74,7 @@ class CheddarButton: AnimatedView {
     }
     
     private func addLabel() {
-        label.textAlignment = .center
-        label.font = Fonts.sofiaPro(weight: .bold, Dimens.titleText)
-        self.addSubviewAndFill(label, top: 2.0, leading: CGFloat(Dimens.midMargin), trailing: -CGFloat(Dimens.midMargin))
+        addSubviewAndFill(label, top: 2.0, leading: CGFloat(Dimens.midMargin), trailing: -CGFloat(Dimens.midMargin))
     }
     
     override func layoutSublayers(of layer: CALayer) {
