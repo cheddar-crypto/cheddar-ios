@@ -14,14 +14,14 @@ class RequestNoteViewController: CheddarViewController<RequestViewModel>, UIText
         return CheddarButton(action: { [weak self] in
             if let self = self {
                 self.viewModel.createInvoice()
-                self.navController?.pushInvoiceQR(sharedViewModel: self.viewModel)
+                Navigator.pushPaymentQR(self, sharedViewModel: self.viewModel)
             }
         })
     }()
     
     private lazy var amountChip = {
         return CheddarChip(action: { [weak self] in
-            self?.navController?.popViewController(animated: true)
+            self?.navigationController?.popViewController(animated: true)
         })
     }()
     

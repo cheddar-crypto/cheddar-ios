@@ -9,130 +9,91 @@
 import UIKit
 
 class HomeViewController: CheddarViewController<HomeViewModel> {
-    private let password = "sshhhhhh"
-
-    private var debugStatus: UILabel!
-    private var resultMessage: UILabel!
+    
+    private lazy var actionBar: CheddarActionBar = {
+        let actionBar = CheddarActionBar()
+        actionBar.setLeftAction(title: "Request", action: { [weak self] in
+            if let self = self {
+                Navigator.pushRequestAmount(self)
+            }
+        })
+        actionBar.setRightAction(title: "Pay", action: { [weak self] in
+            if let self = self {
+                Navigator.pushPaymentScan(self)
+            }
+        })
+        actionBar.translatesAutoresizingMaskIntoConstraints = false
+        return actionBar
+    }()
+    
+    private let refreshControl = UIRefreshControl()
+    
+    private lazy var collectionView: UICollectionView = {
+        
+        // Create the layout
+        let size = NSCollectionLayoutSize(
+            widthDimension: NSCollectionLayoutDimension.fractionalWidth(1),
+            heightDimension: NSCollectionLayoutDimension.estimated(WalletHeaderCollectionViewCell.cellHeight)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: size)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: size, subitem: item, count: 1)
+        let section = NSCollectionLayoutSection(group: group)
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        
+        // Create the collection view
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.delaysContentTouches = false
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(TransactionCollectionViewCell.self, forCellWithReuseIdentifier: TransactionCollectionViewCell.id)
+        collectionView.register(WalletHeaderCollectionViewCell.self, forCellWithReuseIdentifier: WalletHeaderCollectionViewCell.id)
+        collectionView.backgroundColor = .clear
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        collectionView.addSubview(refreshControl)
+        
+        return collectionView
+        
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Say Cheese"
         setup()
-        updateStatus()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        subscribe()
-    }
-    
-    private func subscribe() {
-        EventBus.onMainThread(self, eventType: .lndStateChange) { [weak self] (_) in
-            self?.updateStatus()
-        }
-    }
-    
-    private func updateStatus() {
-        debugStatus.text = LightningStateMonitor.shared.state.debuggingStatus.joined(separator: "\n\n")
-    }
-    
-    private func addDebugButton(_ title: String, topAnchor: NSLayoutYAxisAnchor, topConstant: CGFloat, action: @escaping () -> Void) -> CheddarButton {
-        let button = CheddarButton(action: action)
-        button.title = title
-        view.addSubview(button)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: CGFloat(32)).isActive = true
-        button.topAnchor.constraint(equalTo: topAnchor, constant: topConstant).isActive = true
-        button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        return button
-    }
-
-    private func setup() {
-        
-        let createButton = addDebugButton("Create wallet", topAnchor: view.topAnchor, topConstant: 10, action: {
-            self.viewModel.createWallet(password: self.password)
-        })
-        let unlockButton = addDebugButton("Unlock wallet", topAnchor: createButton.bottomAnchor, topConstant: 10, action: {
-            self.viewModel.unlockWallet(password: self.password)
-        })
-        let newAddressButton = addDebugButton("New address (copies to clipboard)", topAnchor: unlockButton.bottomAnchor, topConstant: 10, action: {
-            self.viewModel.getNewAddress()
-        })
-        let getBalanceButton = addDebugButton("Show balance", topAnchor: newAddressButton.bottomAnchor, topConstant: 10, action: {
-            self.viewModel.getWalletBalance()
-        })
-        let openChannelButton = addDebugButton("Open channel", topAnchor: getBalanceButton.bottomAnchor, topConstant: 10, action: {
-            self.viewModel.openChannel()
-        })
-        let listChannelsButton = addDebugButton("List channels", topAnchor: openChannelButton.bottomAnchor, topConstant: 10, action: {
-            self.viewModel.listChannels()
-        })
-        let payButton = addDebugButton("Pay invoice", topAnchor: listChannelsButton.bottomAnchor, topConstant: 10, action: {
-            self.viewModel.payInvoice()
-        })
-        let wipeButton = addDebugButton("Wipe (and close) wallet", topAnchor: payButton.bottomAnchor, topConstant: 10, action: {
-            self.viewModel.wipeWallet()
-        })
-        let requestFlowButton = addDebugButton("Launch request invoice flow", topAnchor: wipeButton.bottomAnchor, topConstant: 10, action: {
-            self.presentRequestPayment()
-        })
-        let onChainButton = addDebugButton("Launch onchain address vc", topAnchor: requestFlowButton.bottomAnchor, topConstant: 10, action: {
-            self.presentOnChainAddress()
-        })
-        let paymentFlowButton = addDebugButton("Launch LND payment flow", topAnchor: onChainButton.bottomAnchor, topConstant: 10, action: {
-            self.presentPayment()
-        })
-        
-        resultMessage = UILabel()
-        resultMessage.text = "..."
-        resultMessage.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(resultMessage)
-        resultMessage.topAnchor.constraint(equalTo: paymentFlowButton.bottomAnchor, constant: 20).isActive = true
-        resultMessage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        resultMessage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        resultMessage.textColor = Theme.inverseBackgroundColor
-        resultMessage.textAlignment = .center
-        resultMessage.numberOfLines = 0
-        
-        debugStatus = UILabel()
-        debugStatus.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(debugStatus)
-        debugStatus.topAnchor.constraint(equalTo: resultMessage.bottomAnchor, constant: 50).isActive = true
-        debugStatus.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        debugStatus.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        debugStatus.textColor = Theme.inverseBackgroundColor
-        debugStatus.textAlignment = .center
-        debugStatus.numberOfLines = 0
-        debugStatus.text = "Debug status"
-    }
-    
-    // This will get called when the ViewModel for this ViewController is ready to use
-    // This gives us a simple place to observe all changes to the datasources
-    // and can update the views accordingly as they change in real time
     override func viewModelDidLoad() {
-        
+            
         viewModel.isLoading.observe = { [weak self] isLoading in
-            if (isLoading) {
+            if (isLoading && !(self?.refreshControl.isRefreshing ?? true)) {
                 self?.showLoadingView()
             }
         }
         
         viewModel.price.observe = { [weak self] price in
+            self?.refreshPrice(price)
+            self?.refreshControl.endRefreshing()
+        }
+        
+        viewModel.transactions.observe = { [weak self] transaction in
+            self?.visibleCells.removeAll()
+            self?.collectionView.reloadData()
             self?.showContentView()
+            self?.refreshControl.endRefreshing()
         }
         
         viewModel.error.observe = { [weak self] error in
             self?.showErrorView()
+            self?.refreshControl.endRefreshing()
         }
         
         viewModel.resultMessage.observe = { [weak self] message in
-            self?.resultMessage.text = message
+//            self?.resultMessage.text = message
             self?.showContentView()
         }
         
         viewModel.newAddress.observe = { [weak self] address in
-            self?.resultMessage.text = address
+//            self?.resultMessage.text = address
             UIPasteboard.general.string = address
             self?.showContentView()
         }
@@ -146,6 +107,115 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
         
         viewModel.load()
         
+    }
+    
+    @objc private func refresh() {
+        // TODO
+        print("Pull to refresh triggered")
+    }
+
+    private func setup() {
+        addActionBar()
+        addCollectionView()
+        view.bringSubviewToFront(actionBar)
+    }
+    
+    private func addCollectionView() {
+        view.addSubview(collectionView)
+        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: actionBar.topAnchor).isActive = true
+        collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+    }
+    
+    private func addActionBar() {
+        view.addSubview(actionBar)
+        actionBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        actionBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        actionBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        actionBar.heightAnchor.constraint(equalToConstant: CGFloat(Dimens.bar)).isActive = true
+    }
+    
+    // MARK: Cell Refreshing
+    // This is for handling realtime price updates
+    
+    private var visibleCells: [IndexPath] = []
+    
+    private func cacheIndexPath(_ indexPath: IndexPath) {
+        if (!visibleCells.contains(indexPath)) {
+            visibleCells.append(indexPath)
+        }
+    }
+    
+    private func unchacheIndexPath(_ indexPath: IndexPath) {
+        visibleCells = visibleCells.filter { $0 != indexPath }
+    }
+    
+    // Update all the visible cells with the current price
+    private func refreshPrice(_ price: Price) {
+        visibleCells.forEach { indexPath in
+            let cell = collectionView.cellForItem(at: indexPath)
+            
+            // Wallet cell
+            if let walletCell = cell as? WalletHeaderCollectionViewCell {
+                walletCell.updatePrice(price)
+            }
+            
+            // Transaction cells
+            if let txCell = cell as? TransactionCollectionViewCell {
+                txCell.updatePrice(price)
+            }
+            
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        cacheIndexPath(indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        unchacheIndexPath(indexPath)
+    }
+    
+}
+
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if (indexPath.section == 0) {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WalletHeaderCollectionViewCell.id, for: indexPath) as! WalletHeaderCollectionViewCell
+            if let wallet = viewModel.wallet.value, let price = viewModel.price.value {
+                cell.setWallet(wallet, price: price)
+            }
+            cell.addressButtonClick = {
+                Navigator.showOnChainAddress(self)
+            }
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TransactionCollectionViewCell.id, for: indexPath) as! TransactionCollectionViewCell
+            if let txs = viewModel.transactions.value, let price = viewModel.price.value {
+                cell.setTransaction(txs[indexPath.row], price: price)
+            }
+            return cell
+        }
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
+        // 2 because:
+        // We have a top section, the header
+        // and a bottom section, the cells
+        // TODO: Handle pagination here
+        return 2
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return section == 1 ? viewModel.transactions.value?.count ?? 0 : 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath)
     }
     
 }

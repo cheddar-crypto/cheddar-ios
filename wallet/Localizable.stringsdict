@@ -13,9 +13,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>f</string>
 			<key>one</key>
-			<string>%f Bitcoin</string>
+			<string>%2$@ Bitcoin</string>
 			<key>other</key>
-			<string>%f Bitcoins</string>
+			<string>%2$@ Bitcoins</string>
 		</dict>
 	</dict>
 </dict>

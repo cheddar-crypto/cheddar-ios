@@ -17,8 +17,13 @@ struct Dimens {
     public static let chip = 44
     public static let headerText = 54
     public static let titleText = 20
+    public static let titleTallText = 24
+    public static let idkText = 26
     public static let normalText = 16
+    public static let shortMargin = 8
     public static let mediumMargin = 16
+    public static let mmdnMargin = 20
+    public static let midMargin = 28
     public static let largeMargin = 32
     public static let shadow = 2
     

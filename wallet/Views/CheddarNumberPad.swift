@@ -175,17 +175,18 @@ class CheddarNumberPad: UIView {
             
         }
         
+        // TODO: Improve this
         private func refresh() {
             if (selectedInputView == fiatView) {
                 let str = fiatView.title ?? "0"
                 let fiatAmount = Double(str) ?? 0.0
                 let cryptoAmount = fiatAmount / currentPrice
-                cryptoView.title = String(cryptoAmount)
+                cryptoView.title = cryptoAmount.toBitcoins()
             } else {
                 let str = cryptoView.title ?? "0"
                 let cryptoAmount = Double(str) ?? 0.0
                 let fiatAmount = cryptoAmount * currentPrice
-                fiatView.title = String(fiatAmount)
+                fiatView.title = fiatAmount.toFiat()
             }
         }
         

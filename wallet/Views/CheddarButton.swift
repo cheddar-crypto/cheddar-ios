@@ -71,7 +71,7 @@ class CheddarButton: AnimatedView {
     private func addLabel() {
         label.textAlignment = .center
         label.font = Fonts.sofiaPro(weight: .bold, Dimens.titleText)
-        self.addSubviewAndFill(label, top: 2.0, leading: CGFloat(Dimens.mediumMargin), trailing: -CGFloat(Dimens.mediumMargin))
+        self.addSubviewAndFill(label, top: 2.0, leading: CGFloat(Dimens.midMargin), trailing: -CGFloat(Dimens.midMargin))
     }
     
     override func layoutSublayers(of layer: CALayer) {

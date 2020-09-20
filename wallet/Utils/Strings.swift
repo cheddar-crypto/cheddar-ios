@@ -18,10 +18,14 @@ extension String {
     public static let forLabel = NSLocalizedString("FOR", comment: "For")
     public static let copy = NSLocalizedString("COPY", comment: "Copy")
     public static let requestNotePlaceholder = NSLocalizedString("NOTE_PLACEHOLDER", comment: "Placeholder for the note")
+    public static let seeBitcoinAddress = NSLocalizedString("SEE_BITCOIN_ADDRESS", comment: "See the bitcoin address for wallet")
+    public static let youSent = NSLocalizedString("TX_YOU_SENT", comment: "You sent")
+    public static let youReceived = NSLocalizedString("TX_YOU_RECEIVED", comment: "You received")
     
-    public static func bitcoinCount(count: Float) -> String {
-        let formatString = NSLocalizedString("BITCOIN_COUNT", comment: "A count of bitcoins")
-        return String.localizedStringWithFormat(formatString, count)
+    // TODO: Support satoshis
+    public static func bitcoinCount(_ count: Double) -> String {
+        let str = NSLocalizedString("BITCOIN_COUNT", comment: "A count of bitcoins")
+        return String.localizedStringWithFormat(str, Float(count), count.toBitcoins())
     }
     
 }

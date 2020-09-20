@@ -66,7 +66,7 @@ class RequestInvoiceQRViewController: CheddarViewController<RequestViewModel> {
         
         // Add buttons
         actionBar.setLeftAction(title: "Close", action: { [weak self] in // TODO Localization
-            self?.navController?.dismiss(animated: true, completion: nil)
+            self?.navigationController?.popToRootViewController(animated: true)
         })
         
         actionBar.setRightAction(title: "Share", action: { // TODO Localization

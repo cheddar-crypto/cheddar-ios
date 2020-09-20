@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_send-dark.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
