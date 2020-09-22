@@ -110,6 +110,7 @@
 		7AE77C8C2517CC9D001D22E3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7AE77C8E2517CC9D001D22E3 /* InfoPlist.strings */; };
 		7AE77C902517CEA4001D22E3 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE77C8F2517CEA4001D22E3 /* Permissions.swift */; };
 		7AE77C922517F210001D22E3 /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE77C912517F210001D22E3 /* PaymentViewModel.swift */; };
+		7AE77C9425182A09001D22E3 /* SwipeToSendCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE77C9325182A09001D22E3 /* SwipeToSendCoordinator.swift */; };
 		9E840E98A4801A110F5387E7 /* Pods_wallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F290869CC2E00AF959ABA33 /* Pods_wallet.framework */; };
 /* End PBXBuildFile section */
 
@@ -225,6 +226,7 @@
 		7AE77C8D2517CC9D001D22E3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7AE77C8F2517CEA4001D22E3 /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
 		7AE77C912517F210001D22E3 /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
+		7AE77C9325182A09001D22E3 /* SwipeToSendCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeToSendCoordinator.swift; sourceTree = "<group>"; };
 		8169844622EC1A934F64E4C8 /* Pods_wallet_walletUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wallet_walletUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F290869CC2E00AF959ABA33 /* Pods_wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE6665EF031EDC3E364CE652 /* Pods_walletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_walletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -402,6 +404,7 @@
 				7A811E9D24F8A66B00F8D8C8 /* Dimens.swift */,
 				7A53782D250EC24600CBA67C /* ValueAnimator.swift */,
 				7AE77C8F2517CEA4001D22E3 /* Permissions.swift */,
+				7AE77C9325182A09001D22E3 /* SwipeToSendCoordinator.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -912,6 +915,7 @@
 				7A2CC37724F348FE00E2605A /* HomeViewModel.swift in Sources */,
 				7A2CC35124EF73AD00E2605A /* Navigator.swift in Sources */,
 				7A2CC34924EF6F7A00E2605A /* Fonts.swift in Sources */,
+				7AE77C9425182A09001D22E3 /* SwipeToSendCoordinator.swift in Sources */,
 				7A2CC36B24F2D37200E2605A /* ErrorView.swift in Sources */,
 				00665EB224E9185B00030A13 /* autopilot.pb.swift in Sources */,
 			);

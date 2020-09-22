@@ -41,13 +41,8 @@ class ScanAddressViewController: CheddarViewController<PaymentViewModel>, AVCapt
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Fix nav bug
         setNavBarTransparent()
-        
-        if (captureSession?.isRunning == false) {
-            captureSession.startRunning()
-        }
+        captureSession?.startRunning()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -57,9 +52,7 @@ class ScanAddressViewController: CheddarViewController<PaymentViewModel>, AVCapt
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        if (captureSession?.isRunning == true) {
-            captureSession.stopRunning()
-        }
+        captureSession?.stopRunning()
     }
     
     override func viewModelDidLoad() {
