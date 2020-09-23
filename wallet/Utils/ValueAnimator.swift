@@ -23,7 +23,7 @@ class ValueAnimator {
   var animationCurveFunction: (TimeInterval, TimeInterval) -> (Double)
   var valueUpdater: (Double) -> Void
 
-  init (from: Double = 0, to: Double = 1, duration: TimeInterval, animationCurveFunction: @escaping (TimeInterval, TimeInterval) -> (Double) = defaultFunction, valueUpdater: @escaping (Double) -> Void) {
+  init(from: Double = 0, to: Double = 1, duration: TimeInterval, animationCurveFunction: @escaping (TimeInterval, TimeInterval) -> (Double) = defaultFunction, valueUpdater: @escaping (Double) -> Void) {
     self.from = from
     self.to = to
     self.duration = duration

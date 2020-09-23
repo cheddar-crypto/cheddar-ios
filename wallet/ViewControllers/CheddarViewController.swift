@@ -14,12 +14,6 @@ class CheddarViewController<VM: ViewModel>: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    var navController: CheddarNavigationController<VM>? {
-        get {
-            return self.navigationController as? CheddarNavigationController
-        }
-    }
-    
     var viewModel: VM! {
         didSet {
             viewModelDidLoad()

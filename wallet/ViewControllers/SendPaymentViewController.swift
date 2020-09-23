@@ -59,6 +59,11 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
         setNavBarTransparent()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        swipeCoordinator?.reset(animated: false)
+    }
+    
     override func viewModelDidLoad() {
         super.viewModelDidLoad()
         
@@ -81,10 +86,27 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
         addReceiverChip()
         
         // Setup the swipe coordinator
-        view.layoutIfNeeded()
-        if let navController = navigationController {
-            let views = [navController.navigationBar, contentContainer, swipeView]
-            swipeCoordinator = SwipeToSendCoordinator(views: views, gestureView: swipeView)
+        if let navController = navigationController as? CheddarNavigationController {
+            
+            view.layoutIfNeeded()
+            
+            let navBar = navController.navigationBar
+            let views = [navBar, contentContainer, swipeView]
+            
+            swipeCoordinator = SwipeToSendCoordinator(
+                views: views,
+                gestureView: swipeView,
+                onOffsetChange: { offset in
+                    print(offset)
+                    navController.statusBarStyle = .default
+                    navController.interactivePopGestureRecognizer?.isEnabled = offset == 0
+//                    self.swipeView.isUserInteractionEnabled = offset != 1
+                },
+                onSend: {
+                    navController.statusBarStyle = .darkContent
+//                    self.swipeView.isUserInteractionEnabled = false
+                })
+            
         }
         
     }
