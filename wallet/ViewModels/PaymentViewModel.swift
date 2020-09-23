@@ -12,6 +12,7 @@ class PaymentViewModel: ViewModel {
     
     let invoice = Observable<String>()
     let bitcoinAddress = Observable<String>()
+    let note = Observable<String?>()
     
     func postDiscoveredValue(value: String) {
         if (value.isBitcoinAddress) {
@@ -21,6 +22,10 @@ class PaymentViewModel: ViewModel {
         } else {
             // TODO: Tell user that is not a valid code
         }
+        
+        // TODO: Parse this from the lnd invoice
+        note.value = "Chancellor on Brink of Second Bailout for Banks"
+        
     }
     
     func getAmountTitle() -> String {
