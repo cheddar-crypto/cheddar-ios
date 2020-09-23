@@ -28,6 +28,7 @@ extension String {
     public static let requestCameraAccessTitle = NSLocalizedString("ACCESS_CAMERA_DESCRIPTION", comment: "Request Camera Access title")
     public static let pay = NSLocalizedString("PAY", comment: "Pay")
     public static let to = NSLocalizedString("TO", comment: "To")
+    public static let swipeToSend = NSLocalizedString("SWIPE_TO_SEND", comment: "Swipe to send")
     
     // TODO: Support satoshis
     public static func bitcoinCount(_ count: Double) -> String {

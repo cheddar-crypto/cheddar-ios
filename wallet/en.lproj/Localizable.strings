@@ -24,6 +24,7 @@
 "SCAN_ADDRESS_TITLE" = "Scan Invoice";
 "ACCESS_CAMERA" = "Allow Camera Access";
 "ACCESS_CAMERA_DESCRIPTION" = "Cheddar needs access to your camera to scan QR codes. Please allow access to start scanning QR codes.";
+"SWIPE_TO_SEND" = "Swipe to send";
 
 // Date
 "SECONDS_AGO" = "%@s";

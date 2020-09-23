@@ -20,6 +20,22 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
     private lazy var topDivider = makeDivider()
     private lazy var bottomDivider = makeDivider()
     
+    private let swipeToSendArrow: UIImageView = {
+        let view = UIImageView()
+        view.image = .up
+        view.contentMode = .center
+        return view
+    }()
+    
+    private let swipeToSendLabel: UILabel = {
+        let view = UILabel()
+        view.text = String.swipeToSend.uppercased()
+        view.textColor = .gray900
+        view.font = Fonts.sofiaPro(weight: .bold, Dimens.titleText)
+        view.numberOfLines = 0
+        return view
+    }()
+    
     private let contentContainer: UIView = {
         let view = UIView()
         return view
@@ -101,6 +117,7 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
         
         // Other views
         addSwipeToSendView()
+        addTranslatableSendingViews()
         addContentContainer()
         addDivider()
         addAmountChip()
@@ -115,20 +132,31 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
             
             let navBar = navController.navigationBar
             var positions = [UIView : CGFloat]()
-            [navBar, contentContainer].forEach { view in
+            [navBar, contentContainer, swipeToSendArrow, swipeToSendLabel].forEach { view in
                 positions[view] = view.frame.origin.y
             }
             
             swipeCoordinator = SwipeToSendCoordinator(
                 gestureView: swipeView,
-                onOffsetChange: { (travelDistance, offset)  in
+                onOffsetChange: { (travelDistance, offset) in
 //                    print(offset)
                     navController.statusBarStyle = .default
                     navController.interactivePopGestureRecognizer?.isEnabled = offset == 0
                     
+                    // Translations and parallax effects
                     let translation = -travelDistance * offset
                     for (view, position) in positions {
-                        view.frame.origin.y = translation + position
+                        if (view == self.swipeToSendArrow) {
+                            let adjustedTranslation = translation / 2
+                            view.frame.origin.y = adjustedTranslation + position
+                            view.alpha = 1 - (offset * 2)
+                        } else if (view == self.swipeToSendLabel) {
+                            let adjustedTranslation = translation / 4
+                            view.frame.origin.y = adjustedTranslation + position
+                            view.alpha = 1 - (offset * 2)
+                        } else {
+                            view.frame.origin.y = translation + position
+                        }
                     }
                     
 //                    self.swipeView.isUserInteractionEnabled = offset != 1
@@ -199,6 +227,22 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
             let peek = CGFloat(Dimens.swipeBar) + bottomPadding
             swipeView.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -peek).isActive = true
         }
+    }
+    
+    private func addTranslatableSendingViews() {
+        
+        // Arrow
+        view.addSubview(swipeToSendArrow)
+        swipeToSendArrow.translatesAutoresizingMaskIntoConstraints = false
+        swipeToSendArrow.topAnchor.constraint(equalTo: swipeView.topAnchor, constant: CGFloat(Dimens.mmdnMargin)).isActive = true
+        swipeToSendArrow.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor).isActive = true
+        
+        // Label
+        view.addSubview(swipeToSendLabel)
+        swipeToSendLabel.translatesAutoresizingMaskIntoConstraints = false
+        swipeToSendLabel.topAnchor.constraint(equalTo: swipeToSendArrow.bottomAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
+        swipeToSendLabel.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor).isActive = true
+        
     }
     
     private func addNoteSection() {
