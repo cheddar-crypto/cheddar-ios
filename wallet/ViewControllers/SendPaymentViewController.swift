@@ -61,7 +61,7 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        swipeCoordinator?.reset(animated: false)
+        swipeCoordinator?.reset(duration: 0)
     }
     
     override func viewModelDidLoad() {
@@ -91,15 +91,24 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
             view.layoutIfNeeded()
             
             let navBar = navController.navigationBar
-            let views = [navBar, contentContainer, swipeView]
+//            let views = [navBar, contentContainer]
+            var positions = [UIView : CGFloat]()
+            [navBar, contentContainer].forEach { view in
+                positions[view] = view.frame.origin.y
+            }
             
             swipeCoordinator = SwipeToSendCoordinator(
-                views: views,
                 gestureView: swipeView,
-                onOffsetChange: { offset in
-                    print(offset)
+                onOffsetChange: { (travelDistance, offset)  in
+//                    print(offset)
                     navController.statusBarStyle = .default
                     navController.interactivePopGestureRecognizer?.isEnabled = offset == 0
+                    
+                    let translation = -travelDistance * offset
+                    for (view, position) in positions {
+                        view.frame.origin.y = translation + position
+                    }
+                    
 //                    self.swipeView.isUserInteractionEnabled = offset != 1
                 },
                 onSend: {

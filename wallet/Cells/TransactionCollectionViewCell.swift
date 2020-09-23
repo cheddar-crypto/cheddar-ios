@@ -199,11 +199,11 @@ class TransactionCollectionViewCell: UICollectionViewCell {
             
             // Animate the change
             ValueAnimator(
-                from: prevTotal,
-                to: newTotal,
+                from: CGFloat(prevTotal),
+                to: CGFloat(newTotal),
                 duration: Theme.defaultAnimationDuration,
                 valueUpdater: { value in
-                    self.fiatAmountLabel.text = self.addPrefix(isSent: tx.isSent, value: value)
+                    self.fiatAmountLabel.text = self.addPrefix(isSent: tx.isSent, value: Double(value))
                 }).start()
             
             // Update the date as a bonus

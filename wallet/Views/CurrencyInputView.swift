@@ -82,19 +82,19 @@ class CurrencyInputView: AnimatedView {
             label.setFont(
                 animationDuration: animated ? Theme.defaultAnimationDuration : 0,
                 weight: .bold,
-                newSize: Double(Dimens.headerText))
+                newSize: CGFloat(Dimens.headerText))
         case .expanded:
             layer.borderColor = Theme.primaryColor.cgColor
             label.setFont(
                 animationDuration: animated ? Theme.defaultAnimationDuration : 0,
                 weight: .bold,
-                newSize: Double(Dimens.headerText))
+                newSize: CGFloat(Dimens.headerText))
         case .collapsed:
             layer.borderColor = Theme.shadowColor.cgColor
             label.setFont(
                 animationDuration: animated ? Theme.defaultAnimationDuration : 0,
                 weight: .medium,
-                newSize: Double(Dimens.titleText))
+                newSize: CGFloat(Dimens.titleText))
         }
     }
 

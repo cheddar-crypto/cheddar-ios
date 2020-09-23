@@ -141,11 +141,11 @@ class WalletHeaderCollectionViewCell: UICollectionViewCell {
             
             // Animate the change
             ValueAnimator(
-                from: prevTotal,
-                to: newTotal,
+                from: CGFloat(prevTotal),
+                to: CGFloat(newTotal),
                 duration: Theme.defaultAnimationDuration,
                 valueUpdater: { value in
-                    self.currencyView.title = value.toFiat()
+                    self.currencyView.title = Double(value).toFiat()
                 }).start()
             
         }

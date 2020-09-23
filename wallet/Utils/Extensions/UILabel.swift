@@ -10,10 +10,10 @@ import UIKit
 
 extension UILabel {
     
-    func setFont(animationDuration: TimeInterval, weight: FontStyle, newSize: Double) {
+    func setFont(animationDuration: TimeInterval, weight: FontStyle, newSize: CGFloat) {
         if (animationDuration > 0) {
             ValueAnimator(
-                from: Double(font.pointSize),
+                from: font.pointSize,
                 to: newSize,
                 duration: animationDuration,
                 valueUpdater: { value in
