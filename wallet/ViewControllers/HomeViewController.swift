@@ -65,6 +65,18 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavBarStyles()
+        
+        // Reset the navigation bar if needed
+        if let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first {
+            let topSafeArea = window.safeAreaInsets.top
+            let navBar = navigationController?.navigationBar
+            if (navBar?.frame.origin.y != topSafeArea) {
+                UIView.animate(withDuration: 0.2, animations: {
+                    navBar?.frame.origin.y = topSafeArea
+                })
+            }
+        }
+        
     }
     
     override func viewModelDidLoad() {

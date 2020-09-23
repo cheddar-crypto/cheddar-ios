@@ -10,9 +10,16 @@ import Foundation
 
 class PaymentViewModel: ViewModel {
     
+    struct Payment {
+        let someValue: Int
+    }
+    
     let invoice = Observable<String>()
     let bitcoinAddress = Observable<String>()
     let note = Observable<String?>()
+    let isLoading = Observable<Bool>()
+    let error = Observable<Error>()
+    let paymentSent = Observable<Payment>()
     
     func postDiscoveredValue(value: String) {
         if (value.isBitcoinAddress) {
@@ -38,7 +45,12 @@ class PaymentViewModel: ViewModel {
     }
     
     func sendPayment() {
-        print("Send! 🧀")
+        print("Sending! 🧀")
+        isLoading.value = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.isLoading.value = false
+            self.paymentSent.value = Payment(someValue: 123)
+        }
     }
     
 }

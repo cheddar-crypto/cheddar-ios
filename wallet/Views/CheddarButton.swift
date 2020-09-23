@@ -13,6 +13,7 @@ class CheddarButton: AnimatedView {
     enum Style {
         case primary
         case bordered
+        case white
     }
     
     private var style: Style = .primary
@@ -56,11 +57,18 @@ class CheddarButton: AnimatedView {
         case .primary:
             label.textColor = .gray900
             backgroundColor = Theme.primaryColor
+            layer.borderWidth = 0
+            layer.borderColor = UIColor.clear.cgColor
         case .bordered:
             label.textColor = Theme.inverseBackgroundColor
             backgroundColor = Theme.backgroundColor
             layer.borderWidth = CGFloat(Dimens.shadow)
             layer.borderColor = Theme.shadowColor.cgColor
+        case .white:
+            label.textColor = .gray900
+            backgroundColor = .white
+            layer.borderWidth = 0
+            layer.borderColor = UIColor.clear.cgColor
         }
     }
     

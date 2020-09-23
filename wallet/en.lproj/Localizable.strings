@@ -12,6 +12,7 @@
 "FOR" = "For";
 "PAY" = "Pay";
 "COPY" = "Copy";
+"DONE" = "Done";
 "TO" = "To";
 "PASTE_LND_INVOICE" = "Paste Invoice";
 "PASTE_BITCOIN_ADDRESS" = "Paste Address";

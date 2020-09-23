@@ -11,8 +11,9 @@ import UIKit
 class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
     
     private var swipeCoordinator: SwipeToSendCoordinator!
+    private var positions = [UIView : CGFloat]()
     
-    let swipeView = UIView() // TODO
+    private let swipeView = PaymentFinalizeView()
     private let textViewPlaceholder = UILabel()
     private let textView = UITextView()
     
@@ -100,6 +101,27 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
             self?.textView.isSelectable = false
         }
         
+        viewModel.isLoading.observe = { [weak self] isLoading in
+            if (isLoading) {
+                self?.swipeView.showLoading()
+            }
+        }
+        
+        // TODO: We should probably show a snackbar or something
+        viewModel.error.observe = { [weak self] error in
+            print(error)
+            self?.swipeCoordinator.reset(duration: 0.1)
+        }
+        
+        viewModel.paymentSent.observe = { [weak self] payment in
+            self?.swipeView.showContent {
+                if let navController = self?.navigationController as? CheddarNavigationController {
+                    navController.statusBarStyle = .default
+                    navController.popToRootViewController(animated: true)
+                }
+            }
+        }
+        
     }
     
     private func makeDivider() -> UIView {
@@ -131,7 +153,6 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
             view.layoutIfNeeded()
             
             let navBar = navController.navigationBar
-            var positions = [UIView : CGFloat]()
             [navBar, contentContainer, swipeToSendArrow, swipeToSendLabel].forEach { view in
                 positions[view] = view.frame.origin.y
             }
@@ -144,7 +165,7 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
                     
                     // Translations and parallax effects
                     let translation = -travelDistance * offset
-                    for (view, position) in positions {
+                    for (view, position) in self.positions {
                         if (view == self.swipeToSendArrow) {
                             let adjustedTranslation = translation / 2
                             view.frame.origin.y = adjustedTranslation + position
@@ -220,7 +241,8 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
             view.addSubview(swipeView)
             swipeView.translatesAutoresizingMaskIntoConstraints = false
             swipeView.heightAnchor.constraint(equalToConstant: window.frame.height).isActive = true
-            swipeView.widthAnchor.constraint(equalToConstant: window.frame.width).isActive = true
+            swipeView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            swipeView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
             let bottomPadding = window.safeAreaInsets.bottom
             let peek = CGFloat(Dimens.swipeBar) + bottomPadding
             swipeView.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -peek).isActive = true

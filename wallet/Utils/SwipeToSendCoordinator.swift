@@ -27,7 +27,6 @@ class SwipeToSendCoordinator {
         return Offset(min: min, max: max)
     }()
     
-//    private var views: [UIView: Offset] = [:]
     private let onDrag: (_ travelDistance: CGFloat, _ position: CGFloat) -> Void
     private let onSend: () -> Void
     private lazy var screenHeight = window?.frame.height ?? UIScreen.main.bounds.height
@@ -169,21 +168,6 @@ class SwipeToSendCoordinator {
             }
             
         }).start()
-        
-        
-//        let peekDistance: CGFloat = 40
-//        UIView.animate(
-//            withDuration: SwipeToSendCoordinator.animationDuration,
-//            animations: {
-//                self.window?.layoutIfNeeded()
-//                for (view, _) in self.views {
-//                    view.frame.origin.y -= peekDistance
-//                }
-//                self.updateDragPosition(duration: SwipeToSendCoordinator.animationDuration)
-//            },
-//            completion: { complete in
-//                self.reset(animated: complete)
-//            })
         
     }
     
