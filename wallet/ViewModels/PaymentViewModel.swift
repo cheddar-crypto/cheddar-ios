@@ -37,4 +37,8 @@ class PaymentViewModel: ViewModel {
         return bitcoinAddress.value ?? invoice.value ?? "invalid"
     }
     
+    func sendPayment() {
+        print("Send! 🧀")
+    }
+    
 }

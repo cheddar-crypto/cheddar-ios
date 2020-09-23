@@ -139,7 +139,6 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
             swipeCoordinator = SwipeToSendCoordinator(
                 gestureView: swipeView,
                 onOffsetChange: { (travelDistance, offset) in
-//                    print(offset)
                     navController.statusBarStyle = .default
                     navController.interactivePopGestureRecognizer?.isEnabled = offset == 0
                     
@@ -159,11 +158,10 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
                         }
                     }
                     
-//                    self.swipeView.isUserInteractionEnabled = offset != 1
                 },
                 onSend: {
                     navController.statusBarStyle = .darkContent
-//                    self.swipeView.isUserInteractionEnabled = false
+                    self.viewModel.sendPayment()
                 })
             
         }
