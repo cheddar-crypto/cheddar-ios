@@ -30,6 +30,7 @@ extension String {
     public static let pay = NSLocalizedString("PAY", comment: "Pay")
     public static let to = NSLocalizedString("TO", comment: "To")
     public static let swipeToSend = NSLocalizedString("SWIPE_TO_SEND", comment: "Swipe to send")
+    public static let paymentSent = NSLocalizedString("PAYMENT_SENT", comment: "Payment Sent")
     
     // TODO: Support satoshis
     public static func bitcoinCount(_ count: Double) -> String {
