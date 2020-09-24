@@ -27,6 +27,8 @@ class SwipeToSendCoordinator {
         return Offset(min: min, max: max)
     }()
     
+    var isSending = false
+    
     private let onDrag: (_ travelDistance: CGFloat, _ position: CGFloat) -> Void
     private let onSend: () -> Void
     private lazy var screenHeight = window?.frame.height ?? UIScreen.main.bounds.height
@@ -34,6 +36,7 @@ class SwipeToSendCoordinator {
     private lazy var minReleasePointY = screenHeight * SwipeToSendCoordinator.sendableDistanceThreshold
     
     init(gestureView: UIView, onOffsetChange: @escaping (CGFloat, CGFloat) -> Void, onSend: @escaping () -> Void) {
+        
         self.onDrag = onOffsetChange
         self.onSend = onSend
         self.gestureView = gestureView
@@ -52,6 +55,11 @@ class SwipeToSendCoordinator {
     }
     
     @objc private func panView(_ sender: UIPanGestureRecognizer) {
+        
+        if (isSending) {
+            return
+        }
+        
         switch (sender.state) {
         case .began, .changed:
             
@@ -112,6 +120,7 @@ class SwipeToSendCoordinator {
                 
                 // Tell if complete
                 if (value == self.gestureViewOffset.max) {
+                    self.isSending = true
                     self.onSend()
                 }
                 
@@ -133,6 +142,7 @@ class SwipeToSendCoordinator {
             }
             
             if (value == self.gestureViewOffset.min) {
+                self.isSending = false
                 self.isPeeking = false
             }
             
@@ -145,7 +155,7 @@ class SwipeToSendCoordinator {
     private func peek() {
         
         // Disable peeking if already peeking
-        if (isPeeking) {
+        if (isPeeking || isSending) {
             return
         }
         
