@@ -14,8 +14,9 @@ class PaymentFinalizeView: UIView {
     
     private let loadingIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .large)
-        view.tintColor = .gray900
+        view.color = .gray900
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
         return view
     }()
     
@@ -59,19 +60,22 @@ class PaymentFinalizeView: UIView {
     }
     
     func showLoading() {
-        loadingIndicator.isHidden = false
-        loadingIndicator.startAnimating()
-        doneButton.isHidden = true
-        imageView.isHidden = true
-        sentLabel.isHidden = true
+        self.doneButton.isHidden = true
+        self.imageView.isHidden = true
+        self.sentLabel.isHidden = true
+        self.loadingIndicator.animateIn()
+        self.loadingIndicator.startAnimating()
     }
     
     func showContent(onDoneAction: @escaping () -> Void) {
         self.onDoneAction = onDoneAction
-        loadingIndicator.isHidden = true
-        doneButton.isHidden = false
-        imageView.isHidden = false
-        sentLabel.isHidden = false
+        self.loadingIndicator.animateOut {
+            self.imageView.animateIn(fromScale: 0) {
+                self.sentLabel.animateIn(delay: 0.1) {
+                    self.doneButton.animateIn(delay: 0.1)
+                }
+            }
+        }
     }
     
     private func setup() {

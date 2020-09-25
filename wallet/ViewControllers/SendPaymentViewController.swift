@@ -151,8 +151,10 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
         if let navController = navigationController as? CheddarNavigationController {
             
             view.layoutIfNeeded()
-            
+
             let navBar = navController.navigationBar
+            navBar.frame.origin.y = UIApplication.shared.getStatusBarHeight()
+            
             [navBar, contentContainer, swipeToSendArrow, swipeToSendLabel].forEach { view in
                 positions[view] = view.frame.origin.y
             }
@@ -193,7 +195,7 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
         if let navBar = navigationController?.navigationBar {
             view.addSubview(contentContainer)
             contentContainer.translatesAutoresizingMaskIntoConstraints = false
-            contentContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: navBar.frame.maxY).isActive = true
+            contentContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: navBar.frame.height + UIApplication.shared.getStatusBarHeight()).isActive = true
             contentContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
             contentContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             contentContainer.bottomAnchor.constraint(equalTo: swipeView.topAnchor).isActive = true
