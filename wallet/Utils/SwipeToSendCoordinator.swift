@@ -20,14 +20,15 @@ class SwipeToSendCoordinator {
     private static let sendableVelocityThreshold: CGFloat = -2200
     private static let sendableDistanceThreshold: CGFloat = 0.5
     
+    private lazy var panGesture = UIPanGestureRecognizer(target: self, action: #selector(panView(_:)))
+    private lazy var tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapView(_:)))
+    
     private let gestureView: UIView
     private lazy var gestureViewOffset: Offset = {
         let min = gestureView.frame.origin.y
         let max = min - abs(screenHeight - gestureView.frame.maxY)
         return Offset(min: min, max: max)
     }()
-    
-    var isSending = false
     
     private let onDrag: (_ travelDistance: CGFloat, _ position: CGFloat) -> Void
     private let onSend: () -> Void
@@ -42,12 +43,19 @@ class SwipeToSendCoordinator {
         self.gestureView = gestureView
         
         // Set the gesture view
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panView(_:)))
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapView(_:)))
-        gestureView.addGestureRecognizer(panGesture)
-        gestureView.addGestureRecognizer(tapGesture)
+        addGestures()
         gestureView.isUserInteractionEnabled = true
         
+    }
+    
+    private func addGestures() {
+        gestureView.addGestureRecognizer(panGesture)
+        gestureView.addGestureRecognizer(tapGesture)
+    }
+    
+    private func removeGestures() {
+        gestureView.removeGestureRecognizer(panGesture)
+        gestureView.removeGestureRecognizer(tapGesture)
     }
     
     @objc private func tapView(_ sender: UIPanGestureRecognizer) {
@@ -55,11 +63,6 @@ class SwipeToSendCoordinator {
     }
     
     @objc private func panView(_ sender: UIPanGestureRecognizer) {
-        
-        if (isSending) {
-            return
-        }
-        
         switch (sender.state) {
         case .began, .changed:
             
@@ -120,8 +123,8 @@ class SwipeToSendCoordinator {
                 
                 // Tell if complete
                 if (value == self.gestureViewOffset.max) {
-                    self.isSending = true
                     self.onSend()
+                    self.removeGestures()
                 }
                 
             }
@@ -142,8 +145,8 @@ class SwipeToSendCoordinator {
             }
             
             if (value == self.gestureViewOffset.min) {
-                self.isSending = false
                 self.isPeeking = false
+                self.addGestures()
             }
             
         }).start()
@@ -155,7 +158,7 @@ class SwipeToSendCoordinator {
     private func peek() {
         
         // Disable peeking if already peeking
-        if (isPeeking || isSending) {
+        if (isPeeking) {
             return
         }
         
