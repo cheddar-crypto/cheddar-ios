@@ -46,9 +46,11 @@ class LightningStateMonitor {
         }
         
         EventBus.onMainThread(self, eventType: .lndStopped) { [weak self] (_) in
-            self?.state.lndRunning = false
-            self?.state.walletUnlocked = false
-            self?.state.rpcReady = false
+            guard let self = self else { return }
+            
+            self.state.lndRunning = false
+            self.state.walletUnlocked = false
+            self.state.rpcReady = false
         }
         
         EventBus.onMainThread(self, eventType: .lndRpcReady) { [weak self] (_) in

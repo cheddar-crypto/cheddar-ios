@@ -13,12 +13,18 @@ class CheddarButton: AnimatedView {
     enum Style {
         case primary
         case bordered
+        case white
     }
     
     private var style: Style = .primary
     @objc private var action: () -> Void
     private var didSetCorners = false
-    private let label = UILabel()
+    private let label: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = Fonts.sofiaPro(weight: .bold, Dimens.titleText)
+        return label
+    }()
     var title: String? {
         get {
             return label.text
@@ -51,11 +57,18 @@ class CheddarButton: AnimatedView {
         case .primary:
             label.textColor = .gray900
             backgroundColor = Theme.primaryColor
+            layer.borderWidth = 0
+            layer.borderColor = UIColor.clear.cgColor
         case .bordered:
             label.textColor = Theme.inverseBackgroundColor
             backgroundColor = Theme.backgroundColor
-            layer.borderWidth = CGFloat(Dimens.shadow)
+            layer.borderWidth = Dimens.shadow
             layer.borderColor = Theme.shadowColor.cgColor
+        case .white:
+            label.textColor = .gray900
+            backgroundColor = .white
+            layer.borderWidth = 0
+            layer.borderColor = UIColor.clear.cgColor
         }
     }
     
@@ -69,9 +82,7 @@ class CheddarButton: AnimatedView {
     }
     
     private func addLabel() {
-        label.textAlignment = .center
-        label.font = Fonts.sofiaPro(weight: .bold, Dimens.titleText)
-        self.addSubviewAndFill(label, top: 2.0, leading: CGFloat(Dimens.midMargin), trailing: -CGFloat(Dimens.midMargin))
+        addSubviewAndFill(label, top: 2.0, leading: Dimens.midMargin, trailing: -Dimens.midMargin)
     }
     
     override func layoutSublayers(of layer: CALayer) {

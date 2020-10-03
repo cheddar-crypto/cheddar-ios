@@ -24,8 +24,8 @@ public enum FontStyle {
 
 struct Fonts {
     
-    public static func sofiaPro(weight: FontStyle = .regular, _ size: Int = 16) -> UIFont {
-        return UIFont(name: weight.name, size: CGFloat(size))!
+    public static func sofiaPro(weight: FontStyle = .regular, _ size: CGFloat = 16) -> UIFont {
+        return UIFont(name: weight.name, size: size)!
     }
     
 }

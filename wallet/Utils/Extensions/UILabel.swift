@@ -10,17 +10,17 @@ import UIKit
 
 extension UILabel {
     
-    func setFont(animationDuration: TimeInterval, weight: FontStyle, newSize: Double) {
+    func setFont(animationDuration: TimeInterval, weight: FontStyle, newSize: CGFloat) {
         if (animationDuration > 0) {
             ValueAnimator(
-                from: Double(font.pointSize),
+                from: font.pointSize,
                 to: newSize,
                 duration: animationDuration,
-                valueUpdater: { value in
-                    self.font = Fonts.sofiaPro(weight: weight, Int(value))
+                valueUpdater: { [weak self] value in
+                    self?.font = Fonts.sofiaPro(weight: weight, value)
                 }).start()
         } else {
-            font = Fonts.sofiaPro(weight: weight, Int(newSize))
+            font = Fonts.sofiaPro(weight: weight, newSize)
         }
     }
     

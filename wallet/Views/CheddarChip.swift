@@ -11,8 +11,13 @@ import UIKit
 class CheddarChip: AnimatedView {
 
     @objc private var action: () -> Void
-    private var didSetCorners = false
-    private let label = UILabel()
+    private let label: UILabel = {
+        let label = UILabel()
+        label.textColor = .gray900
+        label.numberOfLines = 0
+        label.font = Fonts.sofiaPro(weight: .regular, Dimens.titleText)
+        return label
+    }()
     var title: String? {
         get {
             return label.text
@@ -37,6 +42,7 @@ class CheddarChip: AnimatedView {
         clipsToBounds = true
         addLabel()
         addTapRecognizer()
+        layer.cornerRadius = Dimens.chip / 2
     }
     
     private func addTapRecognizer() {
@@ -45,22 +51,12 @@ class CheddarChip: AnimatedView {
     }
     
     @objc private func tap(_ sender: UITapGestureRecognizer) {
-        self.action()
+        action()
     }
     
     private func addLabel() {
-        label.textColor = .gray900
-        label.textAlignment = .center
-        label.font = Fonts.sofiaPro(weight: .regular, Dimens.titleText)
-        self.addSubviewAndFill(label, top: 2.0, leading: 12.0, trailing: -12.0)
-    }
-    
-    override func layoutSublayers(of layer: CALayer) {
-        super.layoutSublayers(of: layer)
-        if (!didSetCorners) {
-            didSetCorners = true
-            layer.cornerRadius = frame.height / 2
-        }
+        let padding = Dimens.🖖
+        addSubviewAndFill(label, top: padding + 2.0, bottom: -padding, leading: padding, trailing: -padding)
     }
 
 }

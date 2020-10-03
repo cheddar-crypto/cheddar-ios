@@ -19,4 +19,40 @@ extension UIView {
         view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: bottom).isActive = true
     }
     
+    func addGradient(startColor: UIColor, endColor: UIColor) {
+        layoutIfNeeded()
+        let gradient = CAGradientLayer()
+        gradient.colors = [startColor.cgColor, endColor.cgColor]
+        gradient.locations = [0.0, 1.0]
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
+        gradient.frame = CGRect(x: 0.0, y: 0.0, width: frame.size.width, height: frame.size.height)
+        layer.insertSublayer(gradient, at: 0)
+    }
+    
+    func animateIn(duration: TimeInterval = 0.25, fromScale: CGFloat = 0.9, delay: TimeInterval = 0.0, onComplete: (() -> Void)? = nil) {
+        self.transform = CGAffineTransform(scaleX: fromScale, y: fromScale)
+        self.alpha = 0
+        self.isHidden = false
+        UIView.animate(withDuration: duration, delay: delay, options: [.allowUserInteraction, .curveEaseOut], animations: {
+            self.transform = CGAffineTransform(scaleX: 1, y: 1)
+            self.alpha = 1
+        }, completion: { complete in
+            onComplete?()
+        })
+    }
+    
+    func animateOut(duration: TimeInterval = 0.25, toScale: CGFloat = 0.9, delay: TimeInterval = 0.0, onComplete: (() -> Void)? = nil) {
+        self.isHidden = false
+        UIView.animate(withDuration: duration, delay: delay, options: [.allowUserInteraction, .curveEaseIn], animations: { [weak self] in
+            guard let self = self else { return }
+            self.transform = CGAffineTransform(scaleX: toScale, y: toScale)
+            self.alpha = 0
+        }, completion: { [weak self] complete in
+            guard let self = self else { return }
+            self.isHidden = true
+            onComplete?()
+        })
+    }
+    
 }

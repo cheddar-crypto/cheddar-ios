@@ -34,5 +34,16 @@ class CheddarNavigationController<VM: ViewModel>: UINavigationController, UIGest
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return viewControllers.count > 1
     }
+    
+    var statusBarStyle = UIStatusBarStyle.default {
+        didSet {
+            if (oldValue != statusBarStyle) {
+                setNeedsStatusBarAppearanceUpdate()
+            }
+        }
+    }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return statusBarStyle
+    }
 
 }

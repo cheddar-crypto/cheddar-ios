@@ -33,20 +33,27 @@ class Navigator {
     
     public static func pushPaymentScan(_ viewController: UIViewController) {
         if let navController = viewController.navigationController {
-            let vc = ScanInvoiceViewController()
+            let vc = ScanAddressViewController()
             navController.pushViewController(vc, animated: true)
         }
     }
     
-    public static func pushPaymentSend(_ viewController: UIViewController) {
+    public static func pushPaymentSend(_ viewController: UIViewController, sharedViewModel: PaymentViewModel) {
         if let navController = viewController.navigationController {
-            let vc = SendPaymentViewController()
+            let vc = SendPaymentViewController(sharedViewModel: sharedViewModel)
             navController.pushViewController(vc, animated: true)
         }
     }
     
     public static func showOnChainAddress(_ viewController: UIViewController) {
         viewController.present(OnChainAddressViewController(), animated: true, completion: nil)
+    }
+    
+    public static func openSettingsForApp() {
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+        if (UIApplication.shared.canOpenURL(settingsUrl)) {
+            UIApplication.shared.open(settingsUrl)
+        }
     }
     
 }

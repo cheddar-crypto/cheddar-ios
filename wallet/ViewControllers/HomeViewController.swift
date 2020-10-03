@@ -13,14 +13,14 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
     private lazy var actionBar: CheddarActionBar = {
         let actionBar = CheddarActionBar()
         actionBar.setLeftAction(title: "Request", action: { [weak self] in
-            if let self = self {
-                Navigator.pushRequestAmount(self)
-            }
+            guard let self = self else { return }
+            Navigator.pushRequestAmount(self)
+
         })
         actionBar.setRightAction(title: "Pay", action: { [weak self] in
-            if let self = self {
-                Navigator.pushPaymentScan(self)
-            }
+            guard let self = self else { return }
+            Navigator.pushPaymentScan(self)
+            
         })
         actionBar.translatesAutoresizingMaskIntoConstraints = false
         return actionBar
@@ -62,40 +62,68 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
         setup()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavBarStyles()
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        
+        // Reset the navigation bar if needed
+        let topSafeArea = UIApplication.shared.getStatusBarHeight()
+        let navBar = navigationController?.navigationBar
+        if (navBar?.frame.origin.y != topSafeArea) {
+            UIView.animate(withDuration: 0.2, animations: {
+                navBar?.frame.origin.y = topSafeArea
+            })
+        }
+        
+    }
+    
     override func viewModelDidLoad() {
             
         viewModel.isLoading.observe = { [weak self] isLoading in
-            if (isLoading && !(self?.refreshControl.isRefreshing ?? true)) {
-                self?.showLoadingView()
+            guard let self = self else { return }
+            
+            if (isLoading && !self.refreshControl.isRefreshing) {
+                self.showLoadingView()
             }
         }
         
         viewModel.price.observe = { [weak self] price in
-            self?.refreshPrice(price)
-            self?.refreshControl.endRefreshing()
+            guard let self = self else { return }
+            
+            self.refreshPrice(price)
+            self.refreshControl.endRefreshing()
         }
         
         viewModel.transactions.observe = { [weak self] transaction in
-            self?.visibleCells.removeAll()
-            self?.collectionView.reloadData()
-            self?.showContentView()
-            self?.refreshControl.endRefreshing()
+            guard let self = self else { return }
+            
+            self.visibleCells.removeAll()
+            self.collectionView.reloadData()
+            self.showContentView()
+            self.refreshControl.endRefreshing()
         }
         
         viewModel.error.observe = { [weak self] error in
-            self?.showErrorView()
-            self?.refreshControl.endRefreshing()
+            guard let self = self else { return }
+            
+            self.showErrorView()
+            self.refreshControl.endRefreshing()
         }
         
         viewModel.resultMessage.observe = { [weak self] message in
+            guard let self = self else { return }
+            
 //            self?.resultMessage.text = message
-            self?.showContentView()
+            self.showContentView()
         }
         
         viewModel.newAddress.observe = { [weak self] address in
+            guard let self = self else { return }
+            
 //            self?.resultMessage.text = address
             UIPasteboard.general.string = address
-            self?.showContentView()
+            self.showContentView()
         }
         
         viewModel.walletWipe.observe = { _ in
@@ -133,7 +161,7 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
         actionBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         actionBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         actionBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        actionBar.heightAnchor.constraint(equalToConstant: CGFloat(Dimens.bar)).isActive = true
+        actionBar.heightAnchor.constraint(equalToConstant: Dimens.bar).isActive = true
     }
     
     // MARK: Cell Refreshing
@@ -187,7 +215,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             if let wallet = viewModel.wallet.value, let price = viewModel.price.value {
                 cell.setWallet(wallet, price: price)
             }
-            cell.addressButtonClick = {
+            cell.addressButtonClick = { [weak self] in
+                guard let self = self else { return }
                 Navigator.showOnChainAddress(self)
             }
             return cell

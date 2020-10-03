@@ -9,21 +9,21 @@
 import UIKit
 
 // swiftlint:disable:next private_over_fileprivate
-fileprivate var defaultFunction: (TimeInterval, TimeInterval) -> (Double) = { time, duration in
-  return time / duration
+fileprivate var defaultFunction: (TimeInterval, TimeInterval) -> (CGFloat) = { time, duration in
+    return (CGFloat)(time / duration)
 }
 
 class ValueAnimator {
 
-  let from: Double
-  let to: Double
+  let from: CGFloat
+  let to: CGFloat
   var duration: TimeInterval = 0
   var startTime: Date!
   var displayLink: CADisplayLink?
-  var animationCurveFunction: (TimeInterval, TimeInterval) -> (Double)
-  var valueUpdater: (Double) -> Void
+  var animationCurveFunction: (TimeInterval, TimeInterval) -> (CGFloat)
+  var valueUpdater: (CGFloat) -> Void
 
-  init (from: Double = 0, to: Double = 1, duration: TimeInterval, animationCurveFunction: @escaping (TimeInterval, TimeInterval) -> (Double) = defaultFunction, valueUpdater: @escaping (Double) -> Void) {
+  init(from: CGFloat = 0, to: CGFloat = 1, duration: TimeInterval, animationCurveFunction: @escaping (TimeInterval, TimeInterval) -> (CGFloat) = defaultFunction, valueUpdater: @escaping (CGFloat) -> Void) {
     self.from = from
     self.to = to
     self.duration = duration

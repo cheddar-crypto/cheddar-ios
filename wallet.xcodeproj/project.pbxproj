@@ -71,7 +71,7 @@
 		7A2CC35324EF73D000E2605A /* RequestNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35224EF73D000E2605A /* RequestNoteViewController.swift */; };
 		7A2CC35524EF776400E2605A /* RequestInvoiceQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35424EF776400E2605A /* RequestInvoiceQRViewController.swift */; };
 		7A2CC35724F1C63E00E2605A /* OnChainAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35624F1C63E00E2605A /* OnChainAddressViewController.swift */; };
-		7A2CC35B24F1C7B500E2605A /* ScanInvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35A24F1C7B500E2605A /* ScanInvoiceViewController.swift */; };
+		7A2CC35B24F1C7B500E2605A /* ScanAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35A24F1C7B500E2605A /* ScanAddressViewController.swift */; };
 		7A2CC35D24F1C81100E2605A /* SendPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2CC35C24F1C81100E2605A /* SendPaymentViewController.swift */; };
 		7A2CC36124F1CD3400E2605A /* sofia_pro_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A2CC35E24F1CD3400E2605A /* sofia_pro_medium.ttf */; };
 		7A2CC36224F1CD3400E2605A /* sofia_pro_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A2CC35F24F1CD3400E2605A /* sofia_pro_regular.ttf */; };
@@ -107,6 +107,11 @@
 		7ABFCBDD24E4EC010012EF39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFCBDB24E4EC010012EF39 /* LaunchScreen.storyboard */; };
 		7ABFCBE824E4EC010012EF39 /* LightningTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBE724E4EC010012EF39 /* LightningTests.swift */; };
 		7ABFCBF324E4EC010012EF39 /* walletUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABFCBF224E4EC010012EF39 /* walletUITests.swift */; };
+		7AE77C8C2517CC9D001D22E3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7AE77C8E2517CC9D001D22E3 /* InfoPlist.strings */; };
+		7AE77C902517CEA4001D22E3 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE77C8F2517CEA4001D22E3 /* Permissions.swift */; };
+		7AE77C922517F210001D22E3 /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE77C912517F210001D22E3 /* PaymentViewModel.swift */; };
+		7AE77C9425182A09001D22E3 /* SwipeToSendCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE77C9325182A09001D22E3 /* SwipeToSendCoordinator.swift */; };
+		7AE77CD2251AF8FD001D22E3 /* PaymentFinalizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE77CD1251AF8FD001D22E3 /* PaymentFinalizeView.swift */; };
 		9E840E98A4801A110F5387E7 /* Pods_wallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F290869CC2E00AF959ABA33 /* Pods_wallet.framework */; };
 /* End PBXBuildFile section */
 
@@ -177,7 +182,7 @@
 		7A2CC35224EF73D000E2605A /* RequestNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNoteViewController.swift; sourceTree = "<group>"; };
 		7A2CC35424EF776400E2605A /* RequestInvoiceQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInvoiceQRViewController.swift; sourceTree = "<group>"; };
 		7A2CC35624F1C63E00E2605A /* OnChainAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnChainAddressViewController.swift; sourceTree = "<group>"; };
-		7A2CC35A24F1C7B500E2605A /* ScanInvoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanInvoiceViewController.swift; sourceTree = "<group>"; };
+		7A2CC35A24F1C7B500E2605A /* ScanAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanAddressViewController.swift; sourceTree = "<group>"; };
 		7A2CC35C24F1C81100E2605A /* SendPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPaymentViewController.swift; sourceTree = "<group>"; };
 		7A2CC35E24F1CD3400E2605A /* sofia_pro_medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sofia_pro_medium.ttf; sourceTree = "<group>"; };
 		7A2CC35F24F1CD3400E2605A /* sofia_pro_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sofia_pro_regular.ttf; sourceTree = "<group>"; };
@@ -219,6 +224,11 @@
 		7ABFCBEE24E4EC010012EF39 /* walletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = walletUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ABFCBF224E4EC010012EF39 /* walletUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = walletUITests.swift; sourceTree = "<group>"; };
 		7ABFCBF424E4EC010012EF39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7AE77C8D2517CC9D001D22E3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7AE77C8F2517CEA4001D22E3 /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
+		7AE77C912517F210001D22E3 /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
+		7AE77C9325182A09001D22E3 /* SwipeToSendCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeToSendCoordinator.swift; sourceTree = "<group>"; };
+		7AE77CD1251AF8FD001D22E3 /* PaymentFinalizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFinalizeView.swift; sourceTree = "<group>"; };
 		8169844622EC1A934F64E4C8 /* Pods_wallet_walletUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wallet_walletUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F290869CC2E00AF959ABA33 /* Pods_wallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE6665EF031EDC3E364CE652 /* Pods_walletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_walletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -376,7 +386,7 @@
 				7A2CC35224EF73D000E2605A /* RequestNoteViewController.swift */,
 				7A2CC35424EF776400E2605A /* RequestInvoiceQRViewController.swift */,
 				7A2CC35624F1C63E00E2605A /* OnChainAddressViewController.swift */,
-				7A2CC35A24F1C7B500E2605A /* ScanInvoiceViewController.swift */,
+				7A2CC35A24F1C7B500E2605A /* ScanAddressViewController.swift */,
 				7A2CC35C24F1C81100E2605A /* SendPaymentViewController.swift */,
 			);
 			path = ViewControllers;
@@ -395,6 +405,8 @@
 				7A811E9B24F8930A00F8D8C8 /* Icons.swift */,
 				7A811E9D24F8A66B00F8D8C8 /* Dimens.swift */,
 				7A53782D250EC24600CBA67C /* ValueAnimator.swift */,
+				7AE77C8F2517CEA4001D22E3 /* Permissions.swift */,
+				7AE77C9325182A09001D22E3 /* SwipeToSendCoordinator.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -488,6 +500,7 @@
 				7A811EAD24FF2BF500F8D8C8 /* CheddarChip.swift */,
 				7A811EAF24FF3EA500F8D8C8 /* CurrencyInputView.swift */,
 				7A25B6D92505C9610077E731 /* CheddarActionBar.swift */,
+				7AE77CD1251AF8FD001D22E3 /* PaymentFinalizeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -498,6 +511,7 @@
 				7A2CC37B24F3510900E2605A /* ViewModel.swift */,
 				7A2CC37624F348FE00E2605A /* HomeViewModel.swift */,
 				7A811EAB24FC7E0F00F8D8C8 /* RequestViewModel.swift */,
+				7AE77C912517F210001D22E3 /* PaymentViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -553,6 +567,7 @@
 				7ABFCBD624E4EC010012EF39 /* Assets.xcassets */,
 				7ABFCBDB24E4EC010012EF39 /* LaunchScreen.storyboard */,
 				7ABFCBDE24E4EC010012EF39 /* Info.plist */,
+				7AE77C8E2517CC9D001D22E3 /* InfoPlist.strings */,
 				7A2CC37024F2D7CD00E2605A /* Localizable.strings */,
 				7A1450BF250EF49A0065C7FD /* Localizable.stringsdict */,
 				7A2CC35024EF73AD00E2605A /* Navigator.swift */,
@@ -708,6 +723,7 @@
 				00FB66A82507FCBD003461CD /* lnd-regtest.conf in Resources */,
 				7A2CC36124F1CD3400E2605A /* sofia_pro_medium.ttf in Resources */,
 				7ABFCBD724E4EC010012EF39 /* Assets.xcassets in Resources */,
+				7AE77C8C2517CC9D001D22E3 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -843,9 +859,11 @@
 				7A1450C52511ADB80065C7FD /* TransactionCollectionViewCell.swift in Sources */,
 				00665ED724EF05B700030A13 /* NodePublicKey.swift in Sources */,
 				7A811EA224FC2A5E00F8D8C8 /* CheddarButton.swift in Sources */,
+				7AE77C902517CEA4001D22E3 /* Permissions.swift in Sources */,
 				7A537835250EE84700CBA67C /* UserDefaults.swift in Sources */,
 				7A2CC37224F2D82E00E2605A /* Strings.swift in Sources */,
 				7A811EA824FC455400F8D8C8 /* Misc.swift in Sources */,
+				7AE77C922517F210001D22E3 /* PaymentViewModel.swift in Sources */,
 				7A53782C250EB10600CBA67C /* PriceRepository.swift in Sources */,
 				00665EBA24E9185B00030A13 /* wtclient.pb.swift in Sources */,
 				00665ED224EC510400030A13 /* EventBus.swift in Sources */,
@@ -859,7 +877,7 @@
 				7A2CC37424F3488F00E2605A /* Observable.swift in Sources */,
 				00665EC924EC494A00030A13 /* HomeViewController.swift in Sources */,
 				7A811E9E24F8A66B00F8D8C8 /* Dimens.swift in Sources */,
-				7A2CC35B24F1C7B500E2605A /* ScanInvoiceViewController.swift in Sources */,
+				7A2CC35B24F1C7B500E2605A /* ScanAddressViewController.swift in Sources */,
 				7A2CC37C24F3510900E2605A /* ViewModel.swift in Sources */,
 				7A2CC34B24EF6F9F00E2605A /* CheddarNavigationController.swift in Sources */,
 				00665EB024E9185B00030A13 /* rpc.pb.swift in Sources */,
@@ -885,6 +903,7 @@
 				7A811EAE24FF2BF500F8D8C8 /* CheddarChip.swift in Sources */,
 				7A811EAC24FC7E1000F8D8C8 /* RequestViewModel.swift in Sources */,
 				7A2CC35D24F1C81100E2605A /* SendPaymentViewController.swift in Sources */,
+				7AE77CD2251AF8FD001D22E3 /* PaymentFinalizeView.swift in Sources */,
 				00665EAE24E9185B00030A13 /* router.pb.swift in Sources */,
 				7A1450C2251197480065C7FD /* RootNavigationController.swift in Sources */,
 				7A811EA424FC314000F8D8C8 /* AnimatedView.swift in Sources */,
@@ -900,6 +919,7 @@
 				7A2CC37724F348FE00E2605A /* HomeViewModel.swift in Sources */,
 				7A2CC35124EF73AD00E2605A /* Navigator.swift in Sources */,
 				7A2CC34924EF6F7A00E2605A /* Fonts.swift in Sources */,
+				7AE77C9425182A09001D22E3 /* SwipeToSendCoordinator.swift in Sources */,
 				7A2CC36B24F2D37200E2605A /* ErrorView.swift in Sources */,
 				00665EB224E9185B00030A13 /* autopilot.pb.swift in Sources */,
 			);
@@ -969,6 +989,14 @@
 				7ABFCBDC24E4EC010012EF39 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		7AE77C8E2517CC9D001D22E3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7AE77C8D2517CC9D001D22E3 /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

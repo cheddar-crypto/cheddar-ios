@@ -10,13 +10,23 @@
 "NOTE" = "Note";
 "NEXT" = "Next";
 "FOR" = "For";
+"PAY" = "Pay";
 "COPY" = "Copy";
+"DONE" = "Done";
+"TO" = "To";
+"PAYMENT_SENT" = "Payment Sent";
+"PASTE_LND_INVOICE" = "Paste Invoice";
+"PASTE_BITCOIN_ADDRESS" = "Paste Address";
 "NOTE_PLACEHOLDER" = "Tap to write a message";
 "CREATE_QR" = "Create QR Code";
 "SEE_BITCOIN_ADDRESS" = "See bitcoin address";
 "DEFAULT_ERROR" = "An error occured";
 "TX_YOU_SENT" = "You sent";
 "TX_YOU_RECEIVED" = "You received";
+"SCAN_ADDRESS_TITLE" = "Scan Invoice";
+"ACCESS_CAMERA" = "Allow Camera Access";
+"ACCESS_CAMERA_DESCRIPTION" = "Cheddar needs access to your camera to scan QR codes. Please allow access to start scanning QR codes.";
+"SWIPE_TO_SEND" = "Swipe to send";
 
 // Date
 "SECONDS_AGO" = "%@s";

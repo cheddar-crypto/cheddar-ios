@@ -6,25 +6,27 @@
 //  Copyright © 2020 Michael Miller. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Dimens {
     
-    public static let tall = 72
-    public static let button = 56
-    public static let bar = 88
-    public static let minButtonWidth = 140
-    public static let chip = 44
-    public static let headerText = 54
-    public static let titleText = 20
-    public static let titleTallText = 24
-    public static let idkText = 26
-    public static let normalText = 16
-    public static let shortMargin = 8
-    public static let mediumMargin = 16
-    public static let mmdnMargin = 20
-    public static let midMargin = 28
-    public static let largeMargin = 32
-    public static let shadow = 2
+    public static let tall: CGFloat = 72
+    public static let button: CGFloat = 56
+    public static let bar: CGFloat = 88
+    public static let swipeBar: CGFloat = 120
+    public static let minButtonWidth: CGFloat = 140
+    public static let chip: CGFloat = 44
+    public static let headerText: CGFloat = 54
+    public static let titleText: CGFloat = 20
+    public static let titleTallText: CGFloat = 24
+    public static let idkText: CGFloat = 26
+    public static let normalText: CGFloat = 16
+    public static let shortMargin: CGFloat = 8
+    public static let mediumMargin: CGFloat = 16
+    public static let mmdnMargin: CGFloat = 20
+    public static let midMargin: CGFloat = 28
+    public static let 🖖: CGFloat = 12
+    public static let largeMargin: CGFloat = 32
+    public static let shadow: CGFloat = 2
     
 }

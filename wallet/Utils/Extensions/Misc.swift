@@ -35,6 +35,16 @@ extension String {
         return nil
     }
     
+    var isLightningInvoice: Bool {
+        // TODO: Add functionality
+        return self.contains("lightning:")
+    }
+    
+    var isBitcoinAddress: Bool {
+        // TODO: Add functionality
+        return self.contains("bitcoin:")
+    }
+    
 }
 
 extension Date {
@@ -63,6 +73,19 @@ extension Date {
         let diff = Calendar.current.dateComponents([.weekOfYear], from: self, to: Date()).weekOfYear ?? 0
         return String(format: NSLocalizedString("WEEKS_AGO", comment: "Weeks ago"), String(diff))
         
+    }
+    
+}
+
+extension UIApplication {
+    
+    func getStatusBarHeight() -> CGFloat {
+        if #available(iOS 13.0, *) {
+            let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+            return window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        } else {
+            return UIApplication.shared.statusBarFrame.height
+        }
     }
     
 }
