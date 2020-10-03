@@ -79,12 +79,14 @@ class HomeViewModel: ViewModel {
         lightningRepo.createWallet(
             password: password,
             onSuccess: { [weak self] seed in
-                self?.isLoading.value = false
-                self?.resultMessage.value = seed.joined(separator: ",")
+                guard let self = self else { return }
+                self.isLoading.value = false
+                self.resultMessage.value = seed.joined(separator: ",")
             },
             onFailure: { [weak self] error in
-                self?.isLoading.value = false
-                self?.resultMessage.value = error?.localizedDescription // TODO: Change to error
+                guard let self = self else { return }
+                self.isLoading.value = false
+                self.resultMessage.value = error?.localizedDescription // TODO: Change to error
             })
         
     }
@@ -97,12 +99,14 @@ class HomeViewModel: ViewModel {
         lightningRepo.unlockWallet(
             password: password,
             onSuccess: { [weak self] in
-                self?.isLoading.value = false
-                self?.resultMessage.value = "Wallet unlocked"
+                guard let self = self else { return }
+                self.isLoading.value = false
+                self.resultMessage.value = "Wallet unlocked"
             },
             onFailure: { [weak self] error in
-                self?.isLoading.value = false
-                self?.resultMessage.value = error?.localizedDescription // TODO: Change to error
+                guard let self = self else { return }
+                self.isLoading.value = false
+                self.resultMessage.value = error?.localizedDescription // TODO: Change to error
             })
     }
     
@@ -117,12 +121,14 @@ class HomeViewModel: ViewModel {
             nodePubKey: nodePubKey,
             closeAddress: closeAddress,
             onSuccess: { [weak self] message in
-                self?.isLoading.value = false
-                self?.resultMessage.value = message
+                guard let self = self else { return }
+                self.isLoading.value = false
+                self.resultMessage.value = message
             },
             onFailure: { [weak self] error in
-                self?.isLoading.value = false
-                self?.resultMessage.value = error?.localizedDescription // TODO: Change to error
+                guard let self = self else { return }
+                self.isLoading.value = false
+                self.resultMessage.value = error?.localizedDescription // TODO: Change to error
             })
     }
     
@@ -132,13 +138,15 @@ class HomeViewModel: ViewModel {
         self.isLoading.value = true
         
         lightningRepo.listChannels(onSuccess: { [weak self] (response) in
-            self?.isLoading.value = false
-            self?.resultMessage.value = response.channels.map({ (channel) in
+            guard let self = self else { return }
+            self.isLoading.value = false
+            self.resultMessage.value = response.channels.map({ (channel) in
                 return "\(channel.remotePubkey):\nCan send: \(channel.localBalance) - Can receive: \(channel.remoteBalance)"
             }).joined(separator: "\n\n")
         }) { [weak self] (error) in
-            self?.isLoading.value = false
-            self?.resultMessage.value = error?.localizedDescription
+            guard let self = self else { return }
+            self.isLoading.value = false
+            self.resultMessage.value = error?.localizedDescription
         }
     }
     
@@ -148,12 +156,14 @@ class HomeViewModel: ViewModel {
         self.isLoading.value = true
         
         lightningRepo.pay(paymentRequest: invoice, onSuccess: { [weak self] (response) in
-            self?.isLoading.value = false
-            self?.resultMessage.value = "Paid \(response.numSatoshis) sats to \(response.destination)"
+            guard let self = self else { return }
+            self.isLoading.value = false
+            self.resultMessage.value = "Paid \(response.numSatoshis) sats to \(response.destination)"
         },
         onFailure: { [weak self] error in
-            self?.isLoading.value = false
-            self?.resultMessage.value = error?.localizedDescription // TODO: Change to error
+            guard let self = self else { return }
+            self.isLoading.value = false
+            self.resultMessage.value = error?.localizedDescription // TODO: Change to error
         })
     }
     
@@ -164,12 +174,14 @@ class HomeViewModel: ViewModel {
         
         lightningRepo.wipeWallet(
             onSuccess: { [weak self] in
-                self?.isLoading.value = false
-                self?.walletWipe.value = ()
+                guard let self = self else { return }
+                self.isLoading.value = false
+                self.walletWipe.value = ()
             },
             onFailure: { [weak self] error in
-                self?.isLoading.value = false
-                self?.resultMessage.value = error?.localizedDescription // TODO: Change to error
+                guard let self = self else { return }
+                self.isLoading.value = false
+                self.resultMessage.value = error?.localizedDescription // TODO: Change to error
             })
     }
     
@@ -180,12 +192,14 @@ class HomeViewModel: ViewModel {
         
         lightningRepo.getWalletBalance(
             onSuccess: { [weak self] (total, confirmed, unconfirmed) in
-                self?.isLoading.value = false
-                self?.resultMessage.value = "Total: \(total)\nConfirmed: \(confirmed)\nUnconfirmed: \(unconfirmed)"
+                guard let self = self else { return }
+                self.isLoading.value = false
+                self.resultMessage.value = "Total: \(total)\nConfirmed: \(confirmed)\nUnconfirmed: \(unconfirmed)"
             },
             onFailure: { [weak self] error in
-                self?.isLoading.value = false
-                self?.resultMessage.value = error?.localizedDescription // TODO: Change to error
+                guard let self = self else { return }
+                self.isLoading.value = false
+                self.resultMessage.value = error?.localizedDescription // TODO: Change to error
             })
     }
     
@@ -196,12 +210,14 @@ class HomeViewModel: ViewModel {
         
         lightningRepo.getNewAddress(
             onSuccess: { [weak self] address in
-                self?.isLoading.value = false
-                self?.newAddress.value = address
+                guard let self = self else { return }
+                self.isLoading.value = false
+                self.newAddress.value = address
             },
             onFailure: { [weak self] error in
-                self?.isLoading.value = false
-                self?.resultMessage.value = error?.localizedDescription // TODO: Change to error
+                guard let self = self else { return }
+                self.isLoading.value = false
+                self.resultMessage.value = error?.localizedDescription // TODO: Change to error
             })
     }
     

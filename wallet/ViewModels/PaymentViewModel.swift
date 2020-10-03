@@ -47,7 +47,8 @@ class PaymentViewModel: ViewModel {
     func sendPayment() {
         print("Sending! 🧀")
         isLoading.value = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            guard let self = self else { return }
             self.isLoading.value = false
             self.paymentSent.value = Payment(someValue: 123)
         }

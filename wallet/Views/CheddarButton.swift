@@ -62,7 +62,7 @@ class CheddarButton: AnimatedView {
         case .bordered:
             label.textColor = Theme.inverseBackgroundColor
             backgroundColor = Theme.backgroundColor
-            layer.borderWidth = CGFloat(Dimens.shadow)
+            layer.borderWidth = Dimens.shadow
             layer.borderColor = Theme.shadowColor.cgColor
         case .white:
             label.textColor = .gray900
@@ -82,7 +82,7 @@ class CheddarButton: AnimatedView {
     }
     
     private func addLabel() {
-        addSubviewAndFill(label, top: 2.0, leading: CGFloat(Dimens.midMargin), trailing: -CGFloat(Dimens.midMargin))
+        addSubviewAndFill(label, top: 2.0, leading: Dimens.midMargin, trailing: -Dimens.midMargin)
     }
     
     override func layoutSublayers(of layer: CALayer) {

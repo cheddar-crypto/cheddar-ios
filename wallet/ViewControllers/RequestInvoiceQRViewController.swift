@@ -24,7 +24,8 @@ class RequestInvoiceQRViewController: CheddarViewController<RequestViewModel> {
     
     private lazy var copyButton = {
         return CheddarButton(style: .bordered, action: { [weak self] in
-            UIPasteboard.general.string = self?.viewModel.invoice.value ?? "" // TODO: Use proper lnd invoice
+            guard let self = self else { return }
+            UIPasteboard.general.string = self.viewModel.invoice.value // TODO: Use proper lnd invoice
         })
     }()
     
@@ -62,7 +63,7 @@ class RequestInvoiceQRViewController: CheddarViewController<RequestViewModel> {
         actionBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         actionBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         actionBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        actionBar.heightAnchor.constraint(equalToConstant: CGFloat(Dimens.bar)).isActive = true
+        actionBar.heightAnchor.constraint(equalToConstant: Dimens.bar).isActive = true
         
         // Add buttons
         actionBar.setLeftAction(title: "Close", action: { [weak self] in // TODO Localization
@@ -88,8 +89,8 @@ class RequestInvoiceQRViewController: CheddarViewController<RequestViewModel> {
         imageContainer.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor).isActive = true
-        imageView.centerYAnchor.constraint(equalTo: imageContainer.centerYAnchor, constant: -CGFloat(Dimens.largeMargin)).isActive = true
-        let margins = CGFloat(Dimens.largeMargin * 2)
+        imageView.centerYAnchor.constraint(equalTo: imageContainer.centerYAnchor, constant: -Dimens.largeMargin).isActive = true
+        let margins = Dimens.largeMargin * 2
         let size = view.frame.width - margins
         imageView.widthAnchor.constraint(equalToConstant: size).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: size).isActive = true
@@ -99,10 +100,10 @@ class RequestInvoiceQRViewController: CheddarViewController<RequestViewModel> {
         copyButton.title = .copy
         imageContainer.addSubview(copyButton)
         copyButton.translatesAutoresizingMaskIntoConstraints = false
-        copyButton.heightAnchor.constraint(equalToConstant: CGFloat(Dimens.button)).isActive = true
-        copyButton.widthAnchor.constraint(greaterThanOrEqualToConstant: CGFloat(Dimens.minButtonWidth)).isActive = true
+        copyButton.heightAnchor.constraint(equalToConstant: Dimens.button).isActive = true
+        copyButton.widthAnchor.constraint(greaterThanOrEqualToConstant: Dimens.minButtonWidth).isActive = true
         copyButton.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor).isActive = true
-        copyButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
+        copyButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: Dimens.mediumMargin).isActive = true
     }
 
 }

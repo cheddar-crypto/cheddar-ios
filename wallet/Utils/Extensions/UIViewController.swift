@@ -24,7 +24,7 @@ extension UIViewController {
         
         // Shadow
         navigationController?.navigationBar.layer.shadowColor = Theme.shadowColor.cgColor
-        navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: CGFloat(Dimens.shadow))
+        navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: Dimens.shadow)
         navigationController?.navigationBar.layer.shadowRadius = 0.0
         navigationController?.navigationBar.layer.shadowOpacity = 1.0
         navigationController?.navigationBar.layer.masksToBounds = false

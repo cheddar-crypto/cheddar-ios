@@ -16,8 +16,8 @@ class CurrencyInputView: AnimatedView {
         case collapsed
     }
     
-    public static let minHeight = CGFloat(56.0)
-    public static let maxHeight = CGFloat(104.0)
+    public static let minHeight: CGFloat = 56.0
+    public static let maxHeight: CGFloat = 104.0
     
     private var currentStyle = Style.collapsed
     var prefixChar: String // TODO: Use image
@@ -47,7 +47,7 @@ class CurrencyInputView: AnimatedView {
         clipsToBounds = true
         addLabel()
         addTapRecognizer()
-        layer.borderWidth = CGFloat(Dimens.shadow)
+        layer.borderWidth = Dimens.shadow
         layer.borderColor = Theme.shadowColor.cgColor
     }
     
@@ -82,19 +82,19 @@ class CurrencyInputView: AnimatedView {
             label.setFont(
                 animationDuration: animated ? Theme.defaultAnimationDuration : 0,
                 weight: .bold,
-                newSize: CGFloat(Dimens.headerText))
+                newSize: Dimens.headerText)
         case .expanded:
             layer.borderColor = Theme.primaryColor.cgColor
             label.setFont(
                 animationDuration: animated ? Theme.defaultAnimationDuration : 0,
                 weight: .bold,
-                newSize: CGFloat(Dimens.headerText))
+                newSize: Dimens.headerText)
         case .collapsed:
             layer.borderColor = Theme.shadowColor.cgColor
             label.setFont(
                 animationDuration: animated ? Theme.defaultAnimationDuration : 0,
                 weight: .medium,
-                newSize: CGFloat(Dimens.titleText))
+                newSize: Dimens.titleText)
         }
     }
 

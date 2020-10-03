@@ -42,7 +42,7 @@ class CheddarChip: AnimatedView {
         clipsToBounds = true
         addLabel()
         addTapRecognizer()
-        layer.cornerRadius = CGFloat(Dimens.chip) / 2
+        layer.cornerRadius = Dimens.chip / 2
     }
     
     private func addTapRecognizer() {
@@ -55,7 +55,7 @@ class CheddarChip: AnimatedView {
     }
     
     private func addLabel() {
-        let padding = CGFloat(Dimens.🖖)
+        let padding = Dimens.🖖
         addSubviewAndFill(label, top: padding + 2.0, bottom: -padding, leading: padding, trailing: -padding)
     }
 
