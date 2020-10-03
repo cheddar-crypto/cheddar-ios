@@ -16,11 +16,11 @@ extension UILabel {
                 from: font.pointSize,
                 to: newSize,
                 duration: animationDuration,
-                valueUpdater: { value in
-                    self.font = Fonts.sofiaPro(weight: weight, Int(value))
+                valueUpdater: { [weak self] value in
+                    self?.font = Fonts.sofiaPro(weight: weight, value)
                 }).start()
         } else {
-            font = Fonts.sofiaPro(weight: weight, Int(newSize))
+            font = Fonts.sofiaPro(weight: weight, newSize)
         }
     }
     

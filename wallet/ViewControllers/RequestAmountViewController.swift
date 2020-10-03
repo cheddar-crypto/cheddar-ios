@@ -12,9 +12,9 @@ class RequestAmountViewController: CheddarViewController<RequestViewModel> {
     
     private lazy var nextButton = {
         return CheddarButton(action: { [weak self] in
-            if let self = self {
-                Navigator.pushRequestNote(self, sharedViewModel: self.viewModel)
-            }
+            guard let self = self else { return }
+            
+            Navigator.pushRequestNote(self, sharedViewModel: self.viewModel)
         })
     }()
     
@@ -45,11 +45,14 @@ class RequestAmountViewController: CheddarViewController<RequestViewModel> {
         return CurrencyInputView(
             prefixChar: "$", // TODO
             action: { [weak self] in
-                UIView.animate(withDuration: Theme.defaultAnimationDuration, delay: 0.0, options: [.allowUserInteraction], animations: {
-                    self?.expandCryptoView()
-                    self?.amountHeightConstraint?.constant = CurrencyInputView.maxHeight
-                    self?.fiatHeightConstraint?.constant = CurrencyInputView.minHeight
-                    self?.amountContainer.layoutIfNeeded()
+                guard let self = self else { return }
+                UIView.animate(withDuration: Theme.defaultAnimationDuration, delay: 0.0, options: [.allowUserInteraction], animations: { [weak self] in
+                    guard let self = self else { return }
+                    
+                    self.expandCryptoView()
+                    self.amountHeightConstraint?.constant = CurrencyInputView.maxHeight
+                    self.fiatHeightConstraint?.constant = CurrencyInputView.minHeight
+                    self.amountContainer.layoutIfNeeded()
                 })
             })
     }()
@@ -58,11 +61,13 @@ class RequestAmountViewController: CheddarViewController<RequestViewModel> {
         return CurrencyInputView(
             prefixChar: "₿", // TODO
             action: { [weak self] in
-                UIView.animate(withDuration: Theme.defaultAnimationDuration, delay: 0.0, options: [.allowUserInteraction], animations: {
-                    self?.expandFiatView()
-                    self?.amountHeightConstraint?.constant = CurrencyInputView.minHeight
-                    self?.fiatHeightConstraint?.constant = CurrencyInputView.maxHeight
-                    self?.amountContainer.layoutIfNeeded()
+                guard let self = self else { return }
+                UIView.animate(withDuration: Theme.defaultAnimationDuration, delay: 0.0, options: [.allowUserInteraction], animations: { [weak self] in
+                    guard let self = self else { return }
+                    self.expandFiatView()
+                    self.amountHeightConstraint?.constant = CurrencyInputView.minHeight
+                    self.fiatHeightConstraint?.constant = CurrencyInputView.maxHeight
+                    self.amountContainer.layoutIfNeeded()
                 })
             })
     }()
@@ -123,17 +128,17 @@ class RequestAmountViewController: CheddarViewController<RequestViewModel> {
     private func addNextButton() {
         view.addSubview(nextButton)
         nextButton.translatesAutoresizingMaskIntoConstraints = false
-        nextButton.heightAnchor.constraint(equalToConstant: CGFloat(Dimens.button)).isActive = true
-        nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -CGFloat(Dimens.mediumMargin)).isActive = true
-        nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
-        nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -CGFloat(Dimens.mediumMargin)).isActive = true
+        nextButton.heightAnchor.constraint(equalToConstant: Dimens.button).isActive = true
+        nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -Dimens.mediumMargin).isActive = true
+        nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Dimens.mediumMargin).isActive = true
+        nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Dimens.mediumMargin).isActive = true
         nextButton.title = .next
     }
     
     private func addNumberPad() {
         view.addSubview(numberPad)
         numberPad.translatesAutoresizingMaskIntoConstraints = false
-        numberPad.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -CGFloat(Dimens.mediumMargin)).isActive = true
+        numberPad.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -Dimens.mediumMargin).isActive = true
         numberPad.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         numberPad.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
@@ -144,10 +149,10 @@ class RequestAmountViewController: CheddarViewController<RequestViewModel> {
         let containerView = UIView()
         view.addSubview(containerView)
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.topAnchor.constraint(equalTo: view.topAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -CGFloat(Dimens.mediumMargin)).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: numberPad.topAnchor, constant: -CGFloat(Dimens.mediumMargin)).isActive = true
+        containerView.topAnchor.constraint(equalTo: view.topAnchor, constant: Dimens.mediumMargin).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Dimens.mediumMargin).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Dimens.mediumMargin).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: numberPad.topAnchor, constant: -Dimens.mediumMargin).isActive = true
         
         // Add stackview
         containerView.addSubview(amountContainer)
@@ -172,7 +177,7 @@ class RequestAmountViewController: CheddarViewController<RequestViewModel> {
     private func addFiatLabel() {
         amountContainer.addSubview(cryptoInputView)
         cryptoInputView.translatesAutoresizingMaskIntoConstraints = false
-        cryptoInputView.topAnchor.constraint(equalTo: fiatInputView.bottomAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
+        cryptoInputView.topAnchor.constraint(equalTo: fiatInputView.bottomAnchor, constant: Dimens.mediumMargin).isActive = true
         cryptoInputView.leadingAnchor.constraint(equalTo: amountContainer.leadingAnchor).isActive = true
         cryptoInputView.trailingAnchor.constraint(equalTo: amountContainer.trailingAnchor).isActive = true
         cryptoInputView.bottomAnchor.constraint(equalTo: amountContainer.bottomAnchor).isActive = true

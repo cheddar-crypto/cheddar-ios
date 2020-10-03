@@ -44,10 +44,12 @@ extension UIView {
     
     func animateOut(duration: TimeInterval = 0.25, toScale: CGFloat = 0.9, delay: TimeInterval = 0.0, onComplete: (() -> Void)? = nil) {
         self.isHidden = false
-        UIView.animate(withDuration: duration, delay: delay, options: [.allowUserInteraction, .curveEaseIn], animations: {
+        UIView.animate(withDuration: duration, delay: delay, options: [.allowUserInteraction, .curveEaseIn], animations: { [weak self] in
+            guard let self = self else { return }
             self.transform = CGAffineTransform(scaleX: toScale, y: toScale)
             self.alpha = 0
-        }, completion: { complete in
+        }, completion: { [weak self] complete in
+            guard let self = self else { return }
             self.isHidden = true
             onComplete?()
         })

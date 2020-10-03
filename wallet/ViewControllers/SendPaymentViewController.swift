@@ -91,19 +91,23 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
         super.viewModelDidLoad()
         
         viewModel.note.observe = { [weak self] note in
-            self?.forLabel.isHidden = note == nil
-            self?.textView.isHidden = note == nil
-            self?.textView.text = note
+            guard let self = self else { return }
+            
+            self.forLabel.isHidden = note == nil
+            self.textView.isHidden = note == nil
+            self.textView.text = note
             
             // TODO: Move to another observer if we support onchain txs
-            self?.textViewPlaceholder.isHidden = true
-            self?.textView.isEditable = false
-            self?.textView.isSelectable = false
+            self.textViewPlaceholder.isHidden = true
+            self.textView.isEditable = false
+            self.textView.isSelectable = false
         }
         
         viewModel.isLoading.observe = { [weak self] isLoading in
+            guard let self = self else { return }
+            
             if (isLoading) {
-                self?.swipeView.showLoading()
+                self.swipeView.showLoading()
             }
         }
         
@@ -114,8 +118,12 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
         }
         
         viewModel.paymentSent.observe = { [weak self] payment in
-            self?.swipeView.showContent {
-                if let navController = self?.navigationController as? CheddarNavigationController {
+            guard let self = self else { return }
+            
+            self.swipeView.showContent { [weak self] in
+                guard let self = self else { return }
+                
+                if let navController = self.navigationController as? CheddarNavigationController {
                     navController.statusBarStyle = .default
                     navController.popToRootViewController(animated: true)
                 }
@@ -161,7 +169,9 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
             
             swipeCoordinator = SwipeToSendCoordinator(
                 gestureView: swipeView,
-                onOffsetChange: { (travelDistance, offset) in
+                onOffsetChange: { [weak self] (travelDistance, offset) in
+                    guard let self = self else { return }
+                    
                     navController.statusBarStyle = .default
                     navController.interactivePopGestureRecognizer?.isEnabled = offset == 0
                     
@@ -182,7 +192,9 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
                     }
                     
                 },
-                onSend: {
+                onSend: { [weak self] in
+                    guard let self = self else { return }
+                    
                     navController.statusBarStyle = .darkContent
                     self.viewModel.sendPayment()
                 })
@@ -208,32 +220,32 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
         topDivider.topAnchor.constraint(equalTo: contentContainer.topAnchor).isActive = true
         topDivider.trailingAnchor.constraint(equalTo: contentContainer.trailingAnchor).isActive = true
         topDivider.leadingAnchor.constraint(equalTo: contentContainer.leadingAnchor).isActive = true
-        topDivider.heightAnchor.constraint(equalToConstant: CGFloat(Dimens.shadow)).isActive = true
+        topDivider.heightAnchor.constraint(equalToConstant: Dimens.shadow).isActive = true
     }
     
     private func addAmountChip() {
         contentContainer.addSubview(amountChip)
         amountChip.translatesAutoresizingMaskIntoConstraints = false
-        amountChip.heightAnchor.constraint(equalToConstant: CGFloat(Dimens.chip)).isActive = true
-        amountChip.topAnchor.constraint(equalTo: topDivider.bottomAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
-        amountChip.leadingAnchor.constraint(equalTo: contentContainer.leadingAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
+        amountChip.heightAnchor.constraint(equalToConstant: Dimens.chip).isActive = true
+        amountChip.topAnchor.constraint(equalTo: topDivider.bottomAnchor, constant: Dimens.mediumMargin).isActive = true
+        amountChip.leadingAnchor.constraint(equalTo: contentContainer.leadingAnchor, constant: Dimens.mediumMargin).isActive = true
         amountChip.title = viewModel.getAmountTitle()
     }
     
     private func addToLabel() {
         contentContainer.addSubview(toLabel)
         toLabel.translatesAutoresizingMaskIntoConstraints = false
-        toLabel.leadingAnchor.constraint(equalTo: amountChip.trailingAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
+        toLabel.leadingAnchor.constraint(equalTo: amountChip.trailingAnchor, constant: Dimens.mediumMargin).isActive = true
         toLabel.centerYAnchor.constraint(equalTo: amountChip.centerYAnchor).isActive = true
     }
     
     private func addReceiverChip() {
         contentContainer.addSubview(receiverChip)
         receiverChip.translatesAutoresizingMaskIntoConstraints = false
-        receiverChip.heightAnchor.constraint(greaterThanOrEqualToConstant: CGFloat(Dimens.chip)).isActive = true
-        receiverChip.topAnchor.constraint(equalTo: amountChip.bottomAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
-        receiverChip.leadingAnchor.constraint(equalTo: contentContainer.leadingAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
-        receiverChip.trailingAnchor.constraint(equalTo: contentContainer.trailingAnchor, constant: -CGFloat(Dimens.mediumMargin)).isActive = true
+        receiverChip.heightAnchor.constraint(greaterThanOrEqualToConstant: Dimens.chip).isActive = true
+        receiverChip.topAnchor.constraint(equalTo: amountChip.bottomAnchor, constant: Dimens.mediumMargin).isActive = true
+        receiverChip.leadingAnchor.constraint(equalTo: contentContainer.leadingAnchor, constant: Dimens.mediumMargin).isActive = true
+        receiverChip.trailingAnchor.constraint(equalTo: contentContainer.trailingAnchor, constant: -Dimens.mediumMargin).isActive = true
         receiverChip.title = viewModel.getReceiver()
     }
     
@@ -246,7 +258,7 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
             swipeView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             swipeView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
             let bottomPadding = window.safeAreaInsets.bottom
-            let peek = CGFloat(Dimens.swipeBar) + bottomPadding
+            let peek = Dimens.swipeBar + bottomPadding
             swipeView.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -peek).isActive = true
         }
     }
@@ -256,13 +268,13 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
         // Arrow
         view.addSubview(swipeToSendArrow)
         swipeToSendArrow.translatesAutoresizingMaskIntoConstraints = false
-        swipeToSendArrow.topAnchor.constraint(equalTo: swipeView.topAnchor, constant: CGFloat(Dimens.mmdnMargin)).isActive = true
+        swipeToSendArrow.topAnchor.constraint(equalTo: swipeView.topAnchor, constant: Dimens.mmdnMargin).isActive = true
         swipeToSendArrow.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor).isActive = true
         
         // Label
         view.addSubview(swipeToSendLabel)
         swipeToSendLabel.translatesAutoresizingMaskIntoConstraints = false
-        swipeToSendLabel.topAnchor.constraint(equalTo: swipeToSendArrow.bottomAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
+        swipeToSendLabel.topAnchor.constraint(equalTo: swipeToSendArrow.bottomAnchor, constant: Dimens.mediumMargin).isActive = true
         swipeToSendLabel.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor).isActive = true
         
     }
@@ -271,10 +283,10 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
         
         contentContainer.addSubview(bottomDivider)
         bottomDivider.translatesAutoresizingMaskIntoConstraints = false
-        bottomDivider.topAnchor.constraint(equalTo: receiverChip.bottomAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
+        bottomDivider.topAnchor.constraint(equalTo: receiverChip.bottomAnchor, constant: Dimens.mediumMargin).isActive = true
         bottomDivider.trailingAnchor.constraint(equalTo: contentContainer.trailingAnchor).isActive = true
         bottomDivider.leadingAnchor.constraint(equalTo: contentContainer.leadingAnchor).isActive = true
-        bottomDivider.heightAnchor.constraint(equalToConstant: CGFloat(Dimens.shadow)).isActive = true
+        bottomDivider.heightAnchor.constraint(equalToConstant: Dimens.shadow).isActive = true
         
         // For label
         let forLabel = UILabel()
@@ -283,8 +295,8 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
         forLabel.font = Fonts.sofiaPro(weight: .regular, Dimens.titleText)
         contentContainer.addSubview(forLabel)
         forLabel.translatesAutoresizingMaskIntoConstraints = false
-        forLabel.topAnchor.constraint(equalTo: bottomDivider.bottomAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
-        forLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
+        forLabel.topAnchor.constraint(equalTo: bottomDivider.bottomAnchor, constant: Dimens.mediumMargin).isActive = true
+        forLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Dimens.mediumMargin).isActive = true
         
         // TextView
         contentContainer.addSubview(textView)
@@ -293,11 +305,11 @@ class SendPaymentViewController: CheddarViewController<PaymentViewModel> {
         textView.font = Fonts.sofiaPro(weight: .regular, Dimens.titleText)
         textView.isScrollEnabled = true
         textView.backgroundColor = Theme.backgroundColor
-        let padding = CGFloat(Dimens.mediumMargin)
+        let padding = Dimens.mediumMargin
         textView.textContainerInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.topAnchor.constraint(equalTo: bottomDivider.bottomAnchor).isActive = true
-        textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(Dimens.tall) - padding).isActive = true
+        textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Dimens.tall - padding).isActive = true
         textView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         textView.bottomAnchor.constraint(equalTo: swipeView.topAnchor).isActive = true
         

@@ -68,11 +68,12 @@ class PaymentFinalizeView: UIView {
     }
     
     func showContent(onDoneAction: @escaping () -> Void) {
+        
         self.onDoneAction = onDoneAction
-        self.loadingIndicator.animateOut {
-            self.imageView.animateIn(fromScale: 0) {
-                self.sentLabel.animateIn(delay: 0.1) {
-                    self.doneButton.animateIn(delay: 0.1)
+        self.loadingIndicator.animateOut { [weak self] in
+            self?.imageView.animateIn(fromScale: 0) { [weak self] in
+                self?.sentLabel.animateIn(delay: 0.1) { [weak self] in
+                    self?.doneButton.animateIn(delay: 0.1)
                 }
             }
         }
@@ -93,24 +94,24 @@ class PaymentFinalizeView: UIView {
     private func addDoneButton() {
         if let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first {
             addSubview(doneButton)
-            doneButton.heightAnchor.constraint(equalToConstant: CGFloat(Dimens.button)).isActive = true
-            doneButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
-            doneButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -CGFloat(Dimens.mediumMargin)).isActive = true
-            doneButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -(window.safeAreaInsets.bottom + CGFloat(Dimens.mediumMargin))).isActive = true
+            doneButton.heightAnchor.constraint(equalToConstant: Dimens.button).isActive = true
+            doneButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Dimens.mediumMargin).isActive = true
+            doneButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Dimens.mediumMargin).isActive = true
+            doneButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -(window.safeAreaInsets.bottom + Dimens.mediumMargin)).isActive = true
         }
     }
     
     private func addImageView() {
         addSubview(imageView)
         imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        imageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -CGFloat(Dimens.bar)).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -Dimens.bar).isActive = true
     }
     
     private func addSentLabel() {
         addSubview(sentLabel)
-        sentLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: CGFloat(Dimens.largeMargin)).isActive = true
-        sentLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: CGFloat(Dimens.mediumMargin)).isActive = true
-        sentLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -CGFloat(Dimens.mediumMargin)).isActive = true
+        sentLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: Dimens.largeMargin).isActive = true
+        sentLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Dimens.mediumMargin).isActive = true
+        sentLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Dimens.mediumMargin).isActive = true
     }
 
 }

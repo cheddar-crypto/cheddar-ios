@@ -17,8 +17,10 @@ class ScanAddressViewController: CheddarViewController<PaymentViewModel>, AVCapt
     private let emptyView = UIView()
     private lazy var pasteButton: CheddarButton = {
         let button = CheddarButton(style: .primary, action: { [weak self] in
+            guard let self = self else { return }
+            
             if let copiedText = UIPasteboard.general.string {
-                self?.viewModel.postDiscoveredValue(value: copiedText)
+                self.viewModel.postDiscoveredValue(value: copiedText)
             }
         })
         return button
@@ -59,20 +61,18 @@ class ScanAddressViewController: CheddarViewController<PaymentViewModel>, AVCapt
         super.viewModelDidLoad()
         
         viewModel.bitcoinAddress.observe = { [weak self] address in
-            
+            guard let self = self else { return }
             // TODO: Handle flow slightly better here
             
-            if let self = self {
-                UIPasteboard.general.string = address
-                Navigator.pushPaymentSend(self, sharedViewModel: self.viewModel)
-            }
+            UIPasteboard.general.string = address
+            Navigator.pushPaymentSend(self, sharedViewModel: self.viewModel)
         }
         
         viewModel.invoice.observe = { [weak self] invoice in
-            if let self = self {
-                UIPasteboard.general.string = invoice
-                Navigator.pushPaymentSend(self, sharedViewModel: self.viewModel)
-            }
+            guard let self = self else { return }
+
+            UIPasteboard.general.string = invoice
+            Navigator.pushPaymentSend(self, sharedViewModel: self.viewModel)
         }
         
     }
@@ -111,15 +111,15 @@ class ScanAddressViewController: CheddarViewController<PaymentViewModel>, AVCapt
         
         // Add the container
         let container = UIStackView()
-        container.spacing = CGFloat(Dimens.largeMargin)
+        container.spacing = Dimens.largeMargin
         container.axis = .vertical
         container.distribution = .fillEqually
         view.addSubview(container)
         container.translatesAutoresizingMaskIntoConstraints = false
         container.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         container.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        container.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: CGFloat(Dimens.largeMargin)).isActive = true
-        container.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -CGFloat(Dimens.largeMargin)).isActive = true
+        container.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Dimens.largeMargin).isActive = true
+        container.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Dimens.largeMargin).isActive = true
         
         // Add stacked views
         let titleLabel = UILabel()
@@ -147,13 +147,15 @@ class ScanAddressViewController: CheddarViewController<PaymentViewModel>, AVCapt
         })
         
         accessButton.title = .requestCameraAccess
-        accessButton.heightAnchor.constraint(equalToConstant: CGFloat(Dimens.button)).isActive = true
+        accessButton.heightAnchor.constraint(equalToConstant: Dimens.button).isActive = true
         container.addArrangedSubview(accessButton)
         
     }
     
     private func showCamera() {
-        DispatchQueue.main.async {
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.addCameraPreview()
             self.emptyView.removeFromSuperview()
             self.view.bringSubviewToFront(self.gradientView)
@@ -208,7 +210,7 @@ class ScanAddressViewController: CheddarViewController<PaymentViewModel>, AVCapt
         imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -CGFloat(Dimens.bar)).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -Dimens.bar).isActive = true
         
     }
     
@@ -216,8 +218,8 @@ class ScanAddressViewController: CheddarViewController<PaymentViewModel>, AVCapt
         view.addSubview(pasteButton)
         pasteButton.translatesAutoresizingMaskIntoConstraints = false
         pasteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        pasteButton.heightAnchor.constraint(equalToConstant: CGFloat(Dimens.button)).isActive = true
-        pasteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -CGFloat(Dimens.button)).isActive = true
+        pasteButton.heightAnchor.constraint(equalToConstant: Dimens.button).isActive = true
+        pasteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -Dimens.button).isActive = true
         showPasteButtonIfNeeded()
     }
     

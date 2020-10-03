@@ -111,7 +111,8 @@ class SwipeToSendCoordinator {
     // Animates the view out
     private func exit(duration: TimeInterval) {
         
-        ValueAnimator(from: gestureView.frame.origin.y, to: gestureViewOffset.max, duration: duration, valueUpdater: { value in
+        ValueAnimator(from: gestureView.frame.origin.y, to: gestureViewOffset.max, duration: duration, valueUpdater: { [weak self] value in
+            guard let self = self else { return }
             
             let v = CGFloat(value)
             let offset = v / self.gestureViewOffset.min
@@ -136,7 +137,8 @@ class SwipeToSendCoordinator {
     // Resets the views back to their original state
     func reset(duration: TimeInterval) {
         
-        ValueAnimator(from: gestureView.frame.origin.y, to: gestureViewOffset.min, duration: duration, valueUpdater: { value in
+        ValueAnimator(from: gestureView.frame.origin.y, to: gestureViewOffset.min, duration: duration, valueUpdater: { [weak self] value in
+            guard let self = self else { return }
             
             let offset = value / self.gestureViewOffset.min
             if (!offset.isNaN) {
@@ -162,11 +164,12 @@ class SwipeToSendCoordinator {
             return
         }
         
-        let peekAmount = gestureViewOffset.min - CGFloat(Dimens.mediumMargin)
+        let peekAmount = gestureViewOffset.min - Dimens.mediumMargin
         let duration = SwipeToSendCoordinator.animationDuration
         isPeeking = true
         
-        ValueAnimator(from: gestureViewOffset.min, to: peekAmount, duration: duration, valueUpdater: { value in
+        ValueAnimator(from: gestureViewOffset.min, to: peekAmount, duration: duration, valueUpdater: { [weak self] value in
+            guard let self = self else { return }
             
             // Animate
             let offset = value / self.gestureViewOffset.min
