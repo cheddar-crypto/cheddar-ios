@@ -63,7 +63,7 @@ class RequestInvoiceQRViewController: CheddarViewController<RequestViewModel> {
         actionBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         actionBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         actionBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        actionBar.heightAnchor.constraint(equalToConstant: Dimens.bar).isActive = true
+        actionBar.heightAnchor.constraint(equalToConstant: Dimens.view88).isActive = true
         
         // Add buttons
         actionBar.setLeftAction(title: "Close", action: { [weak self] in // TODO Localization
@@ -89,8 +89,8 @@ class RequestInvoiceQRViewController: CheddarViewController<RequestViewModel> {
         imageContainer.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor).isActive = true
-        imageView.centerYAnchor.constraint(equalTo: imageContainer.centerYAnchor, constant: -Dimens.largeMargin).isActive = true
-        let margins = Dimens.largeMargin * 2
+        imageView.centerYAnchor.constraint(equalTo: imageContainer.centerYAnchor, constant: -Dimens.margin32).isActive = true
+        let margins = Dimens.margin32 * 2
         let size = view.frame.width - margins
         imageView.widthAnchor.constraint(equalToConstant: size).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: size).isActive = true
@@ -100,10 +100,10 @@ class RequestInvoiceQRViewController: CheddarViewController<RequestViewModel> {
         copyButton.title = .copy
         imageContainer.addSubview(copyButton)
         copyButton.translatesAutoresizingMaskIntoConstraints = false
-        copyButton.heightAnchor.constraint(equalToConstant: Dimens.button).isActive = true
-        copyButton.widthAnchor.constraint(greaterThanOrEqualToConstant: Dimens.minButtonWidth).isActive = true
+        copyButton.heightAnchor.constraint(equalToConstant: Dimens.view56).isActive = true
+        copyButton.widthAnchor.constraint(greaterThanOrEqualToConstant: Dimens.view140).isActive = true
         copyButton.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor).isActive = true
-        copyButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: Dimens.mediumMargin).isActive = true
+        copyButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: Dimens.margin16).isActive = true
     }
 
 }

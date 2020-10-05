@@ -22,7 +22,7 @@ class CheddarButton: AnimatedView {
     private let label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = Fonts.sofiaPro(weight: .bold, Dimens.titleText)
+        label.font = Fonts.sofiaPro(weight: .bold, Dimens.text20)
         return label
     }()
     var title: String? {
@@ -62,7 +62,7 @@ class CheddarButton: AnimatedView {
         case .bordered:
             label.textColor = Theme.inverseBackgroundColor
             backgroundColor = Theme.backgroundColor
-            layer.borderWidth = Dimens.shadow
+            layer.borderWidth = Dimens.view2
             layer.borderColor = Theme.shadowColor.cgColor
         case .white:
             label.textColor = .gray900
@@ -82,7 +82,7 @@ class CheddarButton: AnimatedView {
     }
     
     private func addLabel() {
-        addSubviewAndFill(label, top: 2.0, leading: Dimens.midMargin, trailing: -Dimens.midMargin)
+        addSubviewAndFill(label, top: 2.0, leading: Dimens.margin28, trailing: -Dimens.margin28)
     }
     
     override func layoutSublayers(of layer: CALayer) {

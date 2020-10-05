@@ -30,7 +30,7 @@ class TransactionCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.backgroundColor = .clear
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = Fonts.sofiaPro(weight: .bold, Dimens.titleText)
+        label.font = Fonts.sofiaPro(weight: .bold, Dimens.text20)
         label.textColor = Theme.inverseBackgroundColor
         return label
     }()
@@ -39,7 +39,7 @@ class TransactionCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.backgroundColor = .clear
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = Fonts.sofiaPro(weight: .regular, Dimens.titleText)
+        label.font = Fonts.sofiaPro(weight: .regular, Dimens.text20)
         label.textColor = Theme.inverseBackgroundColor
         return label
     }()
@@ -48,7 +48,7 @@ class TransactionCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.backgroundColor = .clear
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = Fonts.sofiaPro(weight: .bold, Dimens.titleTallText)
+        label.font = Fonts.sofiaPro(weight: .bold, Dimens.text24)
         label.textColor = Theme.inverseBackgroundColor
         return label
     }()
@@ -57,7 +57,7 @@ class TransactionCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.backgroundColor = .clear
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = Fonts.sofiaPro(weight: .regular, Dimens.titleText)
+        label.font = Fonts.sofiaPro(weight: .regular, Dimens.text20)
         label.textColor = Theme.shadowColor
         return label
     }()
@@ -67,7 +67,7 @@ class TransactionCollectionViewCell: UICollectionViewCell {
         label.backgroundColor = .clear
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = Fonts.sofiaPro(weight: .regular, Dimens.titleText)
+        label.font = Fonts.sofiaPro(weight: .regular, Dimens.text20)
         label.textColor = Theme.inverseBackgroundColor
         return label
     }()
@@ -110,15 +110,15 @@ class TransactionCollectionViewCell: UICollectionViewCell {
     
     private func addImageView() {
         containerView.addSubview(imageView)
-        imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Dimens.mediumMargin).isActive = true
-        imageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Dimens.mmdnMargin).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Dimens.margin16).isActive = true
+        imageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Dimens.margin20).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 24).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 24).isActive = true
     }
     
     private func addSenderLabel() {
         containerView.addSubview(senderLabel)
-        senderLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: Dimens.mediumMargin).isActive = true
+        senderLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: Dimens.margin16).isActive = true
         senderLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         senderLabel.topAnchor.constraint(equalTo: imageView.topAnchor).isActive = true
     }
@@ -127,29 +127,29 @@ class TransactionCollectionViewCell: UICollectionViewCell {
         containerView.addSubview(cryptoAmountLabel)
         cryptoAmountLabel.leadingAnchor.constraint(equalTo: senderLabel.leadingAnchor).isActive = true
         cryptoAmountLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        cryptoAmountLabel.topAnchor.constraint(equalTo: senderLabel.bottomAnchor, constant: Dimens.shortMargin).isActive = true
+        cryptoAmountLabel.topAnchor.constraint(equalTo: senderLabel.bottomAnchor, constant: Dimens.margin8).isActive = true
     }
     
     private func addFiatLabel() {
         containerView.addSubview(fiatAmountLabel)
-        fiatAmountLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -Dimens.mediumMargin).isActive = true
-        fiatAmountLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Dimens.mmdnMargin).isActive = true
+        fiatAmountLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -Dimens.margin16).isActive = true
+        fiatAmountLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Dimens.margin20).isActive = true
     }
     
     private func addDateLabel() {
         containerView.addSubview(dateLabel)
-        dateLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -Dimens.mediumMargin).isActive = true
+        dateLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -Dimens.margin16).isActive = true
         dateLabel.topAnchor.constraint(greaterThanOrEqualTo: cryptoAmountLabel.topAnchor).isActive = true
-        dateLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -Dimens.mmdnMargin).isActive = true
+        dateLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -Dimens.margin20).isActive = true
     }
     
     private func addMessage() {
         containerView.addSubview(messageLabel)
         messageLabel.leadingAnchor.constraint(equalTo: senderLabel.leadingAnchor).isActive = true
-        messageLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -Dimens.button).isActive = true
+        messageLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -Dimens.view56).isActive = true
         messageTopConstraint = messageLabel.topAnchor.constraint(equalTo: cryptoAmountLabel.bottomAnchor) // May get set when transaction is set
         messageTopConstraint.isActive = true
-        messageLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -Dimens.mmdnMargin).isActive = true
+        messageLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -Dimens.margin20).isActive = true
     }
     
     private func addBottomBorder() {
@@ -157,7 +157,7 @@ class TransactionCollectionViewCell: UICollectionViewCell {
         bottomBorder.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         bottomBorder.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         bottomBorder.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
-        bottomBorder.heightAnchor.constraint(equalToConstant: Dimens.shadow).isActive = true
+        bottomBorder.heightAnchor.constraint(equalToConstant: Dimens.view2).isActive = true
     }
     
     public func setTransaction(_ transaction: Transaction, price: Price) {
@@ -179,7 +179,7 @@ class TransactionCollectionViewCell: UICollectionViewCell {
         fiatAmountLabel.text = addPrefix(isSent: transaction.isSent, value: newTotal)
         
         // Fix bug where nil message gets pushed up
-        messageTopConstraint.constant = transaction.message == nil ? 0 : Dimens.shortMargin
+        messageTopConstraint.constant = transaction.message == nil ? 0 : Dimens.margin8
         
     }
     

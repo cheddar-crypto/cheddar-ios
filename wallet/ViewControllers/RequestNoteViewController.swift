@@ -81,20 +81,20 @@ class RequestNoteViewController: CheddarViewController<RequestViewModel>, UIText
     private func addQRButton() {
         view.addSubview(nextButton)
         nextButton.translatesAutoresizingMaskIntoConstraints = false
-        nextButton.heightAnchor.constraint(equalToConstant: Dimens.button).isActive = true
-        keyboardAnchor = nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -Dimens.mediumMargin)
+        nextButton.heightAnchor.constraint(equalToConstant: Dimens.view56).isActive = true
+        keyboardAnchor = nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -Dimens.margin16)
         keyboardAnchor?.isActive = true
-        nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Dimens.mediumMargin).isActive = true
-        nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Dimens.mediumMargin).isActive = true
+        nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Dimens.margin16).isActive = true
+        nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Dimens.margin16).isActive = true
         nextButton.title = .createQR
     }
     
     private func addAmountChip() {
         view.addSubview(amountChip)
         amountChip.translatesAutoresizingMaskIntoConstraints = false
-        amountChip.heightAnchor.constraint(equalToConstant: Dimens.chip).isActive = true
-        amountChip.topAnchor.constraint(equalTo: view.topAnchor, constant: Dimens.mediumMargin).isActive = true
-        amountChip.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Dimens.mediumMargin).isActive = true
+        amountChip.heightAnchor.constraint(equalToConstant: Dimens.view44).isActive = true
+        amountChip.topAnchor.constraint(equalTo: view.topAnchor, constant: Dimens.margin16).isActive = true
+        amountChip.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Dimens.margin16).isActive = true
         amountChip.title = viewModel.getAmountTitle()
     }
     
@@ -102,8 +102,8 @@ class RequestNoteViewController: CheddarViewController<RequestViewModel>, UIText
         divider.backgroundColor = Theme.shadowColor
         view.addSubview(divider)
         divider.translatesAutoresizingMaskIntoConstraints = false
-        divider.heightAnchor.constraint(equalToConstant: Dimens.shadow).isActive = true
-        divider.topAnchor.constraint(equalTo: amountChip.bottomAnchor, constant: Dimens.mediumMargin).isActive = true
+        divider.heightAnchor.constraint(equalToConstant: Dimens.view2).isActive = true
+        divider.topAnchor.constraint(equalTo: amountChip.bottomAnchor, constant: Dimens.margin16).isActive = true
         divider.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         divider.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
@@ -114,23 +114,23 @@ class RequestNoteViewController: CheddarViewController<RequestViewModel>, UIText
         let forLabel = UILabel()
         forLabel.text = String.forLabel.lowercased()
         forLabel.textColor = Theme.inverseBackgroundColor
-        forLabel.font = Fonts.sofiaPro(weight: .regular, Dimens.titleText)
+        forLabel.font = Fonts.sofiaPro(weight: .regular, Dimens.text20)
         view.addSubview(forLabel)
         forLabel.translatesAutoresizingMaskIntoConstraints = false
-        forLabel.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: Dimens.mediumMargin).isActive = true
-        forLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Dimens.mediumMargin).isActive = true
+        forLabel.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: Dimens.margin16).isActive = true
+        forLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Dimens.margin16).isActive = true
         
         // TextView
         view.addSubview(textView)
         textView.tintColor = Theme.primaryColor
-        textView.font = Fonts.sofiaPro(weight: .regular, Dimens.titleText)
+        textView.font = Fonts.sofiaPro(weight: .regular, Dimens.text20)
         textView.isScrollEnabled = true
         textView.backgroundColor = Theme.backgroundColor
-        let padding = Dimens.mediumMargin
+        let padding = Dimens.margin16
         textView.textContainerInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.topAnchor.constraint(equalTo: divider.bottomAnchor).isActive = true
-        textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Dimens.tall - padding).isActive = true
+        textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Dimens.view72 - padding).isActive = true
         textView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         textView.bottomAnchor.constraint(equalTo: nextButton.topAnchor).isActive = true
         textView.delegate = self
@@ -138,7 +138,7 @@ class RequestNoteViewController: CheddarViewController<RequestViewModel>, UIText
         // TextView Placeholder
         textViewPlaceholder.text = String.requestNotePlaceholder.lowercased()
         textViewPlaceholder.textColor = Theme.inverseBackgroundColor.withAlphaComponent(0.25)
-        textViewPlaceholder.font = Fonts.sofiaPro(weight: .regular, Dimens.titleText)
+        textViewPlaceholder.font = Fonts.sofiaPro(weight: .regular, Dimens.text20)
         view.addSubview(textViewPlaceholder)
         textViewPlaceholder.translatesAutoresizingMaskIntoConstraints = false
         textViewPlaceholder.topAnchor.constraint(equalTo: textView.topAnchor, constant: padding).isActive = true
@@ -163,9 +163,9 @@ class RequestNoteViewController: CheddarViewController<RequestViewModel>, UIText
             let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
             let animationCurve = UIView.AnimationOptions(rawValue: animationCurveRaw)
             if endFrameY >= UIScreen.main.bounds.size.height {
-                self.keyboardAnchor?.constant = -Dimens.mediumMargin
+                self.keyboardAnchor?.constant = -Dimens.margin16
             } else {
-                self.keyboardAnchor?.constant = -(endFrame?.size.height ?? -Dimens.mediumMargin)
+                self.keyboardAnchor?.constant = -(endFrame?.size.height ?? -Dimens.margin16)
             }
             UIView.animate(withDuration: duration,
                                        delay: TimeInterval(0),

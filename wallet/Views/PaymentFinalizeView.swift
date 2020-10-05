@@ -44,7 +44,7 @@ class PaymentFinalizeView: UIView {
         view.text = .paymentSent
         view.textColor = .gray900
         view.textAlignment = .center
-        view.font = Fonts.sofiaPro(weight: .bold, Dimens.titleTallText)
+        view.font = Fonts.sofiaPro(weight: .bold, Dimens.text24)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isHidden = true
         return view
@@ -94,24 +94,24 @@ class PaymentFinalizeView: UIView {
     private func addDoneButton() {
         if let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first {
             addSubview(doneButton)
-            doneButton.heightAnchor.constraint(equalToConstant: Dimens.button).isActive = true
-            doneButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Dimens.mediumMargin).isActive = true
-            doneButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Dimens.mediumMargin).isActive = true
-            doneButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -(window.safeAreaInsets.bottom + Dimens.mediumMargin)).isActive = true
+            doneButton.heightAnchor.constraint(equalToConstant: Dimens.view56).isActive = true
+            doneButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Dimens.margin16).isActive = true
+            doneButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Dimens.margin16).isActive = true
+            doneButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -(window.safeAreaInsets.bottom + Dimens.margin16)).isActive = true
         }
     }
     
     private func addImageView() {
         addSubview(imageView)
         imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        imageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -Dimens.bar).isActive = true
+        imageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -Dimens.view88).isActive = true
     }
     
     private func addSentLabel() {
         addSubview(sentLabel)
-        sentLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: Dimens.largeMargin).isActive = true
-        sentLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Dimens.mediumMargin).isActive = true
-        sentLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Dimens.mediumMargin).isActive = true
+        sentLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: Dimens.margin32).isActive = true
+        sentLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Dimens.margin16).isActive = true
+        sentLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Dimens.margin16).isActive = true
     }
 
 }

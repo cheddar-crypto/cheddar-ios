@@ -65,7 +65,7 @@ class CheddarNumberPadButton: AnimatedView {
     private func addLabel(title: String) {
         label.textColor = Theme.inverseBackgroundColor
         label.textAlignment = .center
-        label.font = Fonts.sofiaPro(weight: .bold, Dimens.idkText)
+        label.font = Fonts.sofiaPro(weight: .bold, Dimens.text26)
         label.text = title.uppercased()
         if (!subviews.contains(label)) {
             self.addSubviewAndFill(label, top: 2.0)

@@ -24,7 +24,7 @@ extension UIViewController {
         
         // Shadow
         navigationController?.navigationBar.layer.shadowColor = Theme.shadowColor.cgColor
-        navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: Dimens.shadow)
+        navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: Dimens.view2)
         navigationController?.navigationBar.layer.shadowRadius = 0.0
         navigationController?.navigationBar.layer.shadowOpacity = 1.0
         navigationController?.navigationBar.layer.masksToBounds = false
@@ -34,7 +34,7 @@ extension UIViewController {
         // Text
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: Theme.inverseBackgroundColor,
-            NSAttributedString.Key.font: Fonts.sofiaPro(weight: .medium, Dimens.titleText)
+            NSAttributedString.Key.font: Fonts.sofiaPro(weight: .medium, Dimens.text20)
         ]
         
     }
@@ -54,7 +54,7 @@ extension UIViewController {
         // Text
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: Theme.inverseBackgroundColor,
-            NSAttributedString.Key.font: Fonts.sofiaPro(weight: .medium, Dimens.titleText)
+            NSAttributedString.Key.font: Fonts.sofiaPro(weight: .medium, Dimens.text20)
         ]
         
     }

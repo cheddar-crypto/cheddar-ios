@@ -164,7 +164,7 @@ class SwipeToSendCoordinator {
             return
         }
         
-        let peekAmount = gestureViewOffset.min - Dimens.mediumMargin
+        let peekAmount = gestureViewOffset.min - Dimens.margin16
         let duration = SwipeToSendCoordinator.animationDuration
         isPeeking = true
         

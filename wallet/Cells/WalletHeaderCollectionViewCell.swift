@@ -31,7 +31,7 @@ class WalletHeaderCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = Theme.inverseBackgroundColor
         label.textAlignment = .center
-        label.font = Fonts.sofiaPro(weight: .regular, Dimens.titleText)
+        label.font = Fonts.sofiaPro(weight: .regular, Dimens.text20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -81,7 +81,7 @@ class WalletHeaderCollectionViewCell: UICollectionViewCell {
     
     private func addCurrencyView() {
         containerView.addSubview(currencyView)
-        currencyView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Dimens.largeMargin).isActive = true
+        currencyView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Dimens.margin32).isActive = true
         currencyView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         currencyView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         currencyView.setStyle(style: .header, animated: false)
@@ -97,10 +97,10 @@ class WalletHeaderCollectionViewCell: UICollectionViewCell {
     private func addAddressButton() {
         containerView.addSubview(addressButton)
         addressButton.title = .seeBitcoinAddress
-        addressButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Dimens.largeMargin).isActive = true
-        addressButton.topAnchor.constraint(equalTo: amountLabel.bottomAnchor, constant: Dimens.largeMargin).isActive = true
-        addressButton.heightAnchor.constraint(equalToConstant: Dimens.button).isActive = true
-        addressButton.widthAnchor.constraint(greaterThanOrEqualToConstant: Dimens.minButtonWidth).isActive = true
+        addressButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Dimens.margin32).isActive = true
+        addressButton.topAnchor.constraint(equalTo: amountLabel.bottomAnchor, constant: Dimens.margin32).isActive = true
+        addressButton.heightAnchor.constraint(equalToConstant: Dimens.view56).isActive = true
+        addressButton.widthAnchor.constraint(greaterThanOrEqualToConstant: Dimens.view140).isActive = true
         addressButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
     }
     
@@ -109,7 +109,7 @@ class WalletHeaderCollectionViewCell: UICollectionViewCell {
         bottomBorder.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         bottomBorder.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         bottomBorder.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        bottomBorder.heightAnchor.constraint(equalToConstant: Dimens.shadow).isActive = true
+        bottomBorder.heightAnchor.constraint(equalToConstant: Dimens.view2).isActive = true
     }
     
     public func setWallet(_ wallet: Wallet, price: Price) {

@@ -128,17 +128,17 @@ class RequestAmountViewController: CheddarViewController<RequestViewModel> {
     private func addNextButton() {
         view.addSubview(nextButton)
         nextButton.translatesAutoresizingMaskIntoConstraints = false
-        nextButton.heightAnchor.constraint(equalToConstant: Dimens.button).isActive = true
-        nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -Dimens.mediumMargin).isActive = true
-        nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Dimens.mediumMargin).isActive = true
-        nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Dimens.mediumMargin).isActive = true
+        nextButton.heightAnchor.constraint(equalToConstant: Dimens.view56).isActive = true
+        nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -Dimens.margin16).isActive = true
+        nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Dimens.margin16).isActive = true
+        nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Dimens.margin16).isActive = true
         nextButton.title = .next
     }
     
     private func addNumberPad() {
         view.addSubview(numberPad)
         numberPad.translatesAutoresizingMaskIntoConstraints = false
-        numberPad.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -Dimens.mediumMargin).isActive = true
+        numberPad.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -Dimens.margin16).isActive = true
         numberPad.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         numberPad.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
@@ -149,10 +149,10 @@ class RequestAmountViewController: CheddarViewController<RequestViewModel> {
         let containerView = UIView()
         view.addSubview(containerView)
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.topAnchor.constraint(equalTo: view.topAnchor, constant: Dimens.mediumMargin).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Dimens.mediumMargin).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Dimens.mediumMargin).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: numberPad.topAnchor, constant: -Dimens.mediumMargin).isActive = true
+        containerView.topAnchor.constraint(equalTo: view.topAnchor, constant: Dimens.margin16).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Dimens.margin16).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Dimens.margin16).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: numberPad.topAnchor, constant: -Dimens.margin16).isActive = true
         
         // Add stackview
         containerView.addSubview(amountContainer)
@@ -177,7 +177,7 @@ class RequestAmountViewController: CheddarViewController<RequestViewModel> {
     private func addFiatLabel() {
         amountContainer.addSubview(cryptoInputView)
         cryptoInputView.translatesAutoresizingMaskIntoConstraints = false
-        cryptoInputView.topAnchor.constraint(equalTo: fiatInputView.bottomAnchor, constant: Dimens.mediumMargin).isActive = true
+        cryptoInputView.topAnchor.constraint(equalTo: fiatInputView.bottomAnchor, constant: Dimens.margin16).isActive = true
         cryptoInputView.leadingAnchor.constraint(equalTo: amountContainer.leadingAnchor).isActive = true
         cryptoInputView.trailingAnchor.constraint(equalTo: amountContainer.trailingAnchor).isActive = true
         cryptoInputView.bottomAnchor.constraint(equalTo: amountContainer.bottomAnchor).isActive = true

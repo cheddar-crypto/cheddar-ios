@@ -161,7 +161,7 @@ class HomeViewController: CheddarViewController<HomeViewModel> {
         actionBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         actionBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         actionBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        actionBar.heightAnchor.constraint(equalToConstant: Dimens.bar).isActive = true
+        actionBar.heightAnchor.constraint(equalToConstant: Dimens.view88).isActive = true
     }
     
     // MARK: Cell Refreshing

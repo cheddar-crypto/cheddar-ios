@@ -38,7 +38,7 @@ class CheddarNumberPad: UIView {
         
         // Create the vertical stack
         let vStack = UIStackView()
-        vStack.spacing = Dimens.shadow
+        vStack.spacing = Dimens.view2
         vStack.axis = .vertical
         vStack.distribution = .fillEqually
         
@@ -57,7 +57,7 @@ class CheddarNumberPad: UIView {
         })
         
         // Add the stack to the view
-        addSubviewAndFill(vStack, top: Dimens.shadow, bottom: -Dimens.shadow)
+        addSubviewAndFill(vStack, top: Dimens.view2, bottom: -Dimens.view2)
         
     }
     
@@ -70,7 +70,7 @@ class CheddarNumberPad: UIView {
             button.image = .delete
         }
         
-        button.heightAnchor.constraint(equalToConstant: Dimens.tall).isActive = true
+        button.heightAnchor.constraint(equalToConstant: Dimens.view72).isActive = true
         return button
     }
     
@@ -86,7 +86,7 @@ class CheddarNumberPad: UIView {
             })
         })
         let hStack = UIStackView(arrangedSubviews: bottomButtons)
-        hStack.spacing = Dimens.shadow
+        hStack.spacing = Dimens.view2
         hStack.axis = .horizontal
         hStack.distribution = .fillEqually
         return hStack

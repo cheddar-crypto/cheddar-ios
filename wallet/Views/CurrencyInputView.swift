@@ -47,7 +47,7 @@ class CurrencyInputView: AnimatedView {
         clipsToBounds = true
         addLabel()
         addTapRecognizer()
-        layer.borderWidth = Dimens.shadow
+        layer.borderWidth = Dimens.view2
         layer.borderColor = Theme.shadowColor.cgColor
     }
     
@@ -63,7 +63,7 @@ class CurrencyInputView: AnimatedView {
     private func addLabel() {
         label.textColor = Theme.inverseBackgroundColor
         label.textAlignment = .center
-        label.font = Fonts.sofiaPro(weight: .bold, Dimens.titleText)
+        label.font = Fonts.sofiaPro(weight: .bold, Dimens.text20)
         addSubviewAndFill(label)
     }
     
@@ -82,19 +82,19 @@ class CurrencyInputView: AnimatedView {
             label.setFont(
                 animationDuration: animated ? Theme.defaultAnimationDuration : 0,
                 weight: .bold,
-                newSize: Dimens.headerText)
+                newSize: Dimens.text54)
         case .expanded:
             layer.borderColor = Theme.primaryColor.cgColor
             label.setFont(
                 animationDuration: animated ? Theme.defaultAnimationDuration : 0,
                 weight: .bold,
-                newSize: Dimens.headerText)
+                newSize: Dimens.text54)
         case .collapsed:
             layer.borderColor = Theme.shadowColor.cgColor
             label.setFont(
                 animationDuration: animated ? Theme.defaultAnimationDuration : 0,
                 weight: .medium,
-                newSize: Dimens.titleText)
+                newSize: Dimens.text20)
         }
     }
 
